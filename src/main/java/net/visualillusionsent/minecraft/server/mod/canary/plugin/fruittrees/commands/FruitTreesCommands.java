@@ -44,7 +44,7 @@ public final class FruitTreesCommands implements CommandListener{
     public FruitTreesCommands(CanaryFruitTrees fruit_trees){
         this.fruit_trees = fruit_trees;
         List<String> pre = new ArrayList<String>();
-        pre.add(center(Colors.CYAN + "---" + Colors.LIGHT_GREEN + fruit_trees.getName() + Colors.PURPLE + " v" + fruit_trees.getRawVersion() + Colors.CYAN + " ---"));
+        pre.add(center(Colors.CYAN + "--- " + Colors.LIGHT_GREEN + fruit_trees.getName() + Colors.ORANGE + " v" + fruit_trees.getRawVersion() + Colors.CYAN + " ---"));
         pre.add("$VERSION_CHECK$");
         pre.add(Colors.CYAN + "Build: " + Colors.LIGHT_GREEN + fruit_trees.getBuildNumber());
         pre.add(Colors.CYAN + "Built: " + Colors.LIGHT_GREEN + fruit_trees.getBuildTime());
@@ -52,7 +52,7 @@ public final class FruitTreesCommands implements CommandListener{
         pre.add(Colors.CYAN + "Website: " + Colors.LIGHT_GREEN + "http://wiki.visualillusionsent.net/FruitTrees");
         pre.add(Colors.CYAN + "Issues: " + Colors.LIGHT_GREEN + "https://github.com/Visual-Illusions/FruitTrees/issues");
 
-        // Next 2 lines should always remain at the end of the About
+        // Next line should always remain at the end of the About
         pre.add(center("§aCopyright © 2013 §2Visual §6I§9l§bl§4u§as§2i§5o§en§7s §2Entertainment"));
         about = Collections.unmodifiableList(pre);
         try {

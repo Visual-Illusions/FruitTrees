@@ -39,7 +39,7 @@ import org.jdom2.input.SAXBuilder;
 import org.jdom2.output.Format;
 import org.jdom2.output.XMLOutputter;
 
-public final class XMLStorage extends TreeStorage{
+public final class XMLTreeStorage extends TreeStorage{
 
     private final String directory = "config/FruitTrees/trees/", file = "%world_name%_trees.xml";
     private final Format xmlform = Format.getPrettyFormat().setExpandEmptyElements(false).setOmitDeclaration(true).setOmitEncoding(true).setLineSeparator(SystemUtils.LINE_SEP);
@@ -47,7 +47,7 @@ public final class XMLStorage extends TreeStorage{
     private final SAXBuilder builder = new SAXBuilder();
     private FileWriter writer;
 
-    public XMLStorage(FruitTrees fruit_trees){
+    public XMLTreeStorage(FruitTrees fruit_trees){
         super(fruit_trees);
         File dir = new File(directory);
         if (!dir.exists()) {
@@ -78,7 +78,9 @@ public final class XMLStorage extends TreeStorage{
         catch (IOException e) {
             ex = e;
         }
-        catch (JDOMException jdome) {}
+        catch (JDOMException jdome) {
+            ex = jdome;
+        }
         finally {
             try {
                 if (writer != null) {
@@ -88,7 +90,7 @@ public final class XMLStorage extends TreeStorage{
             catch (IOException e) {}
             writer = null;
             if (ex != null) {
-
+                fruit_trees.severe("Failed to save tree: " + tree.toString(), ex);
                 return false;
             }
         }
@@ -98,6 +100,7 @@ public final class XMLStorage extends TreeStorage{
     public void removeTree(FruitTree tree){
         String world_file = file.replace("%world_name%", tree.getTreeWorld().getName());
         File worldFile = new File(directory.concat(world_file));
+        Exception ex = null;
         if (!worldFile.exists()) {
             genDefaultWorldFile(worldFile);
         }
@@ -115,8 +118,12 @@ public final class XMLStorage extends TreeStorage{
                     }
                 }
             }
-            catch (JDOMException ex1) {}
-            catch (IOException ex1) {}
+            catch (IOException e) {
+                ex = e;
+            }
+            catch (JDOMException jdome) {
+                ex = jdome;
+            }
             finally {
                 try {
                     if (writer != null) {
@@ -125,6 +132,9 @@ public final class XMLStorage extends TreeStorage{
                 }
                 catch (IOException e) {}
                 writer = null;
+                if (ex != null) {
+                    fruit_trees.severe("Failed to remove tree: " + tree.toString(), ex);
+                }
             }
         }
     }
@@ -443,7 +453,6 @@ public final class XMLStorage extends TreeStorage{
     }
 
     private final boolean genDefaultWorldFile(File worldFile){
-        //TODO LOG
         Exception ex = null;
         Element fruittrees = new Element("fruittrees");
         Document root = new Document(fruittrees);
@@ -464,6 +473,7 @@ public final class XMLStorage extends TreeStorage{
             catch (IOException e) {}
             writer = null;
             if (ex != null) {
+                fruit_trees.severe("Failed to generate world file", ex);
                 return false;
             }
         }

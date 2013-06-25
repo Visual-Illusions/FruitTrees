@@ -41,7 +41,7 @@ import net.visualillusionsent.minecraft.server.mod.fruittrees.TreeTracker;
 import net.visualillusionsent.minecraft.server.mod.fruittrees.TreeType;
 import net.visualillusionsent.minecraft.server.mod.fruittrees.TreeWorld;
 import net.visualillusionsent.minecraft.server.mod.fruittrees.data.TreeStorage;
-import net.visualillusionsent.minecraft.server.mod.fruittrees.data.XMLStorage;
+import net.visualillusionsent.minecraft.server.mod.fruittrees.data.XMLTreeStorage;
 import net.visualillusionsent.utils.ProgramStatus;
 import net.visualillusionsent.utils.PropertiesFile;
 import net.visualillusionsent.utils.VersionChecker;
@@ -80,7 +80,7 @@ public class CanaryFruitTrees extends Plugin implements FruitTrees{
         checkStatus();
         checkVersion();
         ft_cfg = new FruitTreesConfigurations(this);
-        storage = new XMLStorage(this);
+        storage = new XMLTreeStorage(this);
         for (World world : Canary.getServer().getWorldManager().getAllWorlds()) {
             world_cache.setExistingWorlds(new CanaryTreeWorld(this, world, world.getFqName()));
             storage.loadTreesForWorld(world_cache.getTreeWorld(world.getFqName()));
