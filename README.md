@@ -15,7 +15,7 @@ Create a new project in the IDE of your choice<br/>
 :Add a current CanaryMod.jar to the build path<br/>
 :Export Jar file
 
-CanaryMod can be found at [canarymod.net](http://www.canarymod.net/download")
+CanaryMod can be found at [canarymod.net](http://www.canarymod.net/download)
 
 ## License ##
 
