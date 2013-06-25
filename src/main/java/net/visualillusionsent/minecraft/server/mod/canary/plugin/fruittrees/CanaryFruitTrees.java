@@ -1,7 +1,7 @@
 /*
  * This file is part of FruitTrees.
  *
- * Copyright © 2013-2013 Visual Illusions Entertainment
+ * Copyright © 2013 Visual Illusions Entertainment
  *
  * FruitTrees is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,7 +17,11 @@
  */
 package net.visualillusionsent.minecraft.server.mod.canary.plugin.fruittrees;
 
+import java.io.IOException;
 import java.util.Arrays;
+import java.util.jar.Attributes;
+import java.util.jar.JarFile;
+import java.util.jar.Manifest;
 import java.util.logging.Level;
 import net.canarymod.Canary;
 import net.canarymod.api.inventory.Item;
@@ -37,13 +41,20 @@ import net.visualillusionsent.minecraft.server.mod.fruittrees.TreeType;
 import net.visualillusionsent.minecraft.server.mod.fruittrees.TreeWorld;
 import net.visualillusionsent.minecraft.server.mod.fruittrees.data.TreeStorage;
 import net.visualillusionsent.minecraft.server.mod.fruittrees.data.XMLStorage;
+import net.visualillusionsent.utils.ProgramStatus;
 import net.visualillusionsent.utils.PropertiesFile;
+import net.visualillusionsent.utils.VersionChecker;
 
 public class CanaryFruitTrees extends Plugin implements FruitTrees{
 
     private final CanaryTreeWorldCache world_cache = new CanaryTreeWorldCache(this);
     private TreeStorage storage;
     private FruitTreesConfigurations ft_cfg;
+    private final VersionChecker vc;
+    private float version;
+    private short build;
+    private String buildTime;
+    private ProgramStatus status;
     private static CanaryFruitTrees $;
     final static Item[] seeds = new Item[128]; //This is set to 128 for quick expansion durring development
     private final static String[] dyes = new String[] { "Black", "Red", "Green", "Brown", "Blue", "Purple", "Cyan", "Light_Gray", "Gray", "Pink", "Lime", "Yellow", "Light_Blue", "Magenta", "Orange", "White" };
@@ -57,9 +68,17 @@ public class CanaryFruitTrees extends Plugin implements FruitTrees{
         genRedstoneSeeds();
     }
 
+    public CanaryFruitTrees(){
+        readManifest();
+        vc = new VersionChecker(getName(), String.valueOf(version), String.valueOf(build), "http://visualillusionsent.net/minecraft/plugins/", status, false);
+    }
+
     @Override
     public boolean enable(){
         $ = this;
+        checkStatus();
+        checkVersion();
+
         ft_cfg = new FruitTreesConfigurations(this);
         storage = new XMLStorage(this);
         for (World world : Canary.getServer().getWorldManager().getAllWorlds()) {
@@ -190,7 +209,8 @@ public class CanaryFruitTrees extends Plugin implements FruitTrees{
             Item redstone_seeds = seeds[20].clone();
             redstone_seeds.setAmount(2);
             Item redstone_dust = Canary.factory().getItemFactory().newItem(ItemType.RedStone, 0, 1);
-            Canary.getServer().addRecipe(new CraftingRecipe(redstone_seeds, redstone_dust));
+            Item normal_seeds = Canary.factory().getItemFactory().newItem(ItemType.Seeds, 0, 1);
+            Canary.getServer().addRecipe(new CraftingRecipe(redstone_seeds, redstone_dust, normal_seeds));
         }
     }
 
@@ -307,5 +327,93 @@ public class CanaryFruitTrees extends Plugin implements FruitTrees{
 
     public final TreeStorage getStorage(){
         return storage;
+    }
+
+    private final Manifest getManifest() throws Exception{
+        Manifest toRet = null;
+        Exception ex = null;
+        JarFile jar = null;
+        try {
+            jar = new JarFile(getJarPath());
+            toRet = jar.getManifest();
+        }
+        catch (Exception e) {
+            ex = e;
+        }
+        finally {
+            if (jar != null) {
+                try {
+                    jar.close();
+                }
+                catch (IOException e) {}
+            }
+            if (ex != null) {
+                throw ex;
+            }
+        }
+        return toRet;
+    }
+
+    private final void readManifest(){
+        try {
+            Manifest manifest = getManifest();
+            Attributes mainAttribs = manifest.getMainAttributes();
+            version = Float.parseFloat(mainAttribs.getValue("Version").replace("-SNAPSHOT", ""));
+            build = Short.parseShort(mainAttribs.getValue("Build"));
+            buildTime = mainAttribs.getValue("Build-Time");
+            try {
+                status = ProgramStatus.valueOf(mainAttribs.getValue("ProgramStatus"));
+            }
+            catch (IllegalArgumentException iaex) {
+                status = ProgramStatus.UNKNOWN;
+            }
+        }
+        catch (Exception ex) {
+            version = -1.0F;
+            build = -1;
+            buildTime = "19700101-0000";
+        }
+    }
+
+    private final void checkStatus(){
+        if (status == ProgramStatus.UNKNOWN) {
+            getLogman().severe(String.format("%s has declared itself as an 'UNKNOWN STATUS' build. Use is not advised and could cause damage to your system!", getName()));
+        }
+        else if (status == ProgramStatus.ALPHA) {
+            getLogman().warning(String.format("%s has declared itself as a 'ALPHA' build. Production use is not advised!", getName()));
+        }
+        else if (status == ProgramStatus.BETA) {
+            getLogman().warning(String.format("%s has declared itself as a 'BETA' build. Production use is not advised!", getName()));
+        }
+        else if (status == ProgramStatus.RELEASE_CANDIDATE) {
+            getLogman().info(String.format("%s has declared itself as a 'Release Candidate' build. Expect some bugs.", getName()));
+        }
+    }
+
+    private final void checkVersion(){
+        Boolean islatest = vc.isLatest();
+        if (islatest == null) {
+            getLogman().warning("VersionCheckerError: " + vc.getErrorMessage());
+        }
+        else if (!vc.isLatest()) {
+            getLogman().warning(vc.getUpdateAvailibleMessage());
+            getLogman().warning(String.format("You can view update info @ http://wiki.visualillusionsent.net/%s#ChangeLog", getName()));
+        }
+    }
+
+    public final float getRawVersion(){
+        return version;
+    }
+
+    public final short getBuildNumber(){
+        return build;
+    }
+
+    public final String getBuildTime(){
+        return buildTime;
+    }
+
+    public final VersionChecker getVersionChecker(){
+        return vc;
     }
 }
