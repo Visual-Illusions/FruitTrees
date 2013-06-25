@@ -44,7 +44,7 @@ public final class FruitTreesCommands implements CommandListener{
     public FruitTreesCommands(CanaryFruitTrees fruit_trees){
         this.fruit_trees = fruit_trees;
         List<String> pre = new ArrayList<String>();
-        pre.add(center(Colors.CYAN + "---" + Colors.LIGHT_GREEN + "WarpSigns " + Colors.PURPLE + "v" + fruit_trees.getRawVersion() + Colors.CYAN + " ---"));
+        pre.add(center(Colors.CYAN + "---" + Colors.LIGHT_GREEN + fruit_trees.getName() + Colors.PURPLE + " v" + fruit_trees.getRawVersion() + Colors.CYAN + " ---"));
         pre.add("$VERSION_CHECK$");
         pre.add(Colors.CYAN + "Build: " + Colors.LIGHT_GREEN + fruit_trees.getBuildNumber());
         pre.add(Colors.CYAN + "Built: " + Colors.LIGHT_GREEN + fruit_trees.getBuildTime());

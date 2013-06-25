@@ -33,6 +33,7 @@ import net.canarymod.api.world.World;
 import net.canarymod.config.Configuration;
 import net.canarymod.logger.CanaryLevel;
 import net.canarymod.plugin.Plugin;
+import net.visualillusionsent.minecraft.server.mod.canary.plugin.fruittrees.commands.FruitTreesCommands;
 import net.visualillusionsent.minecraft.server.mod.fruittrees.FruitTree;
 import net.visualillusionsent.minecraft.server.mod.fruittrees.FruitTrees;
 import net.visualillusionsent.minecraft.server.mod.fruittrees.FruitTreesConfigurations;
@@ -78,7 +79,6 @@ public class CanaryFruitTrees extends Plugin implements FruitTrees{
         $ = this;
         checkStatus();
         checkVersion();
-
         ft_cfg = new FruitTreesConfigurations(this);
         storage = new XMLStorage(this);
         for (World world : Canary.getServer().getWorldManager().getAllWorlds()) {
@@ -86,6 +86,7 @@ public class CanaryFruitTrees extends Plugin implements FruitTrees{
             storage.loadTreesForWorld(world_cache.getTreeWorld(world.getFqName()));
         }
         new CanaryFruitTreesListener(this);
+        new FruitTreesCommands(this);
         addAppleSeedsRecipe();
         addGoldenAppleSeedsRecipe0();
         addGoldenAppleSeedsRecipe1();
