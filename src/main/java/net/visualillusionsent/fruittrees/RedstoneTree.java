@@ -17,14 +17,14 @@
  */
 package net.visualillusionsent.fruittrees;
 
-public class RedstoneTree extends FruitTree{
+public final class RedstoneTree extends FruitTree {
 
-    public RedstoneTree(FruitTrees fruit_trees, int loc_x, int loc_y, int loc_z, TreeWorld world){
+    public RedstoneTree(FruitTrees fruit_trees, int loc_x, int loc_y, int loc_z, TreeWorld world) {
         super(fruit_trees, TreeType.REDSTONE, loc_x, loc_y, loc_z, world);
     }
 
     @Override
-    public final void dropFruit(){
+    public final void dropFruit() {
         if (world.isAreaLoaded(this) && fruit_trees.getFruitTreesConfig().checkEnabled(this.type)) {
             int drop_x = offset_drop[random.nextInt(3)];
             int drop_z = offset_drop[random.nextInt(3)];
@@ -32,16 +32,12 @@ public class RedstoneTree extends FruitTree{
         }
     }
 
-    public final String toString(){
-        return String.format("RedstoneTree[X:%d Y:%d Z:%d World:%s]", loc_x, loc_y, loc_z, world);
-    }
-
-    public final Object[] serializeToDatabase(){
-        return new Object[] { loc_x, loc_y, loc_z, world };
-    }
-
     @Override
-    public void growTree(){
+    public void growTree() {
         new TreeGen(this).grow();
+    }
+
+    public final String toString() {
+        return String.format("RedstoneTree[X:%d Y:%d Z:%d World:%s]", loc_x, loc_y, loc_z, world);
     }
 }

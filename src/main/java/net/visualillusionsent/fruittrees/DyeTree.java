@@ -17,16 +17,16 @@
  */
 package net.visualillusionsent.fruittrees;
 
-public class DyeTree extends FruitTree{
+public final class DyeTree extends FruitTree {
 
     private final byte dye_color;
 
-    public DyeTree(FruitTrees fruit_trees, int loc_x, int loc_y, int loc_z, TreeWorld world, byte dye_color){
+    public DyeTree(FruitTrees fruit_trees, int loc_x, int loc_y, int loc_z, TreeWorld world, byte dye_color) {
         super(fruit_trees, fromDyeColor(dye_color), loc_x, loc_y, loc_z, world);
         this.dye_color = dye_color;
     }
 
-    private static final TreeType fromDyeColor(int dye_color){
+    private static final TreeType fromDyeColor(int dye_color) {
         switch (dye_color) {
             case 0x0:
                 return TreeType.DYE_BLACK;
@@ -66,7 +66,7 @@ public class DyeTree extends FruitTree{
     }
 
     @Override
-    public final void dropFruit(){
+    public final void dropFruit() {
         if (isGrown() && world.isAreaLoaded(this) && fruit_trees.getFruitTreesConfig().checkEnabled(this.type)) {
             int drop_x = offset_drop[random.nextInt(3)];
             int drop_z = offset_drop[random.nextInt(3)];
@@ -74,16 +74,13 @@ public class DyeTree extends FruitTree{
         }
     }
 
-    public final String toString(){
-        return String.format("DyeTree[X:%d Y:%d Z:%d World:%s Type:%s]", loc_x, loc_y, loc_z, world, type);
-    }
-
-    public final Object[] serializeToDatabase(){
-        return new Object[] { loc_x, loc_y, loc_z, world };
+    @Override
+    public final void growTree() {
+        new TreeGen(this).grow();
     }
 
     @Override
-    public void growTree(){
-        new TreeGen(this).grow();
+    public final String toString() {
+        return String.format("DyeTree[X:%d Y:%d Z:%d World:%s Type:%s]", loc_x, loc_y, loc_z, world, type);
     }
 }

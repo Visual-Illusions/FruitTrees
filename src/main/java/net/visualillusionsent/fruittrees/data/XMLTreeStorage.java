@@ -39,7 +39,7 @@ import org.jdom2.input.SAXBuilder;
 import org.jdom2.output.Format;
 import org.jdom2.output.XMLOutputter;
 
-public final class XMLTreeStorage extends TreeStorage{
+public final class XMLTreeStorage extends TreeStorage {
 
     private final String directory = "config/FruitTrees/trees/", file = "%world_name%_trees.xml";
     private final Format xmlform = Format.getPrettyFormat().setExpandEmptyElements(false).setOmitDeclaration(true).setOmitEncoding(true).setLineSeparator(SystemUtils.LINE_SEP);
@@ -47,7 +47,7 @@ public final class XMLTreeStorage extends TreeStorage{
     private final SAXBuilder builder = new SAXBuilder();
     private FileWriter writer;
 
-    public XMLTreeStorage(FruitTrees fruit_trees){
+    public XMLTreeStorage(FruitTrees fruit_trees) {
         super(fruit_trees);
         File dir = new File(directory);
         if (!dir.exists()) {
@@ -55,7 +55,7 @@ public final class XMLTreeStorage extends TreeStorage{
         }
     }
 
-    public boolean storeTree(FruitTree tree){
+    public boolean storeTree(FruitTree tree) {
         String world_file = file.replace("%world_name%", tree.getTreeWorld().getName());
         File worldFile = new File(directory.concat(world_file));
         Exception ex = null;
@@ -97,7 +97,7 @@ public final class XMLTreeStorage extends TreeStorage{
         return true;
     }
 
-    public void removeTree(FruitTree tree){
+    public void removeTree(FruitTree tree) {
         String world_file = file.replace("%world_name%", tree.getTreeWorld().getName());
         File worldFile = new File(directory.concat(world_file));
         Exception ex = null;
@@ -139,7 +139,7 @@ public final class XMLTreeStorage extends TreeStorage{
         }
     }
 
-    public boolean loadTreesForWorld(TreeWorld tree_world){
+    public boolean loadTreesForWorld(TreeWorld tree_world) {
         String world_file = file.replace("%world_name%", tree_world.getName());
         File worldFile = new File(directory.concat(world_file));
         if (!worldFile.exists()) {
@@ -452,7 +452,7 @@ public final class XMLTreeStorage extends TreeStorage{
         return true;
     }
 
-    private final boolean genDefaultWorldFile(File worldFile){
+    private final boolean genDefaultWorldFile(File worldFile) {
         Exception ex = null;
         Element fruittrees = new Element("fruittrees");
         Document root = new Document(fruittrees);

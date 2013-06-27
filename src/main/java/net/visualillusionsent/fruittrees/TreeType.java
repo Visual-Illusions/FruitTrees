@@ -40,30 +40,35 @@ public enum TreeType {
     DYE_ORANGE(17, 2, 35, 1), //
     DYE_WHITE(17, 2, 35, 0), //
     REDSTONE(17, 1, 152, 0), //
+    IRON(17, 2, 42, 0), //
+    GOLD(17, 1, 41, 0), //
+    DIAMOND(17, 0, 57, 0), //
+    EMERALD(17, 0, 133, 0), //
+    COAL(17, 1, 0, 0), //
     ;
 
     private final short log_id, log_data, leaves_id, leaves_data;
 
-    private TreeType(int log_id, int log_data, int leaves_id, int leaves_data){
+    private TreeType(int log_id, int log_data, int leaves_id, int leaves_data) {
         this.log_id = (short) log_id;
         this.log_data = (short) log_data;
         this.leaves_id = (short) leaves_id;
         this.leaves_data = (short) leaves_data;
     }
 
-    public final short getLogId(){
+    public final short getLogId() {
         return log_id;
     }
 
-    public final short getLogData(){
+    public final short getLogData() {
         return log_data;
     }
 
-    public final short getLeavesId(){
+    public final short getLeavesId() {
         return leaves_id;
     }
 
-    public final short getLeavesData(){
+    public final short getLeavesData() {
         return leaves_data;
     }
 }
