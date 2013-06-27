@@ -20,9 +20,9 @@ package net.visualillusionsent.minecraft.server.mod.canary.plugin.fruittrees;
 import net.canarymod.Canary;
 import net.canarymod.api.world.World;
 import net.canarymod.api.world.blocks.Block;
-import net.visualillusionsent.minecraft.server.mod.fruittrees.DropTask;
-import net.visualillusionsent.minecraft.server.mod.fruittrees.FruitTree;
-import net.visualillusionsent.minecraft.server.mod.fruittrees.TreeWorld;
+import net.visualillusionsent.fruittrees.DropTask;
+import net.visualillusionsent.fruittrees.FruitTree;
+import net.visualillusionsent.fruittrees.TreeWorld;
 
 public final class CanaryTreeWorld implements TreeWorld{
 

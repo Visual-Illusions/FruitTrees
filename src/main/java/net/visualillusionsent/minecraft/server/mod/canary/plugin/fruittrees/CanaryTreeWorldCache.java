@@ -19,8 +19,8 @@ package net.visualillusionsent.minecraft.server.mod.canary.plugin.fruittrees;
 
 import java.util.concurrent.ConcurrentHashMap;
 import net.canarymod.Canary;
-import net.visualillusionsent.minecraft.server.mod.fruittrees.TreeWorld;
-import net.visualillusionsent.minecraft.server.mod.fruittrees.TreeWorldCache;
+import net.visualillusionsent.fruittrees.TreeWorld;
+import net.visualillusionsent.fruittrees.TreeWorldCache;
 
 public final class CanaryTreeWorldCache extends TreeWorldCache{
 

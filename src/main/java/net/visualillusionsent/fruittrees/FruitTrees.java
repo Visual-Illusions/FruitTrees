@@ -15,16 +15,29 @@
  * You should have received a copy of the GNU General Public License along with FruitTrees.
  * If not, see http://www.gnu.org/licenses/gpl.html.
  */
-package net.visualillusionsent.minecraft.server.mod.fruittrees;
+package net.visualillusionsent.fruittrees;
 
+import net.visualillusionsent.fruittrees.data.TreeStorage;
+import net.visualillusionsent.utils.PropertiesFile;
 
-public abstract class TreeWorldCache{
+public interface FruitTrees{
 
-    protected final FruitTrees fruit_trees;
+    public TreeWorld getWorldForName(String name);
 
-    public TreeWorldCache(FruitTrees fruit_trees){
-        this.fruit_trees = fruit_trees;
-    }
+    public PropertiesFile getConfig();
 
-    public abstract TreeWorld getTreeWorld(String world_name);
+    public void debug(String msg);
+
+    public void info(String msg);
+
+    public void warning(String msg);
+
+    public void severe(String msg);
+
+    public void severe(String msg, Throwable thrown);
+
+    public FruitTreesConfigurations getFruitTreesConfig();
+
+    public TreeStorage getStorage();
+
 }

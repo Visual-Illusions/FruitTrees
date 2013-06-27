@@ -15,29 +15,27 @@
  * You should have received a copy of the GNU General Public License along with FruitTrees.
  * If not, see http://www.gnu.org/licenses/gpl.html.
  */
-package net.visualillusionsent.minecraft.server.mod.fruittrees;
+package net.visualillusionsent.fruittrees;
 
-import net.visualillusionsent.minecraft.server.mod.fruittrees.data.TreeStorage;
-import net.visualillusionsent.utils.PropertiesFile;
+public final class DropTask{
 
-public interface FruitTrees{
+    private final FruitTree tree;
 
-    public TreeWorld getWorldForName(String name);
+    public DropTask(FruitTree tree){
+        this.tree = tree;
+    }
 
-    public PropertiesFile getConfig();
+    public final void drop(){
+        tree.dropFruit();
+    }
 
-    public void debug(String msg);
-
-    public void info(String msg);
-
-    public void warning(String msg);
-
-    public void severe(String msg);
-
-    public void severe(String msg, Throwable thrown);
-
-    public FruitTreesConfigurations getFruitTreesConfig();
-
-    public TreeStorage getStorage();
-
+    public final boolean isValid(){
+        FruitTree test_tree = TreeTracker.getTreeAt(tree.getX(), tree.getY(), tree.getZ(), tree.getTreeWorld());
+        if (test_tree != null) {
+            if (test_tree.isGrown()) {
+                return tree.isStillValid();
+            }
+        }
+        return false;
+    }
 }

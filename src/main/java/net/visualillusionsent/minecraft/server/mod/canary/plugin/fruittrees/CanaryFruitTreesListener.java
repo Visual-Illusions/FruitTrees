@@ -33,7 +33,7 @@ import net.canarymod.hook.world.BlockUpdateHook;
 import net.canarymod.hook.world.TreeGrowHook;
 import net.canarymod.plugin.PluginListener;
 import net.canarymod.plugin.Priority;
-import net.visualillusionsent.minecraft.server.mod.fruittrees.*;
+import net.visualillusionsent.fruittrees.*;
 
 public class CanaryFruitTreesListener implements PluginListener{
 

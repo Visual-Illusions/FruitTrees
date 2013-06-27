@@ -15,11 +15,11 @@
  * You should have received a copy of the GNU General Public License along with FruitTrees.
  * If not, see http://www.gnu.org/licenses/gpl.html.
  */
-package net.visualillusionsent.minecraft.server.mod.fruittrees.data;
+package net.visualillusionsent.fruittrees.data;
 
-import net.visualillusionsent.minecraft.server.mod.fruittrees.FruitTree;
-import net.visualillusionsent.minecraft.server.mod.fruittrees.FruitTrees;
-import net.visualillusionsent.minecraft.server.mod.fruittrees.TreeWorld;
+import net.visualillusionsent.fruittrees.FruitTree;
+import net.visualillusionsent.fruittrees.FruitTrees;
+import net.visualillusionsent.fruittrees.TreeWorld;
 
 public abstract class TreeStorage{
 

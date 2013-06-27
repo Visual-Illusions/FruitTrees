@@ -15,27 +15,25 @@
  * You should have received a copy of the GNU General Public License along with FruitTrees.
  * If not, see http://www.gnu.org/licenses/gpl.html.
  */
-package net.visualillusionsent.minecraft.server.mod.fruittrees;
+package net.visualillusionsent.fruittrees;
 
-public final class DropTask{
+public interface TreeWorld{
 
-    private final FruitTree tree;
+    void dropFruit(int x, int y, int z, int count, short id, short data);
 
-    public DropTask(FruitTree tree){
-        this.tree = tree;
-    }
+    boolean isClear(int x, int y, int z);
 
-    public final void drop(){
-        tree.dropFruit();
-    }
+    void placeTreePart(int x, int y, int z, short type, short data);
 
-    public final boolean isValid(){
-        FruitTree test_tree = TreeTracker.getTreeAt(tree.getX(), tree.getY(), tree.getZ(), tree.getTreeWorld());
-        if (test_tree != null) {
-            if (test_tree.isGrown()) {
-                return tree.isStillValid();
-            }
-        }
-        return false;
-    }
+    void scheduleDrop(DropTask task);
+
+    boolean isTreePart(int x, int y, int z, short part_id, short s);
+
+    boolean isLoaded();
+
+    String getName();
+
+    boolean isAreaLoaded(FruitTree fruit_tree);
+
+    void unloadWorld();
 }

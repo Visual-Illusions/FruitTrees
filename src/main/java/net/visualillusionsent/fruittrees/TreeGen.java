@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License along with FruitTrees.
  * If not, see http://www.gnu.org/licenses/gpl.html.
  */
-package net.visualillusionsent.minecraft.server.mod.fruittrees;
+package net.visualillusionsent.fruittrees;
 
 public final class TreeGen{
 

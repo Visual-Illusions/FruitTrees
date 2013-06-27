@@ -15,21 +15,21 @@
  * You should have received a copy of the GNU General Public License along with FruitTrees.
  * If not, see http://www.gnu.org/licenses/gpl.html.
  */
-package net.visualillusionsent.minecraft.server.mod.fruittrees.data;
+package net.visualillusionsent.fruittrees.data;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
-import net.visualillusionsent.minecraft.server.mod.fruittrees.AppleTree;
-import net.visualillusionsent.minecraft.server.mod.fruittrees.DyeTree;
-import net.visualillusionsent.minecraft.server.mod.fruittrees.FruitTree;
-import net.visualillusionsent.minecraft.server.mod.fruittrees.FruitTrees;
-import net.visualillusionsent.minecraft.server.mod.fruittrees.GoldenAppleTree;
-import net.visualillusionsent.minecraft.server.mod.fruittrees.RecordTree;
-import net.visualillusionsent.minecraft.server.mod.fruittrees.SpongeTree;
-import net.visualillusionsent.minecraft.server.mod.fruittrees.TreeType;
-import net.visualillusionsent.minecraft.server.mod.fruittrees.TreeWorld;
+import net.visualillusionsent.fruittrees.AppleTree;
+import net.visualillusionsent.fruittrees.DyeTree;
+import net.visualillusionsent.fruittrees.FruitTree;
+import net.visualillusionsent.fruittrees.FruitTrees;
+import net.visualillusionsent.fruittrees.GoldenAppleTree;
+import net.visualillusionsent.fruittrees.RecordTree;
+import net.visualillusionsent.fruittrees.SpongeTree;
+import net.visualillusionsent.fruittrees.TreeType;
+import net.visualillusionsent.fruittrees.TreeWorld;
 import net.visualillusionsent.utils.SystemUtils;
 import org.jdom2.Comment;
 import org.jdom2.Document;

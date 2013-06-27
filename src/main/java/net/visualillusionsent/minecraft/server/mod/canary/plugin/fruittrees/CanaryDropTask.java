@@ -20,7 +20,7 @@ package net.visualillusionsent.minecraft.server.mod.canary.plugin.fruittrees;
 import java.util.Random;
 import net.canarymod.Canary;
 import net.canarymod.tasks.ServerTask;
-import net.visualillusionsent.minecraft.server.mod.fruittrees.DropTask;
+import net.visualillusionsent.fruittrees.DropTask;
 
 public final class CanaryDropTask extends ServerTask{
 

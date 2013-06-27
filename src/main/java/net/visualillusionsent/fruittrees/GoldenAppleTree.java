@@ -15,12 +15,12 @@
  * You should have received a copy of the GNU General Public License along with FruitTrees.
  * If not, see http://www.gnu.org/licenses/gpl.html.
  */
-package net.visualillusionsent.minecraft.server.mod.fruittrees;
+package net.visualillusionsent.fruittrees;
 
-public class SpongeTree extends FruitTree{
+public class GoldenAppleTree extends FruitTree{
 
-    public SpongeTree(FruitTrees fruit_trees, int loc_x, int loc_y, int loc_z, TreeWorld world){
-        super(fruit_trees, TreeType.SPONGE, loc_x, loc_y, loc_z, world);
+    public GoldenAppleTree(FruitTrees fruit_trees, int loc_x, int loc_y, int loc_z, TreeWorld world){
+        super(fruit_trees, TreeType.GOLDEN_APPLE, loc_x, loc_y, loc_z, world);
     }
 
     @Override
@@ -28,12 +28,12 @@ public class SpongeTree extends FruitTree{
         if (isGrown() && world.isAreaLoaded(this) && fruit_trees.getFruitTreesConfig().checkEnabled(this.type)) {
             int drop_x = offset_drop[random.nextInt(3)];
             int drop_z = offset_drop[random.nextInt(3)];
-            world.dropFruit(loc_x + drop_x, loc_y + 1, loc_z + drop_z, 1, (short) 19, (byte) 0);
+            world.dropFruit(loc_x + drop_x, loc_y + 1, loc_z + drop_z, 1, (short) 322, (byte) 0);
         }
     }
 
     public final String toString(){
-        return String.format("SpongeTree[X:%d Y:%d Z:%d World:%s]", loc_x, loc_y, loc_z, world);
+        return String.format("GoldenAppleTree[X:%d Y:%d Z:%d World:%s]", loc_x, loc_y, loc_z, world);
     }
 
     public final Object[] serializeToDatabase(){
