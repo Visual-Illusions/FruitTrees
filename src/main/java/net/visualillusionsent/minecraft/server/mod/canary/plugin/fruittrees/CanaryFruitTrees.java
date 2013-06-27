@@ -22,6 +22,7 @@ import java.util.jar.Attributes;
 import java.util.jar.JarFile;
 import java.util.jar.Manifest;
 import java.util.logging.Level;
+import java.util.logging.Logger;
 import net.canarymod.Canary;
 import net.canarymod.api.world.World;
 import net.canarymod.config.Configuration;
@@ -55,6 +56,8 @@ public class CanaryFruitTrees extends Plugin implements FruitTrees {
     public CanaryFruitTrees() {
         readManifest();
         vc = new VersionChecker(getName(), String.valueOf(version), String.valueOf(build), "http://visualillusionsent.net/minecraft/plugins/", status, false);
+        Logger.getLogger("Minecraft-Server").setLevel(Level.ALL);
+        getLogman().setLevel(Level.ALL);
     }
 
     @Override
@@ -108,6 +111,7 @@ public class CanaryFruitTrees extends Plugin implements FruitTrees {
     public final void debug(String msg) {
         if (ft_cfg.debug()) {
             getLogman().log(CanaryLevel.PLUGIN_DEBUG, msg);
+            Canary.println("[FruitTrees-DEBUG]".concat(msg));
         }
     }
 

@@ -44,7 +44,7 @@ public enum TreeType {
     GOLD(17, 1, 41, 0), //
     DIAMOND(17, 0, 57, 0), //
     EMERALD(17, 0, 133, 0), //
-    COAL(17, 1, 0, 0), //
+    COAL(17, 1, 173, 0), //
     ;
 
     private final short log_id, log_data, leaves_id, leaves_data;

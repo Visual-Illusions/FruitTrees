@@ -17,10 +17,10 @@
  */
 package net.visualillusionsent.fruittrees;
 
-public final class GoldTree extends FruitTree {
+public final class CoalTree extends FruitTree {
 
-    public GoldTree(FruitTrees fruit_trees, int loc_x, int loc_y, int loc_z, TreeWorld world) {
-        super(fruit_trees, TreeType.GOLD, loc_x, loc_y, loc_z, world);
+    public CoalTree(FruitTrees fruit_trees, int loc_x, int loc_y, int loc_z, TreeWorld world) {
+        super(fruit_trees, TreeType.COAL, loc_x, loc_y, loc_z, world);
     }
 
     @Override
@@ -28,7 +28,7 @@ public final class GoldTree extends FruitTree {
         if (world.isAreaLoaded(this) && fruit_trees.getFruitTreesConfig().checkEnabled(this.type)) {
             int drop_x = offset_drop[random.nextInt(3)];
             int drop_z = offset_drop[random.nextInt(3)];
-            world.dropFruit(loc_x + drop_x, loc_y + 1, loc_z + drop_z, 1, (short) 266, (short) 0);
+            world.dropFruit(loc_x + drop_x, loc_y + 1, loc_z + drop_z, 1, (short) 263, (short) 0);
         }
     }
 
@@ -39,6 +39,6 @@ public final class GoldTree extends FruitTree {
 
     @Override
     public final String toString() {
-        return String.format("GoldTree[X:%d Y:%d Z:%d World:%s]", loc_x, loc_y, loc_z, world);
+        return String.format("CoalTree[X:%d Y:%d Z:%d World:%s]", loc_x, loc_y, loc_z, world);
     }
 }

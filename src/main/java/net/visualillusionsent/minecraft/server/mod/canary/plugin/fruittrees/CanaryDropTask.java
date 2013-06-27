@@ -22,21 +22,24 @@ import net.canarymod.Canary;
 import net.canarymod.tasks.ServerTask;
 import net.visualillusionsent.fruittrees.DropTask;
 
-public final class CanaryDropTask extends ServerTask{
+public final class CanaryDropTask extends ServerTask {
 
     private static final Random random = new Random();
     private static final CanaryFruitTrees cft = CanaryFruitTrees.instance();
     private final DropTask task;
+    private static long delay;
 
-    public CanaryDropTask(DropTask task){
-        super(cft, random.nextInt(540000) + 60000, false); //Between 1 minute and 5 minutes
+    public CanaryDropTask(DropTask task) {
+        super(cft, delay = random.nextInt(540000) + 60000, false); //Between 1 minute and 5 minutes
         this.task = task;
         Canary.getServer().addSynchronousTask(this);
+        cft.debug("Dropping fruit from Tree: " + task.getTree() + " in " + (delay / 1000) + " seconds");
     }
 
     @Override
-    public void run(){
+    public void run() {
         if (task.isValid()) {
+            cft.debug("Dropping fruit from Tree: " + task.getTree());
             task.drop();
             new CanaryDropTask(task);
         }

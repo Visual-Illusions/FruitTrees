@@ -113,8 +113,9 @@ public final class FruitTreesConfigurations {
                 case GOLD:
                 case DIAMOND:
                 case EMERALD:
-                case COAL:
                     return cfg.getBoolean(type.name().toLowerCase() + ".tree.enabled");
+                case COAL:
+                    return false; //COAL TREE NOT FULLY IMPLEMENTED
                 case DYE_BLACK:
                 case DYE_BLUE:
                 case DYE_BROWN:

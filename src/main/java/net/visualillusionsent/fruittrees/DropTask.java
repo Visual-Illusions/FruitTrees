@@ -17,19 +17,23 @@
  */
 package net.visualillusionsent.fruittrees;
 
-public final class DropTask{
+public final class DropTask {
 
     private final FruitTree tree;
 
-    public DropTask(FruitTree tree){
+    public DropTask(FruitTree tree) {
         this.tree = tree;
     }
 
-    public final void drop(){
+    public final void drop() {
         tree.dropFruit();
     }
 
-    public final boolean isValid(){
+    public final FruitTree getTree() {
+        return tree;
+    }
+
+    public final boolean isValid() {
         FruitTree test_tree = TreeTracker.getTreeAt(tree.getX(), tree.getY(), tree.getZ(), tree.getTreeWorld());
         if (test_tree != null) {
             if (test_tree.isGrown()) {
