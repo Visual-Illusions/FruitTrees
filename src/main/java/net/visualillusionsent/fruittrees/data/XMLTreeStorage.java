@@ -451,8 +451,44 @@ public final class XMLTreeStorage extends TreeStorage {
                                 }
                                 break;
                             case DIAMOND:
+                                if (fruit_trees.getFruitTreesConfig().checkEnabled(TreeType.DIAMOND)) {
+                                    new DiamondTree(fruit_trees,
+                                        Integer.valueOf(tree.getAttributeValue("X")).intValue(),
+                                        Integer.valueOf(tree.getAttributeValue("Y")).intValue(),
+                                        Integer.valueOf(tree.getAttributeValue("Z")).intValue(),
+                                        tree_world);
+                                }
+                                else {
+                                    // Pass it down to the catch block
+                                    throw new IllegalArgumentException("HerpDerp");
+                                }
+                                break;
                             case EMERALD:
+                                if (fruit_trees.getFruitTreesConfig().checkEnabled(TreeType.EMERALD)) {
+                                    new EmeraldTree(fruit_trees,
+                                        Integer.valueOf(tree.getAttributeValue("X")).intValue(),
+                                        Integer.valueOf(tree.getAttributeValue("Y")).intValue(),
+                                        Integer.valueOf(tree.getAttributeValue("Z")).intValue(),
+                                        tree_world);
+                                }
+                                else {
+                                    // Pass it down to the catch block
+                                    throw new IllegalArgumentException("HerpDerp");
+                                }
+                                break;
                             case COAL:
+                                if (fruit_trees.getFruitTreesConfig().checkEnabled(TreeType.COAL)) {
+                                    new CoalTree(fruit_trees,
+                                        Integer.valueOf(tree.getAttributeValue("X")).intValue(),
+                                        Integer.valueOf(tree.getAttributeValue("Y")).intValue(),
+                                        Integer.valueOf(tree.getAttributeValue("Z")).intValue(),
+                                        tree_world);
+                                }
+                                else {
+                                    // Pass it down to the catch block
+                                    throw new IllegalArgumentException("HerpDerp");
+                                }
+                                break;
                             default:
                                 continue;
                         }
