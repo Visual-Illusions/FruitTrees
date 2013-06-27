@@ -18,6 +18,7 @@
 package net.visualillusionsent.fruittrees;
 
 import net.visualillusionsent.utils.PropertiesFile;
+import net.visualillusionsent.utils.UtilityException;
 
 public final class FruitTreesConfigurations {
 
@@ -77,36 +78,67 @@ public final class FruitTreesConfigurations {
             cfg.setString("iron.tree.enabled", "yes");
             cfg.addComment("iron.tree.enabled", "Sets whether Iron Trees are enabled or not");
         }
+        //Gold Tree
+        if (!cfg.containsKey("gold.tree.enabled")) {
+            cfg.setString("gold.tree.enabled", "yes");
+            cfg.addComment("gold.tree.enabled", "Sets whether Gold Trees are enabled or not");
+        }
+        //Diamond Tree
+        if (!cfg.containsKey("diamond.tree.enabled")) {
+            cfg.setString("diamond.tree.enabled", "yes");
+            cfg.addComment("diamond.tree.enabled", "Sets whether Diamond Trees are enabled or not");
+        }
+        //Emerald Tree
+        if (!cfg.containsKey("emerald.tree.enabled")) {
+            cfg.setString("emerald.tree.enabled", "yes");
+            cfg.addComment("emerald.tree.enabled", "Sets whether Emerald Trees are enabled or not");
+        }
+        //Coal Tree
+        if (!cfg.containsKey("coal.tree.enabled")) {
+            cfg.setString("coal.tree.enabled", "yes");
+            cfg.addComment("coal.tree.enabled", "Sets whether Coal Trees are enabled or not");
+        }
         cfg.save();
     }
 
     public final boolean checkEnabled(TreeType type) {
-        switch (type) {
-            case APPLE:
-            case GOLDEN_APPLE:
-            case SPONGE:
-            case RECORD:
-            case REDSTONE:
-                return cfg.getBoolean(type.name().toLowerCase() + ".tree.enabled");
-            case DYE_BLACK:
-            case DYE_BLUE:
-            case DYE_BROWN:
-            case DYE_CYAN:
-            case DYE_GRAY:
-            case DYE_GREEN:
-            case DYE_LIGHT_BLUE:
-            case DYE_LIGHT_GRAY:
-            case DYE_LIME:
-            case DYE_MAGENTA:
-            case DYE_ORANGE:
-            case DYE_PINK:
-            case DYE_PURPLE:
-            case DYE_RED:
-            case DYE_WHITE:
-            case DYE_YELLOW:
-                return cfg.getBoolean(type.name().replace("DYE_", "").toLowerCase() + ".dye.tree.enabled");
-            default:
-                return false;
+        try {
+            switch (type) {
+                case APPLE:
+                case GOLDEN_APPLE:
+                case SPONGE:
+                case RECORD:
+                case REDSTONE:
+                case IRON:
+                case GOLD:
+                case DIAMOND:
+                case EMERALD:
+                case COAL:
+                    return cfg.getBoolean(type.name().toLowerCase() + ".tree.enabled");
+                case DYE_BLACK:
+                case DYE_BLUE:
+                case DYE_BROWN:
+                case DYE_CYAN:
+                case DYE_GRAY:
+                case DYE_GREEN:
+                case DYE_LIGHT_BLUE:
+                case DYE_LIGHT_GRAY:
+                case DYE_LIME:
+                case DYE_MAGENTA:
+                case DYE_ORANGE:
+                case DYE_PINK:
+                case DYE_PURPLE:
+                case DYE_RED:
+                case DYE_WHITE:
+                case DYE_YELLOW:
+                    return cfg.getBoolean(type.name().replace("DYE_", "").toLowerCase() + ".dye.tree.enabled");
+                default:
+                    return false;
+            }
+        }
+        catch (UtilityException uex) {
+            // Missing Property
+            return false;
         }
     }
 

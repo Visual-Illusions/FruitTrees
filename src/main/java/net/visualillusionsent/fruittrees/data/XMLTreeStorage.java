@@ -21,15 +21,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
-import net.visualillusionsent.fruittrees.AppleTree;
-import net.visualillusionsent.fruittrees.DyeTree;
-import net.visualillusionsent.fruittrees.FruitTree;
-import net.visualillusionsent.fruittrees.FruitTrees;
-import net.visualillusionsent.fruittrees.GoldenAppleTree;
-import net.visualillusionsent.fruittrees.RecordTree;
-import net.visualillusionsent.fruittrees.SpongeTree;
-import net.visualillusionsent.fruittrees.TreeType;
-import net.visualillusionsent.fruittrees.TreeWorld;
+import net.visualillusionsent.fruittrees.*;
 import net.visualillusionsent.utils.SystemUtils;
 import org.jdom2.Comment;
 import org.jdom2.Document;
@@ -223,7 +215,7 @@ public final class XMLTreeStorage extends TreeStorage {
                                 }
                                 break;
                             case DYE_BLUE:
-                                if (fruit_trees.getFruitTreesConfig().checkEnabled(TreeType.DYE_BLACK)) {
+                                if (fruit_trees.getFruitTreesConfig().checkEnabled(TreeType.DYE_BLUE)) {
                                     new DyeTree(fruit_trees,
                                         Integer.valueOf(tree.getAttributeValue("X")).intValue(),
                                         Integer.valueOf(tree.getAttributeValue("Y")).intValue(),
@@ -237,7 +229,7 @@ public final class XMLTreeStorage extends TreeStorage {
                                 }
                                 break;
                             case DYE_BROWN:
-                                if (fruit_trees.getFruitTreesConfig().checkEnabled(TreeType.DYE_BLACK)) {
+                                if (fruit_trees.getFruitTreesConfig().checkEnabled(TreeType.DYE_BROWN)) {
                                     new DyeTree(fruit_trees,
                                         Integer.valueOf(tree.getAttributeValue("X")).intValue(),
                                         Integer.valueOf(tree.getAttributeValue("Y")).intValue(),
@@ -251,7 +243,7 @@ public final class XMLTreeStorage extends TreeStorage {
                                 }
                                 break;
                             case DYE_CYAN:
-                                if (fruit_trees.getFruitTreesConfig().checkEnabled(TreeType.DYE_BLACK)) {
+                                if (fruit_trees.getFruitTreesConfig().checkEnabled(TreeType.DYE_CYAN)) {
                                     new DyeTree(fruit_trees,
                                         Integer.valueOf(tree.getAttributeValue("X")).intValue(),
                                         Integer.valueOf(tree.getAttributeValue("Y")).intValue(),
@@ -265,7 +257,7 @@ public final class XMLTreeStorage extends TreeStorage {
                                 }
                                 break;
                             case DYE_GRAY:
-                                if (fruit_trees.getFruitTreesConfig().checkEnabled(TreeType.DYE_BLACK)) {
+                                if (fruit_trees.getFruitTreesConfig().checkEnabled(TreeType.DYE_GRAY)) {
                                     new DyeTree(fruit_trees,
                                         Integer.valueOf(tree.getAttributeValue("X")).intValue(),
                                         Integer.valueOf(tree.getAttributeValue("Y")).intValue(),
@@ -279,7 +271,7 @@ public final class XMLTreeStorage extends TreeStorage {
                                 }
                                 break;
                             case DYE_GREEN:
-                                if (fruit_trees.getFruitTreesConfig().checkEnabled(TreeType.DYE_BLACK)) {
+                                if (fruit_trees.getFruitTreesConfig().checkEnabled(TreeType.DYE_GREEN)) {
                                     new DyeTree(fruit_trees,
                                         Integer.valueOf(tree.getAttributeValue("X")).intValue(),
                                         Integer.valueOf(tree.getAttributeValue("Y")).intValue(),
@@ -293,7 +285,7 @@ public final class XMLTreeStorage extends TreeStorage {
                                 }
                                 break;
                             case DYE_LIGHT_BLUE:
-                                if (fruit_trees.getFruitTreesConfig().checkEnabled(TreeType.DYE_BLACK)) {
+                                if (fruit_trees.getFruitTreesConfig().checkEnabled(TreeType.DYE_LIGHT_BLUE)) {
                                     new DyeTree(fruit_trees,
                                         Integer.valueOf(tree.getAttributeValue("X")).intValue(),
                                         Integer.valueOf(tree.getAttributeValue("Y")).intValue(),
@@ -307,7 +299,7 @@ public final class XMLTreeStorage extends TreeStorage {
                                 }
                                 break;
                             case DYE_LIGHT_GRAY:
-                                if (fruit_trees.getFruitTreesConfig().checkEnabled(TreeType.DYE_BLACK)) {
+                                if (fruit_trees.getFruitTreesConfig().checkEnabled(TreeType.DYE_LIGHT_GRAY)) {
                                     new DyeTree(fruit_trees,
                                         Integer.valueOf(tree.getAttributeValue("X")).intValue(),
                                         Integer.valueOf(tree.getAttributeValue("Y")).intValue(),
@@ -321,7 +313,7 @@ public final class XMLTreeStorage extends TreeStorage {
                                 }
                                 break;
                             case DYE_LIME:
-                                if (fruit_trees.getFruitTreesConfig().checkEnabled(TreeType.DYE_BLACK)) {
+                                if (fruit_trees.getFruitTreesConfig().checkEnabled(TreeType.DYE_LIME)) {
                                     new DyeTree(fruit_trees,
                                         Integer.valueOf(tree.getAttributeValue("X")).intValue(),
                                         Integer.valueOf(tree.getAttributeValue("Y")).intValue(),
@@ -335,7 +327,7 @@ public final class XMLTreeStorage extends TreeStorage {
                                 }
                                 break;
                             case DYE_MAGENTA:
-                                if (fruit_trees.getFruitTreesConfig().checkEnabled(TreeType.DYE_BLACK)) {
+                                if (fruit_trees.getFruitTreesConfig().checkEnabled(TreeType.DYE_MAGENTA)) {
                                     new DyeTree(fruit_trees,
                                         Integer.valueOf(tree.getAttributeValue("X")).intValue(),
                                         Integer.valueOf(tree.getAttributeValue("Y")).intValue(),
@@ -349,7 +341,7 @@ public final class XMLTreeStorage extends TreeStorage {
                                 }
                                 break;
                             case DYE_ORANGE:
-                                if (fruit_trees.getFruitTreesConfig().checkEnabled(TreeType.DYE_BLACK)) {
+                                if (fruit_trees.getFruitTreesConfig().checkEnabled(TreeType.DYE_ORANGE)) {
                                     new DyeTree(fruit_trees,
                                         Integer.valueOf(tree.getAttributeValue("X")).intValue(),
                                         Integer.valueOf(tree.getAttributeValue("Y")).intValue(),
@@ -363,7 +355,7 @@ public final class XMLTreeStorage extends TreeStorage {
                                 }
                                 break;
                             case DYE_PINK:
-                                if (fruit_trees.getFruitTreesConfig().checkEnabled(TreeType.DYE_BLACK)) {
+                                if (fruit_trees.getFruitTreesConfig().checkEnabled(TreeType.DYE_PINK)) {
                                     new DyeTree(fruit_trees,
                                         Integer.valueOf(tree.getAttributeValue("X")).intValue(),
                                         Integer.valueOf(tree.getAttributeValue("Y")).intValue(),
@@ -377,7 +369,7 @@ public final class XMLTreeStorage extends TreeStorage {
                                 }
                                 break;
                             case DYE_PURPLE:
-                                if (fruit_trees.getFruitTreesConfig().checkEnabled(TreeType.DYE_BLACK)) {
+                                if (fruit_trees.getFruitTreesConfig().checkEnabled(TreeType.DYE_PURPLE)) {
                                     new DyeTree(fruit_trees,
                                         Integer.valueOf(tree.getAttributeValue("X")).intValue(),
                                         Integer.valueOf(tree.getAttributeValue("Y")).intValue(),
@@ -391,7 +383,7 @@ public final class XMLTreeStorage extends TreeStorage {
                                 }
                                 break;
                             case DYE_RED:
-                                if (fruit_trees.getFruitTreesConfig().checkEnabled(TreeType.DYE_BLACK)) {
+                                if (fruit_trees.getFruitTreesConfig().checkEnabled(TreeType.DYE_RED)) {
                                     new DyeTree(fruit_trees,
                                         Integer.valueOf(tree.getAttributeValue("X")).intValue(),
                                         Integer.valueOf(tree.getAttributeValue("Y")).intValue(),
@@ -405,7 +397,7 @@ public final class XMLTreeStorage extends TreeStorage {
                                 }
                                 break;
                             case DYE_WHITE:
-                                if (fruit_trees.getFruitTreesConfig().checkEnabled(TreeType.DYE_BLACK)) {
+                                if (fruit_trees.getFruitTreesConfig().checkEnabled(TreeType.DYE_WHITE)) {
                                     new DyeTree(fruit_trees,
                                         Integer.valueOf(tree.getAttributeValue("X")).intValue(),
                                         Integer.valueOf(tree.getAttributeValue("Y")).intValue(),
@@ -419,7 +411,7 @@ public final class XMLTreeStorage extends TreeStorage {
                                 }
                                 break;
                             case DYE_YELLOW:
-                                if (fruit_trees.getFruitTreesConfig().checkEnabled(TreeType.DYE_BLACK)) {
+                                if (fruit_trees.getFruitTreesConfig().checkEnabled(TreeType.DYE_YELLOW)) {
                                     new DyeTree(fruit_trees,
                                         Integer.valueOf(tree.getAttributeValue("X")).intValue(),
                                         Integer.valueOf(tree.getAttributeValue("Y")).intValue(),
@@ -432,6 +424,35 @@ public final class XMLTreeStorage extends TreeStorage {
                                     throw new IllegalArgumentException("HerpDerp");
                                 }
                                 break;
+                            case IRON:
+                                if (fruit_trees.getFruitTreesConfig().checkEnabled(TreeType.IRON)) {
+                                    new IronTree(fruit_trees,
+                                        Integer.valueOf(tree.getAttributeValue("X")).intValue(),
+                                        Integer.valueOf(tree.getAttributeValue("Y")).intValue(),
+                                        Integer.valueOf(tree.getAttributeValue("Z")).intValue(),
+                                        tree_world);
+                                }
+                                else {
+                                    // Pass it down to the catch block
+                                    throw new IllegalArgumentException("HerpDerp");
+                                }
+                                break;
+                            case GOLD:
+                                if (fruit_trees.getFruitTreesConfig().checkEnabled(TreeType.GOLD)) {
+                                    new GoldTree(fruit_trees,
+                                        Integer.valueOf(tree.getAttributeValue("X")).intValue(),
+                                        Integer.valueOf(tree.getAttributeValue("Y")).intValue(),
+                                        Integer.valueOf(tree.getAttributeValue("Z")).intValue(),
+                                        tree_world);
+                                }
+                                else {
+                                    // Pass it down to the catch block
+                                    throw new IllegalArgumentException("HerpDerp");
+                                }
+                                break;
+                            case DIAMOND:
+                            case EMERALD:
+                            case COAL:
                             default:
                                 continue;
                         }
