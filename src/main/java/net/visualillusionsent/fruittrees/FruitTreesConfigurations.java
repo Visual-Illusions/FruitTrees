@@ -19,17 +19,17 @@ package net.visualillusionsent.fruittrees;
 
 import net.visualillusionsent.utils.PropertiesFile;
 
-public final class FruitTreesConfigurations{
+public final class FruitTreesConfigurations {
 
     private final PropertiesFile cfg;
     private final String[] dyes = new String[] { "Black", "Red", "Green", "Brown", "Blue", "Purple", "Cyan", "Light_Gray", "Gray", "Pink", "Lime", "Yellow", "Light_Blue", "Magenta", "Orange", "White" };
 
-    public FruitTreesConfigurations(FruitTrees fruit_trees){
+    public FruitTreesConfigurations(FruitTrees fruit_trees) {
         this.cfg = fruit_trees.getConfig();
         checkConfig();
     }
 
-    private final void checkConfig(){
+    private final void checkConfig() {
         // Debug Log
         if (!cfg.containsKey("debug.log.enabled")) {
             cfg.setString("debug.log.enabled", "yes");
@@ -72,10 +72,15 @@ public final class FruitTreesConfigurations{
                 cfg.addComment(key, String.format("Sets whether %s Dye Trees are enabled or not", dyes[index]));
             }
         }
+        //Iron Tree
+        if (!cfg.containsKey("iron.tree.enabled")) {
+            cfg.setString("iron.tree.enabled", "yes");
+            cfg.addComment("iron.tree.enabled", "Sets whether Iron Trees are enabled or not");
+        }
         cfg.save();
     }
 
-    public final boolean checkEnabled(TreeType type){
+    public final boolean checkEnabled(TreeType type) {
         switch (type) {
             case APPLE:
             case GOLDEN_APPLE:
@@ -105,7 +110,7 @@ public final class FruitTreesConfigurations{
         }
     }
 
-    public final boolean debug(){
+    public final boolean debug() {
         return cfg.getBoolean("debug.log.enabled");
     }
 }
