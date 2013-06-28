@@ -33,7 +33,7 @@ public final class FruitTreesConfigurations {
     private final void checkConfig() {
         // Debug Log
         if (!cfg.containsKey("debug.log.enabled")) {
-            cfg.setString("debug.log.enabled", "yes");
+            cfg.setString("debug.log.enabled", "no");
             cfg.addComment("debug.log.enabled", "Sets whether Debug Logging is enabled or not");
         }
         // Datasoure type
@@ -49,12 +49,12 @@ public final class FruitTreesConfigurations {
         // SQL User
         if (!cfg.containsKey("sql.user")) {
             cfg.setString("sql.user", "my.sql.user");
-            cfg.addComment("sql.url", "The user name of the SQL database");
+            cfg.addComment("sql.user", "The user name of the SQL database");
         }
         // SQL Password
         if (!cfg.containsKey("sql.password")) {
-            cfg.setString("sql.user", "my.sql.pass");
-            cfg.addComment("sql.url", "The password of the SQL database (forwarded to DarkDiplomat [lol just kidding])");
+            cfg.setString("sql.password", "my.sql.pass");
+            cfg.addComment("sql.password", "The password of the SQL database (forwarded to DarkDiplomat [lol just kidding])");
         }
         //Header
         if (cfg.getHeaderLines().isEmpty()) {

@@ -27,7 +27,7 @@ import net.visualillusionsent.fruittrees.FruitTrees;
 import net.visualillusionsent.fruittrees.TreeType;
 import net.visualillusionsent.fruittrees.TreeWorld;
 
-public class MySQLTreeStorage extends TreeStorage {
+public final class MySQLTreeStorage extends TreeStorage {
 
     private final String tree_table = "FruitTrees";
     private Connection conn;
@@ -38,12 +38,13 @@ public class MySQLTreeStorage extends TreeStorage {
     }
 
     private final void checkOrGenTable() throws SQLException {
-        PreparedStatement ps = conn.prepareStatement("CREATE TABLE IF NOT EXISTS " + tree_table + " (Type VARCHAR(30), X INT, Y INT, Z INT, TreeWorld VARCHAR(64))");
-        ps.execute();
+        testConnection();
+        conn.prepareStatement("CREATE TABLE IF NOT EXISTS " + tree_table + " (Type VARCHAR(30), X INT, Y INT, Z INT, TreeWorld VARCHAR(64))").execute();
     }
 
     @Override
-    public boolean storeTree(FruitTree tree) {
+    public final boolean storeTree(FruitTree tree) {
+        fruit_trees.info(String.format("Storing Tree: %s", tree));
         SQLException sqlex = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -55,6 +56,7 @@ public class MySQLTreeStorage extends TreeStorage {
             ps.setInt(3, tree.getY());
             ps.setInt(4, tree.getZ());
             ps.setString(5, tree.getTreeWorld().getName());
+            ps.execute();
         }
         catch (SQLException sqle) {
             sqlex = sqle;
@@ -74,11 +76,13 @@ public class MySQLTreeStorage extends TreeStorage {
                 return false;
             }
         }
+        fruit_trees.info("Tree stored successfully");
         return true;
     }
 
     @Override
-    public void removeTree(FruitTree tree) {
+    public final void removeTree(FruitTree tree) {
+        fruit_trees.info(String.format("Killing Tree: %s", tree));
         SQLException sqlex = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -89,6 +93,7 @@ public class MySQLTreeStorage extends TreeStorage {
             ps.setInt(2, tree.getY());
             ps.setInt(3, tree.getZ());
             ps.setString(4, tree.getTreeWorld().getName());
+            ps.execute();
         }
         catch (SQLException sqle) {
             sqlex = sqle;
@@ -107,17 +112,20 @@ public class MySQLTreeStorage extends TreeStorage {
                 fruit_trees.severe("Failed to remove Tree: ".concat(tree.toString()), sqlex);
             }
         }
+        fruit_trees.info("Tree killed successfully");
     }
 
     @Override
-    public boolean loadTreesForWorld(TreeWorld tree_world) {
+    public final boolean loadTreesForWorld(TreeWorld tree_world) {
+        fruit_trees.info(String.format("Loading Trees for TreeWorld: %s", tree_world));
         SQLException sqlex = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
         int load = 0;
         try {
             testConnection();
-            ps = conn.prepareStatement("SELECT * FROM " + tree_table + " WHERE TreeWorld=" + tree_world.getName());
+            ps = conn.prepareStatement("SELECT * FROM " + tree_table + " WHERE TreeWorld=?");
+            ps.setString(1, tree_world.getName());
             rs = ps.executeQuery();
             while (rs.next()) {
                 String type = null;
@@ -161,6 +169,7 @@ public class MySQLTreeStorage extends TreeStorage {
 
     private final void testConnection() throws SQLException {
         if (conn == null || conn.isClosed() || !conn.isValid(1)) {
+            DriverManager.setLoginTimeout(3);
             conn = DriverManager.getConnection("jdbc:mysql://" + fruit_trees.getFruitTreesConfig().getSQL_URL(), fruit_trees.getFruitTreesConfig().getSQL_User(), fruit_trees.getFruitTreesConfig().getSQL_Password());
         }
     }
