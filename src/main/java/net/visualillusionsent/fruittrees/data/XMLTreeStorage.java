@@ -21,7 +21,10 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
-import net.visualillusionsent.fruittrees.*;
+import net.visualillusionsent.fruittrees.FruitTree;
+import net.visualillusionsent.fruittrees.FruitTrees;
+import net.visualillusionsent.fruittrees.TreeType;
+import net.visualillusionsent.fruittrees.TreeWorld;
 import net.visualillusionsent.utils.SystemUtils;
 import org.jdom2.Comment;
 import org.jdom2.Document;
@@ -132,8 +135,11 @@ public final class XMLTreeStorage extends TreeStorage {
     }
 
     public boolean loadTreesForWorld(TreeWorld tree_world) {
+        fruit_trees.info(String.format("Loading Trees for TreeWorld: %s", tree_world));
         String world_file = file.replace("%world_name%", tree_world.getName());
         File worldFile = new File(directory.concat(world_file));
+        Exception ex = null;
+        int load = 0;
         if (!worldFile.exists()) {
             return genDefaultWorldFile(worldFile);
         }
@@ -144,368 +150,38 @@ public final class XMLTreeStorage extends TreeStorage {
                 List<Element> trees = fruittrees.getChildren();
                 for (Element tree : trees) {
                     try {
-                        // "0:Black", "1:Red", "2:Green", "3:Brown", "4:Blue", "5:Purple", "6:Cyan",
-                        // "7:Light_Gray", "8:Gray", "9:Pink", "10:Lime", "11:Yellow", "12:Light_Blue",
-                        // "13:Magenta", "14:Orange", "15:White"
-                        switch (TreeType.valueOf(tree.getAttributeValue("Type"))) {
-                            case APPLE:
-                                if (fruit_trees.getFruitTreesConfig().checkEnabled(TreeType.APPLE)) {
-                                    new AppleTree(fruit_trees,
-                                        Integer.valueOf(tree.getAttributeValue("X")).intValue(),
-                                        Integer.valueOf(tree.getAttributeValue("Y")).intValue(),
-                                        Integer.valueOf(tree.getAttributeValue("Z")).intValue(),
-                                        tree_world);
-                                }
-                                else {
-                                    // Pass it down to the catch block
-                                    throw new IllegalArgumentException("HerpDerp");
-                                }
-                                break;
-                            case GOLDEN_APPLE:
-                                if (fruit_trees.getFruitTreesConfig().checkEnabled(TreeType.GOLDEN_APPLE)) {
-                                    new GoldenAppleTree(fruit_trees,
-                                        Integer.valueOf(tree.getAttributeValue("X")).intValue(),
-                                        Integer.valueOf(tree.getAttributeValue("Y")).intValue(),
-                                        Integer.valueOf(tree.getAttributeValue("Z")).intValue(),
-                                        tree_world);
-                                }
-                                else {
-                                    // Pass it down to the catch block
-                                    throw new IllegalArgumentException("HerpDerp");
-                                }
-                                break;
-                            case RECORD:
-                                if (fruit_trees.getFruitTreesConfig().checkEnabled(TreeType.RECORD)) {
-                                    new RecordTree(fruit_trees,
-                                        Integer.valueOf(tree.getAttributeValue("X")).intValue(),
-                                        Integer.valueOf(tree.getAttributeValue("Y")).intValue(),
-                                        Integer.valueOf(tree.getAttributeValue("Z")).intValue(),
-                                        tree_world);
-                                }
-                                else {
-                                    // Pass it down to the catch block
-                                    throw new IllegalArgumentException("HerpDerp");
-                                }
-                                break;
-                            case SPONGE:
-                                if (fruit_trees.getFruitTreesConfig().checkEnabled(TreeType.SPONGE)) {
-                                    new SpongeTree(fruit_trees,
-                                        Integer.valueOf(tree.getAttributeValue("X")).intValue(),
-                                        Integer.valueOf(tree.getAttributeValue("Y")).intValue(),
-                                        Integer.valueOf(tree.getAttributeValue("Z")).intValue(),
-                                        tree_world);
-                                }
-                                else {
-                                    // Pass it down to the catch block
-                                    throw new IllegalArgumentException("HerpDerp");
-                                }
-                                break;
-                            case DYE_BLACK:
-                                if (fruit_trees.getFruitTreesConfig().checkEnabled(TreeType.DYE_BLACK)) {
-                                    new DyeTree(fruit_trees,
-                                        Integer.valueOf(tree.getAttributeValue("X")).intValue(),
-                                        Integer.valueOf(tree.getAttributeValue("Y")).intValue(),
-                                        Integer.valueOf(tree.getAttributeValue("Z")).intValue(),
-                                        tree_world,
-                                        (byte) 0);
-                                }
-                                else {
-                                    // Pass it down to the catch block
-                                    throw new IllegalArgumentException("HerpDerp");
-                                }
-                                break;
-                            case DYE_BLUE:
-                                if (fruit_trees.getFruitTreesConfig().checkEnabled(TreeType.DYE_BLUE)) {
-                                    new DyeTree(fruit_trees,
-                                        Integer.valueOf(tree.getAttributeValue("X")).intValue(),
-                                        Integer.valueOf(tree.getAttributeValue("Y")).intValue(),
-                                        Integer.valueOf(tree.getAttributeValue("Z")).intValue(),
-                                        tree_world,
-                                        (byte) 4);
-                                }
-                                else {
-                                    // Pass it down to the catch block
-                                    throw new IllegalArgumentException("HerpDerp");
-                                }
-                                break;
-                            case DYE_BROWN:
-                                if (fruit_trees.getFruitTreesConfig().checkEnabled(TreeType.DYE_BROWN)) {
-                                    new DyeTree(fruit_trees,
-                                        Integer.valueOf(tree.getAttributeValue("X")).intValue(),
-                                        Integer.valueOf(tree.getAttributeValue("Y")).intValue(),
-                                        Integer.valueOf(tree.getAttributeValue("Z")).intValue(),
-                                        tree_world,
-                                        (byte) 3);
-                                }
-                                else {
-                                    // Pass it down to the catch block
-                                    throw new IllegalArgumentException("HerpDerp");
-                                }
-                                break;
-                            case DYE_CYAN:
-                                if (fruit_trees.getFruitTreesConfig().checkEnabled(TreeType.DYE_CYAN)) {
-                                    new DyeTree(fruit_trees,
-                                        Integer.valueOf(tree.getAttributeValue("X")).intValue(),
-                                        Integer.valueOf(tree.getAttributeValue("Y")).intValue(),
-                                        Integer.valueOf(tree.getAttributeValue("Z")).intValue(),
-                                        tree_world,
-                                        (byte) 6);
-                                }
-                                else {
-                                    // Pass it down to the catch block
-                                    throw new IllegalArgumentException("HerpDerp");
-                                }
-                                break;
-                            case DYE_GRAY:
-                                if (fruit_trees.getFruitTreesConfig().checkEnabled(TreeType.DYE_GRAY)) {
-                                    new DyeTree(fruit_trees,
-                                        Integer.valueOf(tree.getAttributeValue("X")).intValue(),
-                                        Integer.valueOf(tree.getAttributeValue("Y")).intValue(),
-                                        Integer.valueOf(tree.getAttributeValue("Z")).intValue(),
-                                        tree_world,
-                                        (byte) 8);
-                                }
-                                else {
-                                    // Pass it down to the catch block
-                                    throw new IllegalArgumentException("HerpDerp");
-                                }
-                                break;
-                            case DYE_GREEN:
-                                if (fruit_trees.getFruitTreesConfig().checkEnabled(TreeType.DYE_GREEN)) {
-                                    new DyeTree(fruit_trees,
-                                        Integer.valueOf(tree.getAttributeValue("X")).intValue(),
-                                        Integer.valueOf(tree.getAttributeValue("Y")).intValue(),
-                                        Integer.valueOf(tree.getAttributeValue("Z")).intValue(),
-                                        tree_world,
-                                        (byte) 2);
-                                }
-                                else {
-                                    // Pass it down to the catch block
-                                    throw new IllegalArgumentException("HerpDerp");
-                                }
-                                break;
-                            case DYE_LIGHT_BLUE:
-                                if (fruit_trees.getFruitTreesConfig().checkEnabled(TreeType.DYE_LIGHT_BLUE)) {
-                                    new DyeTree(fruit_trees,
-                                        Integer.valueOf(tree.getAttributeValue("X")).intValue(),
-                                        Integer.valueOf(tree.getAttributeValue("Y")).intValue(),
-                                        Integer.valueOf(tree.getAttributeValue("Z")).intValue(),
-                                        tree_world,
-                                        (byte) 12);
-                                }
-                                else {
-                                    // Pass it down to the catch block
-                                    throw new IllegalArgumentException("HerpDerp");
-                                }
-                                break;
-                            case DYE_LIGHT_GRAY:
-                                if (fruit_trees.getFruitTreesConfig().checkEnabled(TreeType.DYE_LIGHT_GRAY)) {
-                                    new DyeTree(fruit_trees,
-                                        Integer.valueOf(tree.getAttributeValue("X")).intValue(),
-                                        Integer.valueOf(tree.getAttributeValue("Y")).intValue(),
-                                        Integer.valueOf(tree.getAttributeValue("Z")).intValue(),
-                                        tree_world,
-                                        (byte) 7);
-                                }
-                                else {
-                                    // Pass it down to the catch block
-                                    throw new IllegalArgumentException("HerpDerp");
-                                }
-                                break;
-                            case DYE_LIME:
-                                if (fruit_trees.getFruitTreesConfig().checkEnabled(TreeType.DYE_LIME)) {
-                                    new DyeTree(fruit_trees,
-                                        Integer.valueOf(tree.getAttributeValue("X")).intValue(),
-                                        Integer.valueOf(tree.getAttributeValue("Y")).intValue(),
-                                        Integer.valueOf(tree.getAttributeValue("Z")).intValue(),
-                                        tree_world,
-                                        (byte) 10);
-                                }
-                                else {
-                                    // Pass it down to the catch block
-                                    throw new IllegalArgumentException("HerpDerp");
-                                }
-                                break;
-                            case DYE_MAGENTA:
-                                if (fruit_trees.getFruitTreesConfig().checkEnabled(TreeType.DYE_MAGENTA)) {
-                                    new DyeTree(fruit_trees,
-                                        Integer.valueOf(tree.getAttributeValue("X")).intValue(),
-                                        Integer.valueOf(tree.getAttributeValue("Y")).intValue(),
-                                        Integer.valueOf(tree.getAttributeValue("Z")).intValue(),
-                                        tree_world,
-                                        (byte) 13);
-                                }
-                                else {
-                                    // Pass it down to the catch block
-                                    throw new IllegalArgumentException("HerpDerp");
-                                }
-                                break;
-                            case DYE_ORANGE:
-                                if (fruit_trees.getFruitTreesConfig().checkEnabled(TreeType.DYE_ORANGE)) {
-                                    new DyeTree(fruit_trees,
-                                        Integer.valueOf(tree.getAttributeValue("X")).intValue(),
-                                        Integer.valueOf(tree.getAttributeValue("Y")).intValue(),
-                                        Integer.valueOf(tree.getAttributeValue("Z")).intValue(),
-                                        tree_world,
-                                        (byte) 14);
-                                }
-                                else {
-                                    // Pass it down to the catch block
-                                    throw new IllegalArgumentException("HerpDerp");
-                                }
-                                break;
-                            case DYE_PINK:
-                                if (fruit_trees.getFruitTreesConfig().checkEnabled(TreeType.DYE_PINK)) {
-                                    new DyeTree(fruit_trees,
-                                        Integer.valueOf(tree.getAttributeValue("X")).intValue(),
-                                        Integer.valueOf(tree.getAttributeValue("Y")).intValue(),
-                                        Integer.valueOf(tree.getAttributeValue("Z")).intValue(),
-                                        tree_world,
-                                        (byte) 9);
-                                }
-                                else {
-                                    // Pass it down to the catch block
-                                    throw new IllegalArgumentException("HerpDerp");
-                                }
-                                break;
-                            case DYE_PURPLE:
-                                if (fruit_trees.getFruitTreesConfig().checkEnabled(TreeType.DYE_PURPLE)) {
-                                    new DyeTree(fruit_trees,
-                                        Integer.valueOf(tree.getAttributeValue("X")).intValue(),
-                                        Integer.valueOf(tree.getAttributeValue("Y")).intValue(),
-                                        Integer.valueOf(tree.getAttributeValue("Z")).intValue(),
-                                        tree_world,
-                                        (byte) 5);
-                                }
-                                else {
-                                    // Pass it down to the catch block
-                                    throw new IllegalArgumentException("HerpDerp");
-                                }
-                                break;
-                            case DYE_RED:
-                                if (fruit_trees.getFruitTreesConfig().checkEnabled(TreeType.DYE_RED)) {
-                                    new DyeTree(fruit_trees,
-                                        Integer.valueOf(tree.getAttributeValue("X")).intValue(),
-                                        Integer.valueOf(tree.getAttributeValue("Y")).intValue(),
-                                        Integer.valueOf(tree.getAttributeValue("Z")).intValue(),
-                                        tree_world,
-                                        (byte) 1);
-                                }
-                                else {
-                                    // Pass it down to the catch block
-                                    throw new IllegalArgumentException("HerpDerp");
-                                }
-                                break;
-                            case DYE_WHITE:
-                                if (fruit_trees.getFruitTreesConfig().checkEnabled(TreeType.DYE_WHITE)) {
-                                    new DyeTree(fruit_trees,
-                                        Integer.valueOf(tree.getAttributeValue("X")).intValue(),
-                                        Integer.valueOf(tree.getAttributeValue("Y")).intValue(),
-                                        Integer.valueOf(tree.getAttributeValue("Z")).intValue(),
-                                        tree_world,
-                                        (byte) 15);
-                                }
-                                else {
-                                    // Pass it down to the catch block
-                                    throw new IllegalArgumentException("HerpDerp");
-                                }
-                                break;
-                            case DYE_YELLOW:
-                                if (fruit_trees.getFruitTreesConfig().checkEnabled(TreeType.DYE_YELLOW)) {
-                                    new DyeTree(fruit_trees,
-                                        Integer.valueOf(tree.getAttributeValue("X")).intValue(),
-                                        Integer.valueOf(tree.getAttributeValue("Y")).intValue(),
-                                        Integer.valueOf(tree.getAttributeValue("Z")).intValue(),
-                                        tree_world,
-                                        (byte) 11);
-                                }
-                                else {
-                                    // Pass it down to the catch block
-                                    throw new IllegalArgumentException("HerpDerp");
-                                }
-                                break;
-                            case IRON:
-                                if (fruit_trees.getFruitTreesConfig().checkEnabled(TreeType.IRON)) {
-                                    new IronTree(fruit_trees,
-                                        Integer.valueOf(tree.getAttributeValue("X")).intValue(),
-                                        Integer.valueOf(tree.getAttributeValue("Y")).intValue(),
-                                        Integer.valueOf(tree.getAttributeValue("Z")).intValue(),
-                                        tree_world);
-                                }
-                                else {
-                                    // Pass it down to the catch block
-                                    throw new IllegalArgumentException("HerpDerp");
-                                }
-                                break;
-                            case GOLD:
-                                if (fruit_trees.getFruitTreesConfig().checkEnabled(TreeType.GOLD)) {
-                                    new GoldTree(fruit_trees,
-                                        Integer.valueOf(tree.getAttributeValue("X")).intValue(),
-                                        Integer.valueOf(tree.getAttributeValue("Y")).intValue(),
-                                        Integer.valueOf(tree.getAttributeValue("Z")).intValue(),
-                                        tree_world);
-                                }
-                                else {
-                                    // Pass it down to the catch block
-                                    throw new IllegalArgumentException("HerpDerp");
-                                }
-                                break;
-                            case DIAMOND:
-                                if (fruit_trees.getFruitTreesConfig().checkEnabled(TreeType.DIAMOND)) {
-                                    new DiamondTree(fruit_trees,
-                                        Integer.valueOf(tree.getAttributeValue("X")).intValue(),
-                                        Integer.valueOf(tree.getAttributeValue("Y")).intValue(),
-                                        Integer.valueOf(tree.getAttributeValue("Z")).intValue(),
-                                        tree_world);
-                                }
-                                else {
-                                    // Pass it down to the catch block
-                                    throw new IllegalArgumentException("HerpDerp");
-                                }
-                                break;
-                            case EMERALD:
-                                if (fruit_trees.getFruitTreesConfig().checkEnabled(TreeType.EMERALD)) {
-                                    new EmeraldTree(fruit_trees,
-                                        Integer.valueOf(tree.getAttributeValue("X")).intValue(),
-                                        Integer.valueOf(tree.getAttributeValue("Y")).intValue(),
-                                        Integer.valueOf(tree.getAttributeValue("Z")).intValue(),
-                                        tree_world);
-                                }
-                                else {
-                                    // Pass it down to the catch block
-                                    throw new IllegalArgumentException("HerpDerp");
-                                }
-                                break;
-                            case COAL:
-                                if (fruit_trees.getFruitTreesConfig().checkEnabled(TreeType.COAL)) {
-                                    new CoalTree(fruit_trees,
-                                        Integer.valueOf(tree.getAttributeValue("X")).intValue(),
-                                        Integer.valueOf(tree.getAttributeValue("Y")).intValue(),
-                                        Integer.valueOf(tree.getAttributeValue("Z")).intValue(),
-                                        tree_world);
-                                }
-                                else {
-                                    // Pass it down to the catch block
-                                    throw new IllegalArgumentException("HerpDerp");
-                                }
-                                break;
-                            default:
-                                continue;
-                        }
+                        TreeType.valueOf(tree.getAttributeValue("Type")).newFruitTree(fruit_trees,
+                            Integer.valueOf(tree.getAttributeValue("X")).intValue(),
+                            Integer.valueOf(tree.getAttributeValue("Y")).intValue(),
+                            Integer.valueOf(tree.getAttributeValue("Z")).intValue(),
+                            tree_world);
+                        load++;
                     }
-                    catch (IllegalArgumentException iae) {
-                        fruit_trees.warning(String.format("Unable to initialize tree: Type=%s X=%s Y=%s Z=%s.",
-                            tree.getAttributeValue("Type"),
-                            tree.getAttributeValue("X"),
-                            tree.getAttributeValue("Y"),
-                            tree.getAttributeValue("Z")));
+                    catch (Exception exc) {
+                        fruit_trees.warning(String.format("Unable to initialize tree: Type=%s X=%s Y=%s Z=%s TreeWorld=%s.",
+                            tree.getAttribute("Type") != null ? tree.getAttributeValue("Type") : null,
+                            tree.getAttribute("X") != null ? tree.getAttributeValue("X") : null,
+                            tree.getAttribute("Y") != null ? tree.getAttributeValue("Y") : null,
+                            tree.getAttribute("Z") != null ? tree.getAttributeValue("Z") : null,
+                            tree_world));
                         continue;
                     }
                 }
             }
-            catch (JDOMException ex1) {}
-            catch (IOException ex1) {}
+            catch (IOException ioex) {
+                ex = ioex;
+            }
+            catch (JDOMException jdome) {
+                ex = jdome;
+            }
+            finally {
+                if (ex != null) {
+                    fruit_trees.severe("Failed to load trees for TreeWorld: ".concat(tree_world.toString()), ex);
+                    return false;
+                }
+            }
         }
+        fruit_trees.info(String.format("Loaded %d Trees for TreeWorld: %s", load, tree_world));
         return true;
     }
 

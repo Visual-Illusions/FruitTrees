@@ -89,7 +89,7 @@ public class CanaryFruitTreesListener implements PluginListener {
                     }
                 }
                 else if (seeds.getType() == ItemType.Seeds) {
-                    if (type.equals("DyeSeeds")) {
+                    if (type.endsWith("DyeSeeds")) {
                         block.getWorld().setBlockAt(block.getPosition(), (short) 3);
                         block.getWorld().setBlockAt(block.getX(), block.getY() + 1, block.getZ(), (short) 6, TreeType.DYE_BLACK.getLogData());
                         FruitTree tree = new DyeTree(CanaryFruitTrees.instance(), block.getX(), block.getY() + 1, block.getZ(), CanaryFruitTrees.instance().getWorldForName(block.getWorld().getFqName()), seeds.getMetaTag().getCompoundTag("FruitTrees").getByte("DyeColor"));

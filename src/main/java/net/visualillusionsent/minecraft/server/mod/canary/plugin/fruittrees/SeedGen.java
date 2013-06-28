@@ -78,78 +78,81 @@ final class SeedGen {
 
     private static final void genAppleSeeds() {
         if (CanaryFruitTrees.instance().checkEnabled(TreeType.APPLE)) {
-            genSeeds("Apple", ItemType.MelonSeeds, 0);
+            genSeeds("Apple", ItemType.MelonSeeds, 0, (byte) -1);
         }
     }
 
     private static final void genGoldAppleSeeds() {
         if (CanaryFruitTrees.instance().checkEnabled(TreeType.GOLDEN_APPLE)) {
-            genSeeds("Golden Apple", ItemType.MelonSeeds, 1);
+            genSeeds("Golden Apple", ItemType.MelonSeeds, 1, (byte) -1);
         }
     }
 
     private static final void genSpongeSeeds() {
         if (CanaryFruitTrees.instance().checkEnabled(TreeType.SPONGE)) {
-            genSeeds("Sponge", ItemType.PumpkinSeeds, 2);
+            genSeeds("Sponge", ItemType.PumpkinSeeds, 2, (byte) -1);
         }
     }
 
     private static final void genRecordSeeds() {
         if (CanaryFruitTrees.instance().checkEnabled(TreeType.RECORD)) {
-            genSeeds("Record", ItemType.PumpkinSeeds, 3);
+            genSeeds("Record", ItemType.PumpkinSeeds, 3, (byte) -1);
         }
     }
 
     private static final void genDyeSeeds() {
         for (int index = 0; index <= 15; index++) {
             if (CanaryFruitTrees.instance().checkEnabled(TreeType.valueOf("DYE_".concat(dyes[index].toUpperCase())))) {
-                genSeeds(dyes[index].concat(" Dye"), ItemType.Seeds, index + 4);
+                genSeeds(dyes[index].concat(" Dye"), ItemType.Seeds, index + 4, (byte) index);
             }
         }
     }
 
     private static final void genRedstoneSeeds() {
         if (CanaryFruitTrees.instance().checkEnabled(TreeType.REDSTONE)) {
-            genSeeds("Redstone", ItemType.Seeds, 20);
+            genSeeds("Redstone", ItemType.Seeds, 20, (byte) -1);
         }
     }
 
     private static final void genIronSeeds() {
         if (CanaryFruitTrees.instance().checkEnabled(TreeType.IRON)) {
-            genSeeds("Iron", ItemType.Seeds, 21);
+            genSeeds("Iron", ItemType.Seeds, 21, (byte) -1);
         }
     }
 
     private static final void genGoldSeeds() {
         if (CanaryFruitTrees.instance().checkEnabled(TreeType.GOLD)) {
-            genSeeds("Gold", ItemType.Seeds, 22);
+            genSeeds("Gold", ItemType.Seeds, 22, (byte) -1);
         }
     }
 
     private static final void genDiamondSeeds() {
         if (CanaryFruitTrees.instance().checkEnabled(TreeType.GOLD)) {
-            genSeeds("Diamond", ItemType.Seeds, 23);
+            genSeeds("Diamond", ItemType.Seeds, 23, (byte) -1);
         }
     }
 
     private static final void genEmeraldSeeds() {
         if (CanaryFruitTrees.instance().checkEnabled(TreeType.EMERALD)) {
-            genSeeds("Emerald", ItemType.Seeds, 24);
+            genSeeds("Emerald", ItemType.Seeds, 24, (byte) -1);
         }
     }
 
     private static final void genCoalSeeds() {
         if (CanaryFruitTrees.instance().checkEnabled(TreeType.COAL)) {
-            genSeeds("Coal", ItemType.MelonSeeds, 25);
+            genSeeds("Coal", ItemType.MelonSeeds, 25, (byte) -1);
         }
     }
 
-    private static final void genSeeds(String name, ItemType type, int seed_index) {
+    private static final void genSeeds(String name, ItemType type, int seed_index, byte dye) {
         Item fruit_seeds = Canary.factory().getItemFactory().newItem(type, 0, 1);
         fruit_seeds.setDisplayName(String.format("%s Seeds", name));
         fruit_seeds.setLore(String.format("Plant to grow a %s Tree", name));
         CompoundTag fruit_trees_tag = Canary.factory().getNBTFactory().newCompoundTag("FruitTrees");
-        fruit_trees_tag.put("TreeType", Canary.factory().getNBTFactory().newStringTag("TreeType", name.concat("Seeds").replace(" ", "")));
+        fruit_trees_tag.put("TreeType", name.concat("Seeds").replace(" ", ""));
+        if (dye != -1) {
+            fruit_trees_tag.put("DyeColor", dye);
+        }
         fruit_seeds.getMetaTag().put("FruitTrees", fruit_trees_tag);
         seeds[seed_index] = fruit_seeds;
     }

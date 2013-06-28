@@ -36,6 +36,26 @@ public final class FruitTreesConfigurations {
             cfg.setString("debug.log.enabled", "yes");
             cfg.addComment("debug.log.enabled", "Sets whether Debug Logging is enabled or not");
         }
+        // Datasoure type
+        if (!cfg.containsKey("datasource.type")) {
+            cfg.setString("datasource.type", "xml");
+            cfg.addComment("datasource.type", "Sets the Datasource to use (XML or MYSQL)");
+        }
+        // SQL URL
+        if (!cfg.containsKey("sql.url")) { //jdbc:mysql://
+            cfg.setString("sql.url", "my.sql.serv");
+            cfg.addComment("sql.url", "The URL to the SQL database (no jdbc:mysql:// required)");
+        }
+        // SQL User
+        if (!cfg.containsKey("sql.user")) {
+            cfg.setString("sql.user", "my.sql.user");
+            cfg.addComment("sql.url", "The user name of the SQL database");
+        }
+        // SQL Password
+        if (!cfg.containsKey("sql.password")) {
+            cfg.setString("sql.user", "my.sql.pass");
+            cfg.addComment("sql.url", "The password of the SQL database (forwarded to DarkDiplomat [lol just kidding])");
+        }
         //Header
         if (cfg.getHeaderLines().isEmpty()) {
             cfg.addHeaderLines("FruitTrees Configuration File", "Copyright (C) 2013 Visual Illusions Entertainment");
@@ -145,5 +165,21 @@ public final class FruitTreesConfigurations {
 
     public final boolean debug() {
         return cfg.getBoolean("debug.log.enabled");
+    }
+
+    public boolean isMySQL() {
+        return cfg.getString("datasource.type").toLowerCase().equals("mysql");
+    }
+
+    public String getSQL_URL() {
+        return cfg.getString("sql.url");
+    }
+
+    public String getSQL_User() {
+        return cfg.getString("sql.user");
+    }
+
+    public String getSQL_Password() {
+        return cfg.getString("sql.password");
     }
 }

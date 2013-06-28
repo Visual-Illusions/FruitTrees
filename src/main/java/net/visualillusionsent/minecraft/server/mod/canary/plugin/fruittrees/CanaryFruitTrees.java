@@ -18,6 +18,7 @@
 package net.visualillusionsent.minecraft.server.mod.canary.plugin.fruittrees;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.jar.Attributes;
 import java.util.jar.JarFile;
 import java.util.jar.Manifest;
@@ -33,6 +34,7 @@ import net.visualillusionsent.fruittrees.FruitTreesConfigurations;
 import net.visualillusionsent.fruittrees.TreeTracker;
 import net.visualillusionsent.fruittrees.TreeType;
 import net.visualillusionsent.fruittrees.TreeWorld;
+import net.visualillusionsent.fruittrees.data.MySQLTreeStorage;
 import net.visualillusionsent.fruittrees.data.TreeStorage;
 import net.visualillusionsent.fruittrees.data.XMLTreeStorage;
 import net.visualillusionsent.minecraft.server.mod.canary.plugin.fruittrees.commands.FruitTreesCommands;
@@ -65,7 +67,19 @@ public class CanaryFruitTrees extends Plugin implements FruitTrees {
         checkVersion();
         ft_cfg = new FruitTreesConfigurations(this);
         SeedGen.genAll();
-        storage = new XMLTreeStorage(this);
+        if (ft_cfg.isMySQL()) {
+            try {
+                storage = new MySQLTreeStorage(this);
+            }
+            catch (SQLException ex) {
+                getLogman().log(Level.SEVERE, "Failed to initialize MySQL Data storage...", ex);
+                disable();
+                return false;
+            }
+        }
+        else {
+            storage = new XMLTreeStorage(this);
+        }
         for (World world : Canary.getServer().getWorldManager().getAllWorlds()) {
             world_cache.setExistingWorlds(new CanaryTreeWorld(this, world, world.getFqName()));
             storage.loadTreesForWorld(world_cache.getTreeWorld(world.getFqName()));
@@ -109,7 +123,6 @@ public class CanaryFruitTrees extends Plugin implements FruitTrees {
     public final void debug(String msg) {
         if (ft_cfg.debug()) {
             getLogman().log(CanaryLevel.PLUGIN_DEBUG, msg);
-            Canary.println("[FruitTrees-DEBUG]".concat(msg));
         }
     }
 

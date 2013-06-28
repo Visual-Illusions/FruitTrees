@@ -19,37 +19,39 @@ package net.visualillusionsent.fruittrees;
 
 public enum TreeType {
 
-    APPLE(17, 0, 18, 3), //
-    GOLDEN_APPLE(17, 1, 18, 3), //
-    SPONGE(17, 2, 19, 0), //
-    RECORD(17, 1, 25, 0), //
-    DYE_BLACK(17, 2, 35, 15), //
-    DYE_RED(17, 2, 35, 14), //
-    DYE_GREEN(17, 2, 35, 13), //
-    DYE_BROWN(17, 2, 35, 12), //
-    DYE_BLUE(17, 2, 35, 11), //
-    DYE_PURPLE(17, 2, 35, 10), //
-    DYE_CYAN(17, 2, 35, 9), //
-    DYE_LIGHT_GRAY(17, 2, 35, 8), //
-    DYE_GRAY(17, 2, 35, 7), //
-    DYE_PINK(17, 2, 35, 6), //
-    DYE_LIME(17, 2, 35, 5), //
-    DYE_YELLOW(17, 2, 35, 4), //
-    DYE_LIGHT_BLUE(17, 2, 35, 3), //
-    DYE_MAGENTA(17, 2, 35, 2), //
-    DYE_ORANGE(17, 2, 35, 1), //
-    DYE_WHITE(17, 2, 35, 0), //
-    REDSTONE(17, 1, 152, 0), //
-    IRON(17, 2, 42, 0), //
-    GOLD(17, 1, 41, 0), //
-    DIAMOND(17, 0, 57, 0), //
-    EMERALD(17, 0, 133, 0), //
-    COAL(17, 1, 173, 0), //
+    APPLE(AppleTree.class, 17, 0, 18, 3), //
+    GOLDEN_APPLE(GoldenAppleTree.class, 17, 1, 18, 3), //
+    SPONGE(SpongeTree.class, 17, 2, 19, 0), //
+    RECORD(RecordTree.class, 17, 1, 25, 0), //
+    DYE_BLACK(DyeTree.class, 17, 2, 35, 15), //
+    DYE_RED(DyeTree.class, 17, 2, 35, 14), //
+    DYE_GREEN(DyeTree.class, 17, 2, 35, 13), //
+    DYE_BROWN(DyeTree.class, 17, 2, 35, 12), //
+    DYE_BLUE(DyeTree.class, 17, 2, 35, 11), //
+    DYE_PURPLE(DyeTree.class, 17, 2, 35, 10), //
+    DYE_CYAN(DyeTree.class, 17, 2, 35, 9), //
+    DYE_LIGHT_GRAY(DyeTree.class, 17, 2, 35, 8), //
+    DYE_GRAY(DyeTree.class, 17, 2, 35, 7), //
+    DYE_PINK(DyeTree.class, 17, 2, 35, 6), //
+    DYE_LIME(DyeTree.class, 17, 2, 35, 5), //
+    DYE_YELLOW(DyeTree.class, 17, 2, 35, 4), //
+    DYE_LIGHT_BLUE(DyeTree.class, 17, 2, 35, 3), //
+    DYE_MAGENTA(DyeTree.class, 17, 2, 35, 2), //
+    DYE_ORANGE(DyeTree.class, 17, 2, 35, 1), //
+    DYE_WHITE(DyeTree.class, 17, 2, 35, 0), //
+    REDSTONE(RedstoneTree.class, 17, 1, 152, 0), //
+    IRON(IronTree.class, 17, 2, 42, 0), //
+    GOLD(GoldTree.class, 17, 1, 41, 0), //
+    DIAMOND(DiamondTree.class, 17, 0, 57, 0), //
+    EMERALD(EmeraldTree.class, 17, 0, 133, 0), //
+    COAL(CoalTree.class, 17, 1, 173, 0), //
     ;
 
+    private final Class<? extends FruitTree> tree_class;
     private final short log_id, log_data, leaves_id, leaves_data;
 
-    private TreeType(int log_id, int log_data, int leaves_id, int leaves_data) {
+    private TreeType(Class<? extends FruitTree> tree_class, int log_id, int log_data, int leaves_id, int leaves_data) {
+        this.tree_class = tree_class;
         this.log_id = (short) log_id;
         this.log_data = (short) log_data;
         this.leaves_id = (short) leaves_id;
@@ -70,5 +72,14 @@ public enum TreeType {
 
     public final short getLeavesData() {
         return leaves_data;
+    }
+
+    public final FruitTree newFruitTree(FruitTrees fruit_trees, int x, int y, int z, TreeWorld tree_world) throws Exception {
+        if (this.tree_class == DyeTree.class) {
+            return tree_class.getConstructor(FruitTrees.class, Integer.TYPE, Integer.TYPE, Integer.TYPE, TreeWorld.class, Byte.TYPE).newInstance(fruit_trees, x, y, z, tree_world, (byte) (this.ordinal() - 4));
+        }
+        else {
+            return tree_class.getConstructor(FruitTrees.class, Integer.TYPE, Integer.TYPE, Integer.TYPE, TreeWorld.class).newInstance(fruit_trees, x, y, z, tree_world);
+        }
     }
 }
