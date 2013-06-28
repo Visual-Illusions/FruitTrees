@@ -18,7 +18,6 @@
 package net.visualillusionsent.fruittrees;
 
 import java.util.Random;
-import net.canarymod.Canary;
 import org.jdom2.Element;
 
 public abstract class FruitTree {
@@ -218,7 +217,6 @@ public abstract class FruitTree {
 
     private final boolean inRange(int num_1, int num_2, int min, int max) {
         int check = Math.abs(num_1 - num_2);
-        Canary.println("" + check);
         return check >= min && max >= check;
     }
 
