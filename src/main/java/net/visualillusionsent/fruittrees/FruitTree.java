@@ -191,6 +191,9 @@ public abstract class FruitTree {
         else if (isBaseAt(x, y, z, world)) {
             return true;
         }
+        else if (!inRange(loc_x, x, 0, 5) || !inRange(loc_y, y, 0, 5) || !inRange(loc_z, z, 0, 5)) {
+            return false;
+        }
         else if (x == loc_x && z == loc_z && inRange(loc_y, y, 1, 4)) {
             return type.getLogId() == id && type.getLogData() == data;
         }
