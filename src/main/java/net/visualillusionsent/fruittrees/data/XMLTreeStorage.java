@@ -51,6 +51,7 @@ public final class XMLTreeStorage extends TreeStorage {
     }
 
     public boolean storeTree(FruitTree tree) {
+        fruit_trees.info(String.format("Storing Tree: %s", tree));
         String world_file = file.replace("%world_name%", tree.getTreeWorld().getName());
         File worldFile = new File(directory.concat(world_file));
         Exception ex = null;
@@ -89,10 +90,12 @@ public final class XMLTreeStorage extends TreeStorage {
                 return false;
             }
         }
+        fruit_trees.info("Tree stored successfully");
         return true;
     }
 
     public void removeTree(FruitTree tree) {
+        fruit_trees.info(String.format("Killing Tree: %s", tree));
         String world_file = file.replace("%world_name%", tree.getTreeWorld().getName());
         File worldFile = new File(directory.concat(world_file));
         Exception ex = null;
@@ -132,6 +135,7 @@ public final class XMLTreeStorage extends TreeStorage {
                 }
             }
         }
+        fruit_trees.info("Tree killed successfully");
     }
 
     public boolean loadTreesForWorld(TreeWorld tree_world) {

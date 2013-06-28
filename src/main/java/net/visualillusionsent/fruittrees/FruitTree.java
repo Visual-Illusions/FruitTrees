@@ -18,9 +18,10 @@
 package net.visualillusionsent.fruittrees;
 
 import java.util.Random;
+import net.canarymod.Canary;
 import org.jdom2.Element;
 
-public abstract class FruitTree{
+public abstract class FruitTree {
 
     protected FruitTrees fruit_trees;
     protected TreeType type;
@@ -29,7 +30,7 @@ public abstract class FruitTree{
     protected static final byte[] offset_drop = new byte[] { -2, -1, 1, 2 };
     protected static final Random random = new Random();
 
-    public FruitTree(FruitTrees fruit_trees, TreeType type, int loc_x, int loc_y, int loc_z, TreeWorld world){
+    public FruitTree(FruitTrees fruit_trees, TreeType type, int loc_x, int loc_y, int loc_z, TreeWorld world) {
         this.fruit_trees = fruit_trees;
         this.type = type;
         this.loc_x = loc_x;
@@ -40,23 +41,23 @@ public abstract class FruitTree{
         world.scheduleDrop(new DropTask(this));
     }
 
-    public int getX(){
+    public int getX() {
         return loc_x;
     }
 
-    public int getY(){
+    public int getY() {
         return loc_y;
     }
 
-    public int getZ(){
+    public int getZ() {
         return loc_z;
     }
 
-    public TreeWorld getTreeWorld(){
+    public TreeWorld getTreeWorld() {
         return world;
     }
 
-    public boolean isGrown(){
+    public boolean isGrown() {
         return !world.isTreePart(loc_x, loc_y, loc_z, (short) 6, this.type.getLogData());
     }
 
@@ -64,16 +65,16 @@ public abstract class FruitTree{
 
     public abstract void growTree();
 
-    public final TreeType getType(){
+    public final TreeType getType() {
         return type;
     }
 
-    public final void killTree(){
+    public final void killTree() {
         TreeTracker.untrackTree(this);
         fruit_trees.getStorage().removeTree(this);
     }
 
-    public final boolean isStillValid(){
+    public final boolean isStillValid() {
         if (!fruit_trees.getFruitTreesConfig().checkEnabled(this.type)) {
             fruit_trees.debug("Tree Type Fail at X: " + loc_x + " Y: " + loc_y + " Z: " + loc_z);
             return false;
@@ -168,7 +169,7 @@ public abstract class FruitTree{
         return true;
     }
 
-    public final boolean isBaseAt(int x, int y, int z, TreeWorld world){
+    public final boolean isBaseAt(int x, int y, int z, TreeWorld world) {
         if (x != loc_x) {
             return false;
         }
@@ -184,7 +185,7 @@ public abstract class FruitTree{
         return true;
     }
 
-    public final boolean isInArea(int x, int y, int z, int id, int data, TreeWorld world){
+    public final boolean isInArea(int x, int y, int z, int id, int data, TreeWorld world) {
         if (!world.equals(this.world)) {
             return false;
         }
@@ -197,16 +198,16 @@ public abstract class FruitTree{
         else if (x == loc_x && x == loc_z && y == (loc_y + 5)) {
             return type.getLeavesId() == id && type.getLeavesData() == data;
         }
-        else if (y == (loc_y + 2) && inRange(loc_x, x, 1, 2) && inRange(loc_z, z, 1, 2)) {
+        else if (y == (loc_y + 2) && inRange(loc_x, x, 0, 2) && inRange(loc_z, z, 0, 2)) {
             return type.getLeavesId() == id && type.getLeavesData() == data;
         }
-        else if (y == (loc_y + 3) && inRange(loc_x, x, 1, 2) && inRange(loc_z, z, 1, 2)) {
+        else if (y == (loc_y + 3) && inRange(loc_x, x, 0, 2) && inRange(loc_z, z, 0, 2)) {
             if (Math.abs(loc_x) + 2 == Math.abs(x) && Math.abs(loc_z) + 2 == Math.abs(z)) {
                 return false;
             }
             return type.getLeavesId() == id && type.getLeavesData() == data;
         }
-        else if (y == (loc_y + 3) && inRange(loc_x, x, 1, 1) && inRange(loc_z, z, 1, 1)) {
+        else if (y == (loc_y + 3) && inRange(loc_x, x, 0, 1) && inRange(loc_z, z, 0, 1)) {
             return type.getLeavesId() == id && type.getLeavesData() == data;
         }
         else if (y == (loc_y + 4) && loc_x == x && loc_z == z) {
@@ -215,12 +216,13 @@ public abstract class FruitTree{
         return false;
     }
 
-    private final boolean inRange(int num_1, int num_2, int min, int max){
+    private final boolean inRange(int num_1, int num_2, int min, int max) {
         int check = Math.abs(num_1 - num_2);
+        Canary.println("" + check);
         return check >= min && max >= check;
     }
 
-    public boolean equalsElement(Element tree_element){
+    public boolean equalsElement(Element tree_element) {
         if (!this.type.toString().equals(tree_element.getAttributeValue("Type"))) {
             return false;
         }
@@ -236,7 +238,7 @@ public abstract class FruitTree{
         return true;
     }
 
-    public final void save(){
+    public final void save() {
         fruit_trees.getStorage().storeTree(this);
     }
 }
