@@ -38,7 +38,7 @@ public class MySQLTreeStorage extends TreeStorage {
     }
 
     private final void checkOrGenTable() throws SQLException {
-        PreparedStatement ps = conn.prepareStatement("CREATE TABLE IF NOT EXISTS " + tree_table + " (Type VARCHAR(30), X INT, Y INT, Z INT, TreeWorld VARCHAR(64)");
+        PreparedStatement ps = conn.prepareStatement("CREATE TABLE IF NOT EXISTS " + tree_table + " (Type VARCHAR(30), X INT, Y INT, Z INT, TreeWorld VARCHAR(64))");
         ps.execute();
     }
 
@@ -84,7 +84,7 @@ public class MySQLTreeStorage extends TreeStorage {
         ResultSet rs = null;
         try {
             testConnection();
-            ps = conn.prepareStatement("DELETE FROM " + tree_table + " WHERE X=? AND Y=? AND Z=? AND World=?");
+            ps = conn.prepareStatement("DELETE FROM " + tree_table + " WHERE X=? AND Y=? AND Z=? AND TreeWorld=?");
             ps.setInt(1, tree.getX());
             ps.setInt(2, tree.getY());
             ps.setInt(3, tree.getZ());
@@ -117,7 +117,7 @@ public class MySQLTreeStorage extends TreeStorage {
         int load = 0;
         try {
             testConnection();
-            ps = conn.prepareStatement("SELECT * FROM `" + tree_table + "` WHERE World=" + tree_world.getName());
+            ps = conn.prepareStatement("SELECT * FROM " + tree_table + " WHERE TreeWorld=" + tree_world.getName());
             rs = ps.executeQuery();
             while (rs.next()) {
                 String type = null;
