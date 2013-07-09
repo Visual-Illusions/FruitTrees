@@ -71,13 +71,6 @@
      <version>0.9-SNAPSHOT</version>
    </dependency>
    <!-- Mods End -->
-   <!-- Libraries -->
-   <dependency>
-     <groupId>net.visualillusionsent</groupId>
-     <artifactId>viutils</artifactId>
-     <version>1.0.4-SNAPSHOT</version>
-   </dependency>
-   <!-- Libraries End -->
   </dependencies>
   <build>
     <plugins>
