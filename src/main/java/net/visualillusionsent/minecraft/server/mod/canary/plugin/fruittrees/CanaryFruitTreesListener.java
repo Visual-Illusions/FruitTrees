@@ -27,6 +27,7 @@ import net.canarymod.api.world.blocks.BlockType;
 import net.canarymod.hook.HookHandler;
 import net.canarymod.hook.player.BlockDestroyHook;
 import net.canarymod.hook.player.BlockRightClickHook;
+import net.canarymod.hook.player.CraftHook;
 import net.canarymod.hook.system.LoadWorldHook;
 import net.canarymod.hook.system.UnloadWorldHook;
 import net.canarymod.hook.world.BlockUpdateHook;
@@ -39,6 +40,20 @@ public class CanaryFruitTreesListener implements PluginListener {
 
     public CanaryFruitTreesListener(CanaryFruitTrees cft) {
         Canary.hooks().registerListener(this, cft);
+    }
+
+    @HookHandler(priority = Priority.LOW)
+    public final void craftSeeds(CraftHook hook) {
+        if (!CanaryFruitTrees.instance().getFruitTreesConfig().requirePermissions()) {
+            return;
+        }
+        if (SeedGen.recipes.contains(hook.getMatchingRecipe())) {
+            String type = hook.getRecipeResult().getMetaTag().getCompoundTag("FruitTrees").getString("TreeType");
+            if (!hook.getPlayer().hasPermission("fruittrees.craft.".concat(type.toLowerCase().replace("seeds", "")))) {
+                hook.setCanceled();
+                return;
+            }
+        }
     }
 
     @HookHandler(priority = Priority.LOW)

@@ -36,6 +36,11 @@ public final class FruitTreesConfigurations {
             cfg.setString("debug.log.enabled", "no");
             cfg.addComment("debug.log.enabled", "Sets whether Debug Logging is enabled or not");
         }
+        // Use permissions
+        if (!cfg.containsKey("use.craft.permissions")) {
+            cfg.setString("use.craft.permissions", "yes");
+            cfg.addComment("use.craft.permissions", "Sets whether seed crafting requires permission or not. Permission nodes are fruittrees.craft.<type>  ie: fruittrees.craft.apple");
+        }
         // Datasoure type
         if (!cfg.containsKey("datasource.type")) {
             cfg.setString("datasource.type", "xml");
@@ -166,19 +171,23 @@ public final class FruitTreesConfigurations {
         return cfg.getBoolean("debug.log.enabled");
     }
 
-    public boolean isMySQL() {
+    public final boolean isMySQL() {
         return cfg.getString("datasource.type").toLowerCase().equals("mysql");
     }
 
-    public String getSQL_URL() {
+    public final String getSQL_URL() {
         return cfg.getString("sql.url");
     }
 
-    public String getSQL_User() {
+    public final String getSQL_User() {
         return cfg.getString("sql.user");
     }
 
-    public String getSQL_Password() {
+    public final String getSQL_Password() {
         return cfg.getString("sql.password");
+    }
+
+    public final boolean requirePermissions() {
+        return cfg.getBoolean("use.craft.permissions");
     }
 }

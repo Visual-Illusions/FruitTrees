@@ -17,6 +17,7 @@
  */
 package net.visualillusionsent.minecraft.server.mod.canary.plugin.fruittrees;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import net.canarymod.Canary;
 import net.canarymod.api.inventory.Item;
@@ -30,8 +31,7 @@ import net.visualillusionsent.fruittrees.TreeType;
 final class SeedGen {
 
     final static Item[] seeds = new Item[127]; //This is set to 127 for quick expansion durring development
-    final static Recipe[] recipes = new Recipe[127];
-    private static byte rI = 0;
+    final static ArrayList<Recipe> recipes = new ArrayList<Recipe>(127);
     private final static String[] dyes = new String[] { "Black", "Red", "Green", "Brown", "Blue", "Purple", "Cyan", "Light_Gray", "Gray", "Pink", "Lime", "Yellow", "Light_Blue", "Magenta", "Orange", "White" };
 
     private SeedGen() {}
@@ -43,7 +43,7 @@ final class SeedGen {
                 Canary.getServer().removeRecipe(recipe);
             }
         }
-        Arrays.fill(recipes, null);
+        recipes.clear();
     }
 
     static final void genAll() {
@@ -162,7 +162,7 @@ final class SeedGen {
             Item apple = Canary.factory().getItemFactory().newItem(ItemType.Apple, 0, 1);
             Item aplSeeds = seeds[0].clone();
             aplSeeds.setAmount(3);
-            recipes[rI++] = Canary.getServer().addRecipe(new CraftingRecipe(aplSeeds, apple));
+            recipes.add(Canary.getServer().addRecipe(new CraftingRecipe(aplSeeds, apple)));
         }
     }
 
@@ -171,7 +171,7 @@ final class SeedGen {
             Item golden_apple = Canary.factory().getItemFactory().newItem(ItemType.GoldenApple, 0, 1);
             Item gld_apl_seeds = seeds[1].clone();
             gld_apl_seeds.setAmount(3);
-            recipes[rI++] = Canary.getServer().addRecipe(new CraftingRecipe(gld_apl_seeds, golden_apple));
+            recipes.add(Canary.getServer().addRecipe(new CraftingRecipe(gld_apl_seeds, golden_apple)));
         }
     }
 
@@ -183,7 +183,7 @@ final class SeedGen {
                 new RecipeRow("NSN", new Item[] { gold_nuggets, seeds[0].clone() }),
                 new RecipeRow("NNN", new Item[] { gold_nuggets })
             };
-            recipes[rI++] = Canary.getServer().addRecipe(new CraftingRecipe(gld_apl_seeds, rows));
+            recipes.add(Canary.getServer().addRecipe(new CraftingRecipe(gld_apl_seeds, rows)));
         }
     }
 
@@ -193,7 +193,7 @@ final class SeedGen {
             sponge_seeds.setAmount(2);
             Item yellow_wool = Canary.factory().getItemFactory().newItem(ItemType.Cloth, 4, 1);
             Item clay_ball = Canary.factory().getItemFactory().newItem(ItemType.ClayBall, 0, 1);
-            recipes[rI++] = Canary.getServer().addRecipe(new CraftingRecipe(sponge_seeds, yellow_wool, clay_ball));
+            recipes.add(Canary.getServer().addRecipe(new CraftingRecipe(sponge_seeds, yellow_wool, clay_ball)));
         }
     }
 
@@ -202,7 +202,7 @@ final class SeedGen {
             Item sponge_seeds = seeds[2].clone();
             sponge_seeds.setAmount(3);
             Item sponge = Canary.factory().getItemFactory().newItem(ItemType.Sponge, 0, 1);
-            recipes[rI++] = Canary.getServer().addRecipe(new CraftingRecipe(sponge_seeds, sponge));
+            recipes.add(Canary.getServer().addRecipe(new CraftingRecipe(sponge_seeds, sponge)));
         }
     }
 
@@ -211,29 +211,29 @@ final class SeedGen {
             Item record_seeds = seeds[3].clone();
             record_seeds.setAmount(1);
             Item record = Canary.factory().getItemFactory().newItem(ItemType.GoldRecord, 0, 1);
-            recipes[rI++] = Canary.getServer().addRecipe(new CraftingRecipe(record_seeds.clone(), record));
+            recipes.add(Canary.getServer().addRecipe(new CraftingRecipe(record_seeds.clone(), record)));
             record = Canary.factory().getItemFactory().newItem(ItemType.GreenRecord, 0, 1);
-            recipes[rI++] = Canary.getServer().addRecipe(new CraftingRecipe(record_seeds.clone(), record));
+            recipes.add(Canary.getServer().addRecipe(new CraftingRecipe(record_seeds.clone(), record)));
             record = Canary.factory().getItemFactory().newItem(ItemType.BlocksRecord, 0, 1);
-            recipes[rI++] = Canary.getServer().addRecipe(new CraftingRecipe(record_seeds.clone(), record));
+            recipes.add(Canary.getServer().addRecipe(new CraftingRecipe(record_seeds.clone(), record)));
             record = Canary.factory().getItemFactory().newItem(ItemType.ChirpRecord, 0, 1);
-            recipes[rI++] = Canary.getServer().addRecipe(new CraftingRecipe(record_seeds.clone(), record));
+            recipes.add(Canary.getServer().addRecipe(new CraftingRecipe(record_seeds.clone(), record)));
             record = Canary.factory().getItemFactory().newItem(ItemType.FarRecord, 0, 1);
-            recipes[rI++] = Canary.getServer().addRecipe(new CraftingRecipe(record_seeds.clone(), record));
+            recipes.add(Canary.getServer().addRecipe(new CraftingRecipe(record_seeds.clone(), record)));
             record = Canary.factory().getItemFactory().newItem(ItemType.MallRecord, 0, 1);
-            recipes[rI++] = Canary.getServer().addRecipe(new CraftingRecipe(record_seeds.clone(), record));
+            recipes.add(Canary.getServer().addRecipe(new CraftingRecipe(record_seeds.clone(), record)));
             record = Canary.factory().getItemFactory().newItem(ItemType.MellohiRecord, 0, 1);
-            recipes[rI++] = Canary.getServer().addRecipe(new CraftingRecipe(record_seeds.clone(), record));
+            recipes.add(Canary.getServer().addRecipe(new CraftingRecipe(record_seeds.clone(), record)));
             record = Canary.factory().getItemFactory().newItem(ItemType.StalRecord, 0, 1);
-            recipes[rI++] = Canary.getServer().addRecipe(new CraftingRecipe(record_seeds.clone(), record));
+            recipes.add(Canary.getServer().addRecipe(new CraftingRecipe(record_seeds.clone(), record)));
             record = Canary.factory().getItemFactory().newItem(ItemType.StradRecord, 0, 1);
-            recipes[rI++] = Canary.getServer().addRecipe(new CraftingRecipe(record_seeds.clone(), record));
+            recipes.add(Canary.getServer().addRecipe(new CraftingRecipe(record_seeds.clone(), record)));
             record = Canary.factory().getItemFactory().newItem(ItemType.WardRecord, 0, 1);
-            recipes[rI++] = Canary.getServer().addRecipe(new CraftingRecipe(record_seeds.clone(), record));
+            recipes.add(Canary.getServer().addRecipe(new CraftingRecipe(record_seeds.clone(), record)));
             record = Canary.factory().getItemFactory().newItem(ItemType.ElevenRecord, 0, 1);
-            recipes[rI++] = Canary.getServer().addRecipe(new CraftingRecipe(record_seeds.clone(), record));
+            recipes.add(Canary.getServer().addRecipe(new CraftingRecipe(record_seeds.clone(), record)));
             record = Canary.factory().getItemFactory().newItem(ItemType.WaitRecord, 0, 1);
-            recipes[rI++] = Canary.getServer().addRecipe(new CraftingRecipe(record_seeds.clone(), record));
+            recipes.add(Canary.getServer().addRecipe(new CraftingRecipe(record_seeds.clone(), record)));
         }
     }
 
@@ -244,7 +244,7 @@ final class SeedGen {
                 dye_seeds.setAmount(2);
                 Item seeds = Canary.factory().getItemFactory().newItem(ItemType.Seeds, 0, 1);
                 Item dye = Canary.factory().getItemFactory().newItem(ItemType.InkSack, index, 1);
-                recipes[rI++] = Canary.getServer().addRecipe(new CraftingRecipe(dye_seeds.clone(), seeds, dye));
+                recipes.add(Canary.getServer().addRecipe(new CraftingRecipe(dye_seeds.clone(), seeds, dye)));
             }
         }
     }
@@ -255,7 +255,7 @@ final class SeedGen {
             redstone_seeds.setAmount(2);
             Item redstone_dust = Canary.factory().getItemFactory().newItem(ItemType.RedStone, 0, 1);
             Item normal_seeds = Canary.factory().getItemFactory().newItem(ItemType.Seeds, 0, 1);
-            recipes[rI++] = Canary.getServer().addRecipe(new CraftingRecipe(redstone_seeds, redstone_dust, normal_seeds));
+            recipes.add(Canary.getServer().addRecipe(new CraftingRecipe(redstone_seeds, redstone_dust, normal_seeds)));
         }
     }
 
@@ -268,7 +268,7 @@ final class SeedGen {
                 new RecipeRow("ISI", new Item[] { iron_ingot, normal_seeds }),
                 new RecipeRow("III", new Item[] { iron_ingot })
             };
-            recipes[rI++] = Canary.getServer().addRecipe(new CraftingRecipe(iron_seeds, rows));
+            recipes.add(Canary.getServer().addRecipe(new CraftingRecipe(iron_seeds, rows)));
         }
     }
 
@@ -281,7 +281,7 @@ final class SeedGen {
                 new RecipeRow("GSG", new Item[] { gold_ingot, normal_seeds }),
                 new RecipeRow("GGG", new Item[] { gold_ingot })
             };
-            recipes[rI++] = Canary.getServer().addRecipe(new CraftingRecipe(gold_seeds, rows));
+            recipes.add(Canary.getServer().addRecipe(new CraftingRecipe(gold_seeds, rows)));
         }
     }
 
@@ -294,7 +294,7 @@ final class SeedGen {
                 new RecipeRow("DSD", new Item[] { diamond_gem, normal_seeds }),
                 new RecipeRow("DDD", new Item[] { diamond_gem })
             };
-            recipes[rI++] = Canary.getServer().addRecipe(new CraftingRecipe(diamond_seeds, rows));
+            recipes.add(Canary.getServer().addRecipe(new CraftingRecipe(diamond_seeds, rows)));
         }
     }
 
@@ -307,7 +307,7 @@ final class SeedGen {
                 new RecipeRow("ESE", new Item[] { emerald_gem, normal_seeds }),
                 new RecipeRow("EEE", new Item[] { emerald_gem })
             };
-            recipes[rI++] = Canary.getServer().addRecipe(new CraftingRecipe(emerald_seeds, rows));
+            recipes.add(Canary.getServer().addRecipe(new CraftingRecipe(emerald_seeds, rows)));
         }
     }
 
@@ -316,7 +316,7 @@ final class SeedGen {
             Item coal = Canary.factory().getItemFactory().newItem(ItemType.Coal, 0, 1);
             Item coal_seeds = seeds[25].clone();
             coal_seeds.setAmount(2);
-            recipes[rI++] = Canary.getServer().addRecipe(new CraftingRecipe(coal_seeds, coal));
+            recipes.add(Canary.getServer().addRecipe(new CraftingRecipe(coal_seeds, coal)));
         }
     }
 }
