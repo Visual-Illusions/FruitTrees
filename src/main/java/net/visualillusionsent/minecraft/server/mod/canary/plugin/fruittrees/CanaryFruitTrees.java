@@ -143,7 +143,7 @@ public class CanaryFruitTrees extends Plugin implements FruitTrees {
     }
 
     public final PropertiesFile getConfig() {
-        return Configuration.getPluginConfig(this.getName());
+        return Configuration.getPluginConfig(this);
     }
 
     public final FruitTreesConfigurations getFruitTreesConfig() {

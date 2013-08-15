@@ -191,7 +191,7 @@ final class SeedGen {
         if (CanaryFruitTrees.instance().checkEnabled(TreeType.SPONGE)) {
             Item sponge_seeds = seeds[2].clone();
             sponge_seeds.setAmount(2);
-            Item yellow_wool = Canary.factory().getItemFactory().newItem(ItemType.Cloth, 4, 1);
+            Item yellow_wool = Canary.factory().getItemFactory().newItem(ItemType.InkSack, 4, 1);
             Item clay_ball = Canary.factory().getItemFactory().newItem(ItemType.ClayBall, 0, 1);
             recipes.add(Canary.getServer().addRecipe(new CraftingRecipe(sponge_seeds, yellow_wool, clay_ball)));
         }
