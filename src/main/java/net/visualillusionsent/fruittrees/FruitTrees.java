@@ -20,7 +20,7 @@ package net.visualillusionsent.fruittrees;
 import net.visualillusionsent.fruittrees.data.TreeStorage;
 import net.visualillusionsent.utils.PropertiesFile;
 
-public interface FruitTrees{
+public interface FruitTrees {
 
     public TreeWorld getWorldForName(String name);
 

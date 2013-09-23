@@ -17,15 +17,16 @@
  */
 package net.visualillusionsent.fruittrees.data;
 
+import net.visualillusionsent.fruittrees.FruitTrees;
+import net.visualillusionsent.fruittrees.TreeType;
+import net.visualillusionsent.fruittrees.TreeWorld;
+import net.visualillusionsent.fruittrees.trees.FruitTree;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import net.visualillusionsent.fruittrees.FruitTree;
-import net.visualillusionsent.fruittrees.FruitTrees;
-import net.visualillusionsent.fruittrees.TreeType;
-import net.visualillusionsent.fruittrees.TreeWorld;
 
 public final class MySQLTreeStorage extends TreeStorage {
 
@@ -70,7 +71,8 @@ public final class MySQLTreeStorage extends TreeStorage {
                     ps.close();
                 }
             }
-            catch (Exception e) {}
+            catch (Exception e) {
+            }
             if (sqlex != null) {
                 fruit_trees.severe("Failed to store Tree: ".concat(tree.toString()), sqlex);
                 return false;
@@ -107,7 +109,8 @@ public final class MySQLTreeStorage extends TreeStorage {
                     ps.close();
                 }
             }
-            catch (Exception e) {}
+            catch (Exception e) {
+            }
             if (sqlex != null) {
                 fruit_trees.severe("Failed to remove Tree: ".concat(tree.toString()), sqlex);
             }
@@ -140,7 +143,7 @@ public final class MySQLTreeStorage extends TreeStorage {
                 }
                 catch (Exception ex) {
                     fruit_trees.warning(String.format("Unable to initialize tree: Type=%s X=%s Y=%s Z=%s TreeWorld=%s.",
-                        type, X, Y, Z, tree_world));
+                            type, X, Y, Z, tree_world));
                     continue;
                 }
             }
@@ -157,7 +160,8 @@ public final class MySQLTreeStorage extends TreeStorage {
                     ps.close();
                 }
             }
-            catch (Exception e) {}
+            catch (Exception e) {
+            }
             if (sqlex != null) {
                 fruit_trees.severe("Failed to load trees for TreeWorld: ".concat(tree_world.toString()), sqlex);
                 return false;

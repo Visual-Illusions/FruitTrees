@@ -17,14 +17,10 @@
  */
 package net.visualillusionsent.fruittrees.data;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.List;
-import net.visualillusionsent.fruittrees.FruitTree;
 import net.visualillusionsent.fruittrees.FruitTrees;
 import net.visualillusionsent.fruittrees.TreeType;
 import net.visualillusionsent.fruittrees.TreeWorld;
+import net.visualillusionsent.fruittrees.trees.FruitTree;
 import net.visualillusionsent.utils.SystemUtils;
 import org.jdom2.Comment;
 import org.jdom2.Document;
@@ -33,6 +29,11 @@ import org.jdom2.JDOMException;
 import org.jdom2.input.SAXBuilder;
 import org.jdom2.output.Format;
 import org.jdom2.output.XMLOutputter;
+
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.List;
 
 public final class XMLTreeStorage extends TreeStorage {
 
@@ -83,7 +84,8 @@ public final class XMLTreeStorage extends TreeStorage {
                     writer.close();
                 }
             }
-            catch (IOException e) {}
+            catch (IOException e) {
+            }
             writer = null;
             if (ex != null) {
                 fruit_trees.severe("Failed to save tree: " + tree.toString(), ex);
@@ -128,7 +130,8 @@ public final class XMLTreeStorage extends TreeStorage {
                         writer.close();
                     }
                 }
-                catch (IOException e) {}
+                catch (IOException e) {
+                }
                 writer = null;
                 if (ex != null) {
                     fruit_trees.severe("Failed to remove tree: " + tree.toString(), ex);
@@ -155,19 +158,19 @@ public final class XMLTreeStorage extends TreeStorage {
                 for (Element tree : trees) {
                     try {
                         TreeType.valueOf(tree.getAttributeValue("Type")).newFruitTree(fruit_trees,
-                            Integer.valueOf(tree.getAttributeValue("X")).intValue(),
-                            Integer.valueOf(tree.getAttributeValue("Y")).intValue(),
-                            Integer.valueOf(tree.getAttributeValue("Z")).intValue(),
-                            tree_world);
+                                Integer.valueOf(tree.getAttributeValue("X")).intValue(),
+                                Integer.valueOf(tree.getAttributeValue("Y")).intValue(),
+                                Integer.valueOf(tree.getAttributeValue("Z")).intValue(),
+                                tree_world);
                         load++;
                     }
                     catch (Exception exc) {
                         fruit_trees.warning(String.format("Unable to initialize tree: Type=%s X=%s Y=%s Z=%s TreeWorld=%s.",
-                            tree.getAttribute("Type") != null ? tree.getAttributeValue("Type") : null,
-                            tree.getAttribute("X") != null ? tree.getAttributeValue("X") : null,
-                            tree.getAttribute("Y") != null ? tree.getAttributeValue("Y") : null,
-                            tree.getAttribute("Z") != null ? tree.getAttributeValue("Z") : null,
-                            tree_world));
+                                tree.getAttribute("Type") != null ? tree.getAttributeValue("Type") : null,
+                                tree.getAttribute("X") != null ? tree.getAttributeValue("X") : null,
+                                tree.getAttribute("Y") != null ? tree.getAttributeValue("Y") : null,
+                                tree.getAttribute("Z") != null ? tree.getAttributeValue("Z") : null,
+                                tree_world));
                         continue;
                     }
                 }
@@ -207,7 +210,8 @@ public final class XMLTreeStorage extends TreeStorage {
                     writer.close();
                 }
             }
-            catch (IOException e) {}
+            catch (IOException e) {
+            }
             writer = null;
             if (ex != null) {
                 fruit_trees.severe("Failed to generate world file", ex);

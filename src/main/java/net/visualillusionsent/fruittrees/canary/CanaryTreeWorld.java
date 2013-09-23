@@ -15,49 +15,49 @@
  * You should have received a copy of the GNU General Public License along with FruitTrees.
  * If not, see http://www.gnu.org/licenses/gpl.html.
  */
-package net.visualillusionsent.minecraft.server.mod.canary.plugin.fruittrees;
+package net.visualillusionsent.fruittrees.canary;
 
 import net.canarymod.Canary;
 import net.canarymod.api.world.World;
 import net.canarymod.api.world.blocks.Block;
 import net.visualillusionsent.fruittrees.DropTask;
-import net.visualillusionsent.fruittrees.FruitTree;
 import net.visualillusionsent.fruittrees.TreeWorld;
+import net.visualillusionsent.fruittrees.trees.FruitTree;
 
-public final class CanaryTreeWorld implements TreeWorld{
+public final class CanaryTreeWorld implements TreeWorld {
 
     private final CanaryFruitTrees cft;
     private World world;
     private final String known_world_name;
 
-    public CanaryTreeWorld(CanaryFruitTrees cft, World world, String known_world_name){
+    public CanaryTreeWorld(CanaryFruitTrees cft, World world, String known_world_name) {
         this.cft = cft;
         this.world = world;
         this.known_world_name = known_world_name;
     }
 
-    public final void dropFruit(int x, int y, int z, int count, short id, short data){
+    public final void dropFruit(int x, int y, int z, int count, short id, short data) {
         world.dropItem(x, y, z, id, count, data);
     }
 
-    public final boolean isClear(int x, int y, int z){
+    public final boolean isClear(int x, int y, int z) {
         return world.getBlockAt(x, y, z).isAir();
     }
 
-    public final void placeTreePart(int x, int y, int z, short type, short data){
+    public final void placeTreePart(int x, int y, int z, short type, short data) {
         world.setBlockAt(x, y, z, type, data);
     }
 
-    public final void scheduleDrop(DropTask task){
+    public final void scheduleDrop(DropTask task) {
         new CanaryDropTask(task);
     }
 
-    public final boolean isTreePart(int x, int y, int z, short part_id, short part_data){
+    public final boolean isTreePart(int x, int y, int z, short part_id, short part_data) {
         Block block = world.getBlockAt(x, y, z);
         return block.getTypeId() == part_id && block.getData() == part_data;
     }
 
-    public final boolean isLoaded(){
+    public final boolean isLoaded() {
         if (world == null) {
             boolean loaded = Canary.getServer().getWorldManager().worldIsLoaded(known_world_name);
             if (loaded) {
@@ -68,36 +68,36 @@ public final class CanaryTreeWorld implements TreeWorld{
         return Canary.getServer().getWorldManager().worldIsLoaded(world.getFqName());
     }
 
-    public final boolean isAreaLoaded(FruitTree fruit_tree){
+    public final boolean isAreaLoaded(FruitTree fruit_tree) {
         if (this.isLoaded()) {
             return world.isChunkLoaded(fruit_tree.getX(), fruit_tree.getY(), fruit_tree.getZ());
         }
         return false;
     }
 
-    public final String getName(){
+    public final String getName() {
         return world.getFqName();
     }
 
-    public final void unloadWorld(){
+    public final void unloadWorld() {
         this.world = null;
         cft.worldUnload(this);
     }
 
-    public final boolean equals(Object obj){
+    public final boolean equals(Object obj) {
         if (obj == this) {
             return true;
         }
         else if (obj instanceof CanaryTreeWorld) {
-            return ((CanaryTreeWorld) obj).world.equals(world);
+            return ((CanaryTreeWorld)obj).world.equals(world);
         }
         else if (obj instanceof World) {
-            return ((World) obj).equals(world);
+            return ((World)obj).equals(world);
         }
         return false;
     }
 
-    public final String toString(){
+    public final String toString() {
         return String.format("CanaryTreeWorld[WorldName:%s]", world != null ? world.getFqName() : "null");
     }
 }

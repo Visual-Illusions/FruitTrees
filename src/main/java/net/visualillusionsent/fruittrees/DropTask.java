@@ -17,6 +17,8 @@
  */
 package net.visualillusionsent.fruittrees;
 
+import net.visualillusionsent.fruittrees.trees.FruitTree;
+
 public final class DropTask {
 
     private final FruitTree tree;

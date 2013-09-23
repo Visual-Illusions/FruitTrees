@@ -17,7 +17,9 @@
  */
 package net.visualillusionsent.fruittrees;
 
-final class TreeGen {
+import net.visualillusionsent.fruittrees.trees.FruitTree;
+
+public final class TreeGen {
 
     private final FruitTree fruit_tree;
     private final boolean canGrow;
@@ -27,11 +29,11 @@ final class TreeGen {
         this.canGrow = canGrow();
     }
 
-    final boolean getCanGrow() {
+    public final boolean getCanGrow() {
         return canGrow;
     }
 
-    final boolean grow() {
+    public final boolean grow() {
         if (canGrow) {
             logTree();
             leaves_layer1();
@@ -45,7 +47,7 @@ final class TreeGen {
         }
     }
 
-    final boolean canGrow() {
+    public final boolean canGrow() {
         return true;
     }
 
@@ -56,10 +58,10 @@ final class TreeGen {
         }
         /* The Sideways logs */
         int log_y = fruit_tree.getY() + 3;
-        fruit_tree.getTreeWorld().placeTreePart(fruit_tree.getX() + 1, log_y, fruit_tree.getZ(), fruit_tree.getType().getLogId(), (short) (fruit_tree.getType().getLogData() + 4));
-        fruit_tree.getTreeWorld().placeTreePart(fruit_tree.getX() - 1, log_y, fruit_tree.getZ(), fruit_tree.getType().getLogId(), (short) (fruit_tree.getType().getLogData() + 4));
-        fruit_tree.getTreeWorld().placeTreePart(fruit_tree.getX(), log_y, fruit_tree.getZ() + 1, fruit_tree.getType().getLogId(), (short) (fruit_tree.getType().getLogData() + 8));
-        fruit_tree.getTreeWorld().placeTreePart(fruit_tree.getX(), log_y, fruit_tree.getZ() - 1, fruit_tree.getType().getLogId(), (short) (fruit_tree.getType().getLogData() + 8));
+        fruit_tree.getTreeWorld().placeTreePart(fruit_tree.getX() + 1, log_y, fruit_tree.getZ(), fruit_tree.getType().getLogId(), (short)(fruit_tree.getType().getLogData() + 4));
+        fruit_tree.getTreeWorld().placeTreePart(fruit_tree.getX() - 1, log_y, fruit_tree.getZ(), fruit_tree.getType().getLogId(), (short)(fruit_tree.getType().getLogData() + 4));
+        fruit_tree.getTreeWorld().placeTreePart(fruit_tree.getX(), log_y, fruit_tree.getZ() + 1, fruit_tree.getType().getLogId(), (short)(fruit_tree.getType().getLogData() + 8));
+        fruit_tree.getTreeWorld().placeTreePart(fruit_tree.getX(), log_y, fruit_tree.getZ() - 1, fruit_tree.getType().getLogId(), (short)(fruit_tree.getType().getLogData() + 8));
     }
 
     private final void leaves_layer1() {
@@ -70,7 +72,7 @@ final class TreeGen {
          * 2#####
          * 3##@##
          * 4#####
-         * 5##### 
+         * 5#####
          */
         int layer_y = fruit_tree.getY() + 2;
         placeLeavesAt(fruit_tree.getX() - 2, layer_y, fruit_tree.getZ() - 2); //A-1
@@ -107,7 +109,7 @@ final class TreeGen {
          * 2##@##
          * 3#@@@#
          * 4##@##
-         * 5 ### 
+         * 5 ###
          */
         int layer_y = fruit_tree.getY() + 3;
         placeLeavesAt(fruit_tree.getX() - 2, layer_y, fruit_tree.getZ() - 1); //A-2
@@ -132,11 +134,11 @@ final class TreeGen {
         /* Top Down View
          * Leaves: # Logs: @
          *  ABCDE
-         * 1 
+         * 1
          * 2 ###
          * 3 #@#
          * 4 ###
-         * 5 
+         * 5
          */
         int layer_y = fruit_tree.getY() + 4;
         placeLeavesAt(fruit_tree.getX() - 1, layer_y, fruit_tree.getZ() - 1); //B-2
@@ -152,13 +154,13 @@ final class TreeGen {
     private final void leaves_layer4() {
         /* Top Down View
          * Leaves: # Logs: @
-         * 
+         *
          *  ABCDE
          * 1
-         * 2  
+         * 2
          * 3  #
-         * 4 
-         * 5 
+         * 4
+         * 5
          */
         placeLeavesAt(fruit_tree.getX(), fruit_tree.getY() + 5, fruit_tree.getZ());
     }

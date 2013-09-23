@@ -15,7 +15,12 @@
  * You should have received a copy of the GNU General Public License along with FruitTrees.
  * If not, see http://www.gnu.org/licenses/gpl.html.
  */
-package net.visualillusionsent.fruittrees;
+package net.visualillusionsent.fruittrees.trees;
+
+import net.visualillusionsent.fruittrees.FruitTrees;
+import net.visualillusionsent.fruittrees.TreeGen;
+import net.visualillusionsent.fruittrees.TreeType;
+import net.visualillusionsent.fruittrees.TreeWorld;
 
 public final class DyeTree extends FruitTree {
 
@@ -70,7 +75,7 @@ public final class DyeTree extends FruitTree {
         if (isGrown() && world.isAreaLoaded(this) && fruit_trees.getFruitTreesConfig().checkEnabled(this.type)) {
             int drop_x = offset_drop[random.nextInt(3)];
             int drop_z = offset_drop[random.nextInt(3)];
-            world.dropFruit(loc_x + drop_x, loc_y + 1, loc_z + drop_z, 1, (short) 351, dye_color);
+            world.dropFruit(loc_x + drop_x, loc_y + 1, loc_z + drop_z, 1, (short)351, dye_color);
         }
     }
 

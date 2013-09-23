@@ -15,32 +15,33 @@
  * You should have received a copy of the GNU General Public License along with FruitTrees.
  * If not, see http://www.gnu.org/licenses/gpl.html.
  */
-package net.visualillusionsent.minecraft.server.mod.canary.plugin.fruittrees;
+package net.visualillusionsent.fruittrees.canary;
 
-import java.util.concurrent.ConcurrentHashMap;
 import net.canarymod.Canary;
 import net.visualillusionsent.fruittrees.TreeWorld;
 import net.visualillusionsent.fruittrees.TreeWorldCache;
 
-public final class CanaryTreeWorldCache extends TreeWorldCache{
+import java.util.concurrent.ConcurrentHashMap;
+
+public final class CanaryTreeWorldCache extends TreeWorldCache {
 
     private final ConcurrentHashMap<String, TreeWorld> tree_worlds = new ConcurrentHashMap<String, TreeWorld>();
 
-    public CanaryTreeWorldCache(CanaryFruitTrees fruit_trees){
+    public CanaryTreeWorldCache(CanaryFruitTrees fruit_trees) {
         super(fruit_trees);
     }
 
-    public final TreeWorld getTreeWorld(String world_name){
+    public final TreeWorld getTreeWorld(String world_name) {
         if (tree_worlds.contains(world_name)) {
             return tree_worlds.get(world_name);
         }
         else if (Canary.getServer().getWorldManager().worldIsLoaded(world_name)) {
-            return tree_worlds.putIfAbsent(world_name, new CanaryTreeWorld((CanaryFruitTrees) fruit_trees, Canary.getServer().getWorld(world_name), world_name));
+            return tree_worlds.putIfAbsent(world_name, new CanaryTreeWorld((CanaryFruitTrees)fruit_trees, Canary.getServer().getWorld(world_name), world_name));
         }
         return null;
     }
 
-    protected final void setExistingWorlds(CanaryTreeWorld canaryTreeWorld){
+    protected final void setExistingWorlds(CanaryTreeWorld canaryTreeWorld) {
         tree_worlds.putIfAbsent(canaryTreeWorld.getName(), canaryTreeWorld);
     }
 }

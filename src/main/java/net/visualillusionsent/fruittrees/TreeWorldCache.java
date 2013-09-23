@@ -18,11 +18,11 @@
 package net.visualillusionsent.fruittrees;
 
 
-public abstract class TreeWorldCache{
+public abstract class TreeWorldCache {
 
     protected final FruitTrees fruit_trees;
 
-    public TreeWorldCache(FruitTrees fruit_trees){
+    public TreeWorldCache(FruitTrees fruit_trees) {
         this.fruit_trees = fruit_trees;
     }
 

@@ -15,12 +15,13 @@
  * You should have received a copy of the GNU General Public License along with FruitTrees.
  * If not, see http://www.gnu.org/licenses/gpl.html.
  */
-package net.visualillusionsent.minecraft.server.mod.canary.plugin.fruittrees;
+package net.visualillusionsent.fruittrees.canary;
 
-import java.util.Random;
 import net.canarymod.Canary;
 import net.canarymod.tasks.ServerTask;
 import net.visualillusionsent.fruittrees.DropTask;
+
+import java.util.Random;
 
 public final class CanaryDropTask extends ServerTask {
 

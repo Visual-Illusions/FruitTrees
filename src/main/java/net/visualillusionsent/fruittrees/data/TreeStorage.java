@@ -17,15 +17,15 @@
  */
 package net.visualillusionsent.fruittrees.data;
 
-import net.visualillusionsent.fruittrees.FruitTree;
 import net.visualillusionsent.fruittrees.FruitTrees;
 import net.visualillusionsent.fruittrees.TreeWorld;
+import net.visualillusionsent.fruittrees.trees.FruitTree;
 
-public abstract class TreeStorage{
+public abstract class TreeStorage {
 
     protected final FruitTrees fruit_trees;
 
-    public TreeStorage(FruitTrees fruit_trees){
+    public TreeStorage(FruitTrees fruit_trees) {
         this.fruit_trees = fruit_trees;
     }
 

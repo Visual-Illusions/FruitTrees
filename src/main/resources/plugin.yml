@@ -1,8 +1,0 @@
-﻿# FruitTrees - Bukkit Plugin configuration file
-# Copyright (c) 2013 Visual Illusions Entertainment
-name: FruitTrees
-version: 1.0
-description: Fruit dropping trees
-author: Jason (darkdiplomat)
-website: http://wiki.visualillusionsent.net/FruitTrees
-main: net.visualillusionsent.minecraft.server.mod.bukkit.plugin.fruittrees.BukkitFruitTrees

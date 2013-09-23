@@ -17,6 +17,8 @@
  */
 package net.visualillusionsent.fruittrees;
 
+import net.visualillusionsent.fruittrees.trees.FruitTree;
+
 import java.util.ArrayList;
 
 public final class TreeTracker {
@@ -24,12 +26,12 @@ public final class TreeTracker {
     private final static TreeTracker $ = new TreeTracker();
     private final ArrayList<FruitTree> fruit_trees = new ArrayList<FruitTree>();
 
-    static final void trackTree(FruitTree fruit_tree) {
+    public static final void trackTree(FruitTree fruit_tree) {
         $.fruit_trees.add(fruit_tree);
 
     }
 
-    static final void untrackTree(FruitTree fruit_tree) {
+    public static final void untrackTree(FruitTree fruit_tree) {
         $.fruit_trees.remove(fruit_tree);
     }
 

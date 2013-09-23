@@ -15,10 +15,16 @@
  * You should have received a copy of the GNU General Public License along with FruitTrees.
  * If not, see http://www.gnu.org/licenses/gpl.html.
  */
-package net.visualillusionsent.fruittrees;
+package net.visualillusionsent.fruittrees.trees;
+
+import net.visualillusionsent.fruittrees.DropTask;
+import net.visualillusionsent.fruittrees.FruitTrees;
+import net.visualillusionsent.fruittrees.TreeTracker;
+import net.visualillusionsent.fruittrees.TreeType;
+import net.visualillusionsent.fruittrees.TreeWorld;
+import org.jdom2.Element;
 
 import java.util.Random;
-import org.jdom2.Element;
 
 public abstract class FruitTree {
 
@@ -26,7 +32,7 @@ public abstract class FruitTree {
     protected TreeType type;
     protected int loc_x, loc_y, loc_z;
     protected TreeWorld world;
-    protected static final byte[] offset_drop = new byte[] { -2, -1, 1, 2 };
+    protected static final byte[] offset_drop = new byte[]{-2, -1, 1, 2};
     protected static final Random random = new Random();
 
     public FruitTree(FruitTrees fruit_trees, TreeType type, int loc_x, int loc_y, int loc_z, TreeWorld world) {
@@ -57,7 +63,7 @@ public abstract class FruitTree {
     }
 
     public boolean isGrown() {
-        return !world.isTreePart(loc_x, loc_y, loc_z, (short) 6, this.type.getLogData());
+        return !world.isTreePart(loc_x, loc_y, loc_z, (short)6, this.type.getLogData());
     }
 
     public abstract void dropFruit();
@@ -87,22 +93,22 @@ public abstract class FruitTree {
             }
         }
         // point logs
-        if (!world.isTreePart(loc_x + 1, loc_y + 3, loc_z, type.getLogId(), (byte) (type.getLogData() + 4))) {
+        if (!world.isTreePart(loc_x + 1, loc_y + 3, loc_z, type.getLogId(), (byte)(type.getLogData() + 4))) {
             fruit_trees.debug("Log Type Fail at X: " + (loc_x + 1) + " Y: " + (loc_y + 3) + " Z: " + loc_z);
             killTree();
             return false;
         }
-        if (!world.isTreePart(loc_x - 1, loc_y + 3, loc_z, type.getLogId(), (byte) (type.getLogData() + 4))) {
+        if (!world.isTreePart(loc_x - 1, loc_y + 3, loc_z, type.getLogId(), (byte)(type.getLogData() + 4))) {
             fruit_trees.debug("Log Type Fail at X: " + (loc_x - 1) + " Y: " + (loc_y + 3) + " Z: " + loc_z);
             killTree();
             return false;
         }
-        if (!world.isTreePart(loc_x, loc_y + 3, loc_z + 1, type.getLogId(), (byte) (type.getLogData() + 8))) {
+        if (!world.isTreePart(loc_x, loc_y + 3, loc_z + 1, type.getLogId(), (byte)(type.getLogData() + 8))) {
             fruit_trees.debug("Log Type Fail at X: " + loc_x + " Y: " + (loc_y + 3) + " Z: " + (loc_z + 1));
             killTree();
             return false;
         }
-        if (!world.isTreePart(loc_x, loc_y + 3, loc_z - 1, type.getLogId(), (byte) (type.getLogData() + 8))) {
+        if (!world.isTreePart(loc_x, loc_y + 3, loc_z - 1, type.getLogId(), (byte)(type.getLogData() + 8))) {
             fruit_trees.debug("Log Type Fail at X: " + loc_x + " Y: " + (loc_y + 3) + " Z: " + (loc_z - 1));
             killTree();
             return false;
@@ -135,12 +141,12 @@ public abstract class FruitTree {
                     continue;
                 }
                 else if (((check_x == loc_x + 2 || check_x == loc_x - 2) && check_z == loc_z + 2) ||
-                    ((check_x == loc_x + 2 || check_x == loc_x - 2) && check_z == loc_z - 2)) {
+                        ((check_x == loc_x + 2 || check_x == loc_x - 2) && check_z == loc_z - 2)) {
                     // Outside points
                     continue;
                 }
                 else if (((check_x == loc_x + 1 || check_x == loc_x - 1) && check_z == loc_z) ||
-                    ((check_z == loc_z + 1 || check_z == loc_z - 1) && check_x == loc_x)) {
+                        ((check_z == loc_z + 1 || check_z == loc_z - 1) && check_x == loc_x)) {
                     // Log points
                     continue;
                 }

@@ -17,7 +17,9 @@
  */
 package net.visualillusionsent.fruittrees;
 
-public interface TreeWorld{
+import net.visualillusionsent.fruittrees.trees.FruitTree;
+
+public interface TreeWorld {
 
     void dropFruit(int x, int y, int z, int count, short id, short data);
 
