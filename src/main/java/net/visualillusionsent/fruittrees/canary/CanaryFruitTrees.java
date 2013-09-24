@@ -26,6 +26,7 @@ import net.visualillusionsent.fruittrees.TreeTracker;
 import net.visualillusionsent.fruittrees.TreeType;
 import net.visualillusionsent.fruittrees.TreeWorld;
 import net.visualillusionsent.fruittrees.data.MySQLTreeStorage;
+import net.visualillusionsent.fruittrees.data.SQLiteTreeStorage;
 import net.visualillusionsent.fruittrees.data.TreeStorage;
 import net.visualillusionsent.fruittrees.data.XMLTreeStorage;
 import net.visualillusionsent.fruittrees.trees.FruitTree;
@@ -56,14 +57,31 @@ public class CanaryFruitTrees extends VisualIllusionsCanaryPlugin implements Fru
             try {
                 storage = new MySQLTreeStorage(this);
             }
-            catch (SQLException ex) {
+            catch (Exception ex) {
                 getLogman().log(Level.SEVERE, "Failed to initialize MySQL Data storage...", ex);
                 disable();
                 return false;
             }
         }
+        else if (ft_cfg.isSQLite()) {
+            try {
+                storage = new SQLiteTreeStorage(this);
+            }
+            catch (Exception ex) {
+                getLogman().log(Level.SEVERE, "Failed to initialize SQLite Data storage...", ex);
+                disable();
+                return false;
+            }
+        }
         else {
-            storage = new XMLTreeStorage(this);
+            try {
+                storage = new XMLTreeStorage(this);
+            }
+            catch (Exception ex) {
+                getLogman().log(Level.SEVERE, "Failed to initialize XML Data storage...", ex);
+                disable();
+                return false;
+            }
         }
         for (World world : Canary.getServer().getWorldManager().getAllWorlds()) {
             world_cache.setExistingWorlds(new CanaryTreeWorld(this, world, world.getFqName()));

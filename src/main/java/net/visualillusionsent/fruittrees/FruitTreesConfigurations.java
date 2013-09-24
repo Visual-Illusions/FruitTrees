@@ -44,7 +44,7 @@ public final class FruitTreesConfigurations {
         // Datasoure type
         if (!cfg.containsKey("datasource.type")) {
             cfg.setString("datasource.type", "xml");
-            cfg.addComment("datasource.type", "Sets the Datasource to use (XML or MYSQL)");
+            cfg.addComment("datasource.type", "Sets the Datasource to use (XML, MYSQL, SQLite)");
         }
         // SQL URL
         if (!cfg.containsKey("sql.url")) { //jdbc:mysql://
@@ -173,6 +173,10 @@ public final class FruitTreesConfigurations {
 
     public final boolean isMySQL() {
         return cfg.getString("datasource.type").toLowerCase().equals("mysql");
+    }
+
+    public final boolean isSQLite() {
+        return cfg.getString("datasource.type").toLowerCase().equals("sqlite");
     }
 
     public final String getSQL_URL() {
