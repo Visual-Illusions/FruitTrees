@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>net.visualillusionsent</groupId>
     <artifactId>FruitTrees</artifactId>
-    <version>1.0-RC-1</version>
+    <version>1.0-RC-2-SNAPSHOT</version>
     <name>FruitTrees</name>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
