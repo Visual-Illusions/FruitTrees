@@ -75,7 +75,7 @@ public class CanaryFruitTreesListener implements PluginListener {
         if (hook.getBlockClicked().getType() == BlockType.Soil) {
             Item seeds = hook.getPlayer().getItemHeld();
             Block block = hook.getBlockClicked();
-            if (seeds.getMetaTag().containsKey("FruitTrees")) {
+            if (seeds.hasMetaTag() && seeds.getMetaTag().containsKey("FruitTrees")) {
                 String type = seeds.getMetaTag().getCompoundTag("FruitTrees").getString("TreeType");
                 if (seeds.getType() == ItemType.MelonSeeds) {
                     if (type.equals("AppleSeeds")) {
