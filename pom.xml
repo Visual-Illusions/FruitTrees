@@ -3,11 +3,11 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>net.visualillusionsent</groupId>
     <artifactId>fruittrees</artifactId>
-    <version>1.0</version>
+    <version>1.1</version>
     <name>FruitTrees</name>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <program.status>STABLE</program.status>
+        <program.status>ALPHA</program.status>
         <build.number>0-dev</build.number>
         <canary.main.class>${project.groupId}.${project.artifactId}.canary.CanaryFruitTrees</canary.main.class>
         <vimcplugin.version>1.0u1</vimcplugin.version>
