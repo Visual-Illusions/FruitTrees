@@ -17,9 +17,12 @@
  */
 package net.visualillusionsent.fruittrees.canary;
 
+import net.canarymod.Canary;
 import net.canarymod.chat.Colors;
 import net.canarymod.chat.MessageReceiver;
 import net.canarymod.commandsys.Command;
+import net.canarymod.commandsys.CommandDependencyException;
+import net.visualillusionsent.minecraft.plugin.canary.VisualIllusionsCanaryPluginInformationCommand;
 import net.visualillusionsent.utils.VersionChecker;
 
 /**
@@ -29,8 +32,9 @@ import net.visualillusionsent.utils.VersionChecker;
  */
 public final class FruitTreesCommands extends VisualIllusionsCanaryPluginInformationCommand {
 
-    public FruitTreesCommands(CanaryFruitTrees fruit_trees) {
+    public FruitTreesCommands(CanaryFruitTrees fruit_trees) throws CommandDependencyException {
         super(fruit_trees);
+        Canary.commands().registerCommands(this, fruit_trees, false);
     }
 
     @Command(aliases = {"fruittrees"},
@@ -41,18 +45,15 @@ public final class FruitTreesCommands extends VisualIllusionsCanaryPluginInforma
         for (String msg : about) {
             if (msg.equals("$VERSION_CHECK$")) {
                 VersionChecker vc = plugin.getVersionChecker();
-                Boolean islatest = vc.isLatest();
-                if (islatest == null) {
+                Boolean isLatest = vc.isLatest();
+                if (isLatest == null) {
                     msgrec.message(center(Colors.GRAY + "VersionCheckerError: " + vc.getErrorMessage()));
-                }
-                else if (!islatest) {
+                } else if (!isLatest) {
                     msgrec.message(center(Colors.GRAY + vc.getUpdateAvailibleMessage()));
-                }
-                else {
+                } else {
                     msgrec.message(center(Colors.LIGHT_GREEN + "Latest Version Installed"));
                 }
-            }
-            else {
+            } else {
                 msgrec.message(msg);
             }
         }

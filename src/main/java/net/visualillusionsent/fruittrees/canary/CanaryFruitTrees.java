@@ -19,6 +19,7 @@ package net.visualillusionsent.fruittrees.canary;
 
 import net.canarymod.Canary;
 import net.canarymod.api.world.World;
+import net.canarymod.commandsys.CommandDependencyException;
 import net.canarymod.logger.CanaryLevel;
 import net.visualillusionsent.fruittrees.FruitTrees;
 import net.visualillusionsent.fruittrees.FruitTreesConfigurations;
@@ -30,8 +31,8 @@ import net.visualillusionsent.fruittrees.data.SQLiteTreeStorage;
 import net.visualillusionsent.fruittrees.data.TreeStorage;
 import net.visualillusionsent.fruittrees.data.XMLTreeStorage;
 import net.visualillusionsent.fruittrees.trees.FruitTree;
+import net.visualillusionsent.minecraft.plugin.canary.VisualIllusionsCanaryPlugin;
 
-import java.sql.SQLException;
 import java.util.logging.Level;
 
 public class CanaryFruitTrees extends VisualIllusionsCanaryPlugin implements FruitTrees {
@@ -56,28 +57,23 @@ public class CanaryFruitTrees extends VisualIllusionsCanaryPlugin implements Fru
         if (ft_cfg.isMySQL()) {
             try {
                 storage = new MySQLTreeStorage(this);
-            }
-            catch (Exception ex) {
+            } catch (Exception ex) {
                 getLogman().log(Level.SEVERE, "Failed to initialize MySQL Data storage...", ex);
                 disable();
                 return false;
             }
-        }
-        else if (ft_cfg.isSQLite()) {
+        } else if (ft_cfg.isSQLite()) {
             try {
                 storage = new SQLiteTreeStorage(this);
-            }
-            catch (Exception ex) {
+            } catch (Exception ex) {
                 getLogman().log(Level.SEVERE, "Failed to initialize SQLite Data storage...", ex);
                 disable();
                 return false;
             }
-        }
-        else {
+        } else {
             try {
                 storage = new XMLTreeStorage(this);
-            }
-            catch (Exception ex) {
+            } catch (Exception ex) {
                 getLogman().log(Level.SEVERE, "Failed to initialize XML Data storage...", ex);
                 disable();
                 return false;
@@ -88,7 +84,11 @@ public class CanaryFruitTrees extends VisualIllusionsCanaryPlugin implements Fru
             storage.loadTreesForWorld(world_cache.getTreeWorld(world.getFqName()));
         }
         new CanaryFruitTreesListener(this);
-        new FruitTreesCommands(this);
+        try {
+            new FruitTreesCommands(this);
+        } catch (CommandDependencyException e) {
+            getLogman().logWarning("Failed to register FruitTrees information command.");
+        }
         return true;
     }
 
@@ -107,8 +107,7 @@ public class CanaryFruitTrees extends VisualIllusionsCanaryPlugin implements Fru
         if (tree_world == null) {
             world_cache.setExistingWorlds(new CanaryTreeWorld(this, world, world.getFqName()));
             storage.loadTreesForWorld(world_cache.getTreeWorld(world.getFqName()));
-        }
-        else {
+        } else {
             tree_world.isLoaded();
         }
     }
