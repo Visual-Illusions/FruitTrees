@@ -36,7 +36,7 @@ public final class CanaryTreeWorldCache extends TreeWorldCache {
             return tree_worlds.get(world_name);
         }
         else if (Canary.getServer().getWorldManager().worldIsLoaded(world_name)) {
-            return tree_worlds.putIfAbsent(world_name, new CanaryTreeWorld((CanaryFruitTrees)fruit_trees, Canary.getServer().getWorld(world_name), world_name));
+            return tree_worlds.putIfAbsent(world_name, new CanaryTreeWorld((CanaryFruitTrees) fruit_trees, Canary.getServer().getWorld(world_name), world_name));
         }
         return null;
     }

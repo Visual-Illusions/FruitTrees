@@ -80,7 +80,6 @@ public final class CanaryTreeWorld implements TreeWorld {
     }
 
     public final void unloadWorld() {
-        this.world = null;
         cft.worldUnload(this);
     }
 
@@ -89,10 +88,10 @@ public final class CanaryTreeWorld implements TreeWorld {
             return true;
         }
         else if (obj instanceof CanaryTreeWorld) {
-            return ((CanaryTreeWorld)obj).world.equals(world);
+            return ((CanaryTreeWorld) obj).world.equals(world);
         }
         else if (obj instanceof World) {
-            return ((World)obj).equals(world);
+            return ((World) obj).equals(world);
         }
         return false;
     }

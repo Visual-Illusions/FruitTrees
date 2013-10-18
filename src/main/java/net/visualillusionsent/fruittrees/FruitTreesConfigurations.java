@@ -23,7 +23,7 @@ import net.visualillusionsent.utils.UtilityException;
 public final class FruitTreesConfigurations {
 
     private final PropertiesFile cfg;
-    private final String[] dyes = new String[]{"Black", "Red", "Green", "Brown", "Blue", "Purple", "Cyan", "Light_Gray", "Gray", "Pink", "Lime", "Yellow", "Light_Blue", "Magenta", "Orange", "White"};
+    private final String[] dyes = new String[]{ "Black", "Red", "Green", "Brown", "Blue", "Purple", "Cyan", "Light_Gray", "Gray", "Pink", "Lime", "Yellow", "Light_Blue", "Magenta", "Orange", "White" };
 
     public FruitTreesConfigurations(FruitTrees fruit_trees) {
         this.cfg = fruit_trees.getConfig();

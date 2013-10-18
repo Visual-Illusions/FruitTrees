@@ -65,10 +65,10 @@ public enum TreeType {
 
     private TreeType(Class<? extends FruitTree> tree_class, int log_id, int log_data, int leaves_id, int leaves_data) {
         this.tree_class = tree_class;
-        this.log_id = (short)log_id;
-        this.log_data = (short)log_data;
-        this.leaves_id = (short)leaves_id;
-        this.leaves_data = (short)leaves_data;
+        this.log_id = (short) log_id;
+        this.log_data = (short) log_data;
+        this.leaves_id = (short) leaves_id;
+        this.leaves_data = (short) leaves_data;
     }
 
     public final short getLogId() {
@@ -89,7 +89,7 @@ public enum TreeType {
 
     public final FruitTree newFruitTree(FruitTrees fruit_trees, int x, int y, int z, TreeWorld tree_world) throws Exception {
         if (this.tree_class == DyeTree.class) {
-            return tree_class.getConstructor(FruitTrees.class, Integer.TYPE, Integer.TYPE, Integer.TYPE, TreeWorld.class, Byte.TYPE).newInstance(fruit_trees, x, y, z, tree_world, (byte)(this.ordinal() - 4));
+            return tree_class.getConstructor(FruitTrees.class, Integer.TYPE, Integer.TYPE, Integer.TYPE, TreeWorld.class, Byte.TYPE).newInstance(fruit_trees, x, y, z, tree_world, (byte) (this.ordinal() - 4));
         }
         else {
             return tree_class.getConstructor(FruitTrees.class, Integer.TYPE, Integer.TYPE, Integer.TYPE, TreeWorld.class).newInstance(fruit_trees, x, y, z, tree_world);

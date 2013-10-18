@@ -33,7 +33,7 @@ final class SeedGen {
 
     final static Item[] seeds = new Item[127]; //This is set to 127 for quick expansion durring development
     final static ArrayList<Recipe> recipes = new ArrayList<Recipe>(127);
-    private final static String[] dyes = new String[]{"Black", "Red", "Green", "Brown", "Blue", "Purple", "Cyan", "Light_Gray", "Gray", "Pink", "Lime", "Yellow", "Light_Blue", "Magenta", "Orange", "White"};
+    private final static String[] dyes = new String[]{ "Black", "Red", "Green", "Brown", "Blue", "Purple", "Cyan", "Light_Gray", "Gray", "Pink", "Lime", "Yellow", "Light_Blue", "Magenta", "Orange", "White" };
 
     private SeedGen() {
     }
@@ -80,69 +80,69 @@ final class SeedGen {
 
     private static final void genAppleSeeds() {
         if (CanaryFruitTrees.instance().checkEnabled(TreeType.APPLE)) {
-            genSeeds("Apple", ItemType.MelonSeeds, 0, (byte)-1);
+            genSeeds("Apple", ItemType.MelonSeeds, 0, (byte) -1);
         }
     }
 
     private static final void genGoldAppleSeeds() {
         if (CanaryFruitTrees.instance().checkEnabled(TreeType.GOLDEN_APPLE)) {
-            genSeeds("Golden Apple", ItemType.MelonSeeds, 1, (byte)-1);
+            genSeeds("Golden Apple", ItemType.MelonSeeds, 1, (byte) -1);
         }
     }
 
     private static final void genSpongeSeeds() {
         if (CanaryFruitTrees.instance().checkEnabled(TreeType.SPONGE)) {
-            genSeeds("Sponge", ItemType.PumpkinSeeds, 2, (byte)-1);
+            genSeeds("Sponge", ItemType.PumpkinSeeds, 2, (byte) -1);
         }
     }
 
     private static final void genRecordSeeds() {
         if (CanaryFruitTrees.instance().checkEnabled(TreeType.RECORD)) {
-            genSeeds("Record", ItemType.PumpkinSeeds, 3, (byte)-1);
+            genSeeds("Record", ItemType.PumpkinSeeds, 3, (byte) -1);
         }
     }
 
     private static final void genDyeSeeds() {
         for (int index = 0; index <= 15; index++) {
             if (CanaryFruitTrees.instance().checkEnabled(TreeType.valueOf("DYE_".concat(dyes[index].toUpperCase())))) {
-                genSeeds(dyes[index].concat(" Dye"), ItemType.Seeds, index + 4, (byte)index);
+                genSeeds(dyes[index].concat(" Dye"), ItemType.Seeds, index + 4, (byte) index);
             }
         }
     }
 
     private static final void genRedstoneSeeds() {
         if (CanaryFruitTrees.instance().checkEnabled(TreeType.REDSTONE)) {
-            genSeeds("Redstone", ItemType.Seeds, 20, (byte)-1);
+            genSeeds("Redstone", ItemType.Seeds, 20, (byte) -1);
         }
     }
 
     private static final void genIronSeeds() {
         if (CanaryFruitTrees.instance().checkEnabled(TreeType.IRON)) {
-            genSeeds("Iron", ItemType.Seeds, 21, (byte)-1);
+            genSeeds("Iron", ItemType.Seeds, 21, (byte) -1);
         }
     }
 
     private static final void genGoldSeeds() {
         if (CanaryFruitTrees.instance().checkEnabled(TreeType.GOLD)) {
-            genSeeds("Gold", ItemType.Seeds, 22, (byte)-1);
+            genSeeds("Gold", ItemType.Seeds, 22, (byte) -1);
         }
     }
 
     private static final void genDiamondSeeds() {
         if (CanaryFruitTrees.instance().checkEnabled(TreeType.GOLD)) {
-            genSeeds("Diamond", ItemType.Seeds, 23, (byte)-1);
+            genSeeds("Diamond", ItemType.Seeds, 23, (byte) -1);
         }
     }
 
     private static final void genEmeraldSeeds() {
         if (CanaryFruitTrees.instance().checkEnabled(TreeType.EMERALD)) {
-            genSeeds("Emerald", ItemType.Seeds, 24, (byte)-1);
+            genSeeds("Emerald", ItemType.Seeds, 24, (byte) -1);
         }
     }
 
     private static final void genCoalSeeds() {
         if (CanaryFruitTrees.instance().checkEnabled(TreeType.COAL)) {
-            genSeeds("Coal", ItemType.MelonSeeds, 25, (byte)-1);
+            genSeeds("Coal", ItemType.MelonSeeds, 25, (byte) -1);
         }
     }
 
@@ -181,9 +181,9 @@ final class SeedGen {
         if (CanaryFruitTrees.instance().checkEnabled(TreeType.GOLDEN_APPLE)) {
             Item gld_apl_seeds = seeds[1].clone();
             Item gold_nuggets = Canary.factory().getItemFactory().newItem(ItemType.GoldNugget, 0, 1);
-            RecipeRow[] rows = new RecipeRow[]{new RecipeRow("NNN", new Item[]{gold_nuggets}),
-                    new RecipeRow("NSN", new Item[]{gold_nuggets, seeds[0].clone()}),
-                    new RecipeRow("NNN", new Item[]{gold_nuggets})
+            RecipeRow[] rows = new RecipeRow[]{ new RecipeRow("NNN", new Item[]{ gold_nuggets }),
+                    new RecipeRow("NSN", new Item[]{ gold_nuggets, seeds[0].clone() }),
+                    new RecipeRow("NNN", new Item[]{ gold_nuggets })
             };
             recipes.add(Canary.getServer().addRecipe(new CraftingRecipe(gld_apl_seeds, rows)));
         }
@@ -266,9 +266,9 @@ final class SeedGen {
             Item iron_seeds = seeds[21].clone();
             Item iron_ingot = Canary.factory().getItemFactory().newItem(ItemType.IronIngot, 0, 1);
             Item normal_seeds = Canary.factory().getItemFactory().newItem(ItemType.Seeds, 0, 1);
-            RecipeRow[] rows = new RecipeRow[]{new RecipeRow("III", new Item[]{iron_ingot}),
-                    new RecipeRow("ISI", new Item[]{iron_ingot, normal_seeds}),
-                    new RecipeRow("III", new Item[]{iron_ingot})
+            RecipeRow[] rows = new RecipeRow[]{ new RecipeRow("III", new Item[]{ iron_ingot }),
+                    new RecipeRow("ISI", new Item[]{ iron_ingot, normal_seeds }),
+                    new RecipeRow("III", new Item[]{ iron_ingot })
             };
             recipes.add(Canary.getServer().addRecipe(new CraftingRecipe(iron_seeds, rows)));
         }
@@ -279,9 +279,9 @@ final class SeedGen {
             Item gold_seeds = seeds[22].clone();
             Item gold_ingot = Canary.factory().getItemFactory().newItem(ItemType.GoldIngot, 0, 1);
             Item normal_seeds = Canary.factory().getItemFactory().newItem(ItemType.Seeds, 0, 1);
-            RecipeRow[] rows = new RecipeRow[]{new RecipeRow("GGG", new Item[]{gold_ingot}),
-                    new RecipeRow("GSG", new Item[]{gold_ingot, normal_seeds}),
-                    new RecipeRow("GGG", new Item[]{gold_ingot})
+            RecipeRow[] rows = new RecipeRow[]{ new RecipeRow("GGG", new Item[]{ gold_ingot }),
+                    new RecipeRow("GSG", new Item[]{ gold_ingot, normal_seeds }),
+                    new RecipeRow("GGG", new Item[]{ gold_ingot })
             };
             recipes.add(Canary.getServer().addRecipe(new CraftingRecipe(gold_seeds, rows)));
         }
@@ -292,9 +292,9 @@ final class SeedGen {
             Item diamond_seeds = seeds[23].clone();
             Item diamond_gem = Canary.factory().getItemFactory().newItem(ItemType.Diamond, 0, 1);
             Item normal_seeds = Canary.factory().getItemFactory().newItem(ItemType.Seeds, 0, 1);
-            RecipeRow[] rows = new RecipeRow[]{new RecipeRow("DDD", new Item[]{diamond_gem}),
-                    new RecipeRow("DSD", new Item[]{diamond_gem, normal_seeds}),
-                    new RecipeRow("DDD", new Item[]{diamond_gem})
+            RecipeRow[] rows = new RecipeRow[]{ new RecipeRow("DDD", new Item[]{ diamond_gem }),
+                    new RecipeRow("DSD", new Item[]{ diamond_gem, normal_seeds }),
+                    new RecipeRow("DDD", new Item[]{ diamond_gem })
             };
             recipes.add(Canary.getServer().addRecipe(new CraftingRecipe(diamond_seeds, rows)));
         }
@@ -305,9 +305,9 @@ final class SeedGen {
             Item emerald_seeds = seeds[24].clone();
             Item emerald_gem = Canary.factory().getItemFactory().newItem(ItemType.Emerald, 0, 1);
             Item normal_seeds = Canary.factory().getItemFactory().newItem(ItemType.Seeds, 0, 1);
-            RecipeRow[] rows = new RecipeRow[]{new RecipeRow("EEE", new Item[]{emerald_gem}),
-                    new RecipeRow("ESE", new Item[]{emerald_gem, normal_seeds}),
-                    new RecipeRow("EEE", new Item[]{emerald_gem})
+            RecipeRow[] rows = new RecipeRow[]{ new RecipeRow("EEE", new Item[]{ emerald_gem }),
+                    new RecipeRow("ESE", new Item[]{ emerald_gem, normal_seeds }),
+                    new RecipeRow("EEE", new Item[]{ emerald_gem })
             };
             recipes.add(Canary.getServer().addRecipe(new CraftingRecipe(emerald_seeds, rows)));
         }

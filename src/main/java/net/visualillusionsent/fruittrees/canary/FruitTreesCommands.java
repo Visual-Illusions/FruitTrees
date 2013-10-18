@@ -37,9 +37,9 @@ public final class FruitTreesCommands extends VisualIllusionsCanaryPluginInforma
         Canary.commands().registerCommands(this, fruit_trees, false);
     }
 
-    @Command(aliases = {"fruittrees"},
+    @Command(aliases = { "fruittrees" },
             description = "Displays plugin information",
-            permissions = {""},
+            permissions = { "" },
             toolTip = "FruitTrees Information Command")
     public final void infoCommand(MessageReceiver msgrec, String[] args) {
         for (String msg : about) {
@@ -48,12 +48,15 @@ public final class FruitTreesCommands extends VisualIllusionsCanaryPluginInforma
                 Boolean isLatest = vc.isLatest();
                 if (isLatest == null) {
                     msgrec.message(center(Colors.GRAY + "VersionCheckerError: " + vc.getErrorMessage()));
-                } else if (!isLatest) {
+                }
+                else if (!isLatest) {
                     msgrec.message(center(Colors.GRAY + vc.getUpdateAvailibleMessage()));
-                } else {
+                }
+                else {
                     msgrec.message(center(Colors.LIGHT_GREEN + "Latest Version Installed"));
                 }
-            } else {
+            }
+            else {
                 msgrec.message(msg);
             }
         }

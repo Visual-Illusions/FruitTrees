@@ -32,7 +32,7 @@ public abstract class FruitTree {
     protected TreeType type;
     protected int loc_x, loc_y, loc_z;
     protected TreeWorld world;
-    protected static final byte[] offset_drop = new byte[]{-2, -1, 1, 2};
+    protected static final byte[] offset_drop = new byte[]{ -2, -1, 1, 2 };
     protected static final Random random = new Random();
 
     public FruitTree(FruitTrees fruit_trees, TreeType type, int loc_x, int loc_y, int loc_z, TreeWorld world) {
@@ -63,7 +63,7 @@ public abstract class FruitTree {
     }
 
     public boolean isGrown() {
-        return !world.isTreePart(loc_x, loc_y, loc_z, (short)6, this.type.getLogData());
+        return !world.isTreePart(loc_x, loc_y, loc_z, (short) 6, this.type.getLogData());
     }
 
     public abstract void dropFruit();
@@ -93,22 +93,22 @@ public abstract class FruitTree {
             }
         }
         // point logs
-        if (!world.isTreePart(loc_x + 1, loc_y + 3, loc_z, type.getLogId(), (byte)(type.getLogData() + 4))) {
+        if (!world.isTreePart(loc_x + 1, loc_y + 3, loc_z, type.getLogId(), (byte) (type.getLogData() + 4))) {
             fruit_trees.debug("Log Type Fail at X: " + (loc_x + 1) + " Y: " + (loc_y + 3) + " Z: " + loc_z);
             killTree();
             return false;
         }
-        if (!world.isTreePart(loc_x - 1, loc_y + 3, loc_z, type.getLogId(), (byte)(type.getLogData() + 4))) {
+        if (!world.isTreePart(loc_x - 1, loc_y + 3, loc_z, type.getLogId(), (byte) (type.getLogData() + 4))) {
             fruit_trees.debug("Log Type Fail at X: " + (loc_x - 1) + " Y: " + (loc_y + 3) + " Z: " + loc_z);
             killTree();
             return false;
         }
-        if (!world.isTreePart(loc_x, loc_y + 3, loc_z + 1, type.getLogId(), (byte)(type.getLogData() + 8))) {
+        if (!world.isTreePart(loc_x, loc_y + 3, loc_z + 1, type.getLogId(), (byte) (type.getLogData() + 8))) {
             fruit_trees.debug("Log Type Fail at X: " + loc_x + " Y: " + (loc_y + 3) + " Z: " + (loc_z + 1));
             killTree();
             return false;
         }
-        if (!world.isTreePart(loc_x, loc_y + 3, loc_z - 1, type.getLogId(), (byte)(type.getLogData() + 8))) {
+        if (!world.isTreePart(loc_x, loc_y + 3, loc_z - 1, type.getLogId(), (byte) (type.getLogData() + 8))) {
             fruit_trees.debug("Log Type Fail at X: " + loc_x + " Y: " + (loc_y + 3) + " Z: " + (loc_z - 1));
             killTree();
             return false;

@@ -57,23 +57,28 @@ public class CanaryFruitTrees extends VisualIllusionsCanaryPlugin implements Fru
         if (ft_cfg.isMySQL()) {
             try {
                 storage = new MySQLTreeStorage(this);
-            } catch (Exception ex) {
+            }
+            catch (Exception ex) {
                 getLogman().log(Level.SEVERE, "Failed to initialize MySQL Data storage...", ex);
                 disable();
                 return false;
             }
-        } else if (ft_cfg.isSQLite()) {
+        }
+        else if (ft_cfg.isSQLite()) {
             try {
                 storage = new SQLiteTreeStorage(this);
-            } catch (Exception ex) {
+            }
+            catch (Exception ex) {
                 getLogman().log(Level.SEVERE, "Failed to initialize SQLite Data storage...", ex);
                 disable();
                 return false;
             }
-        } else {
+        }
+        else {
             try {
                 storage = new XMLTreeStorage(this);
-            } catch (Exception ex) {
+            }
+            catch (Exception ex) {
                 getLogman().log(Level.SEVERE, "Failed to initialize XML Data storage...", ex);
                 disable();
                 return false;
@@ -86,7 +91,8 @@ public class CanaryFruitTrees extends VisualIllusionsCanaryPlugin implements Fru
         new CanaryFruitTreesListener(this);
         try {
             new FruitTreesCommands(this);
-        } catch (CommandDependencyException e) {
+        }
+        catch (CommandDependencyException e) {
             getLogman().logWarning("Failed to register FruitTrees information command.");
         }
         return true;
@@ -107,7 +113,8 @@ public class CanaryFruitTrees extends VisualIllusionsCanaryPlugin implements Fru
         if (tree_world == null) {
             world_cache.setExistingWorlds(new CanaryTreeWorld(this, world, world.getFqName()));
             storage.loadTreesForWorld(world_cache.getTreeWorld(world.getFqName()));
-        } else {
+        }
+        else {
             tree_world.isLoaded();
         }
     }

@@ -58,10 +58,10 @@ public final class TreeGen {
         }
         /* The Sideways logs */
         int log_y = fruit_tree.getY() + 3;
-        fruit_tree.getTreeWorld().placeTreePart(fruit_tree.getX() + 1, log_y, fruit_tree.getZ(), fruit_tree.getType().getLogId(), (short)(fruit_tree.getType().getLogData() + 4));
-        fruit_tree.getTreeWorld().placeTreePart(fruit_tree.getX() - 1, log_y, fruit_tree.getZ(), fruit_tree.getType().getLogId(), (short)(fruit_tree.getType().getLogData() + 4));
-        fruit_tree.getTreeWorld().placeTreePart(fruit_tree.getX(), log_y, fruit_tree.getZ() + 1, fruit_tree.getType().getLogId(), (short)(fruit_tree.getType().getLogData() + 8));
-        fruit_tree.getTreeWorld().placeTreePart(fruit_tree.getX(), log_y, fruit_tree.getZ() - 1, fruit_tree.getType().getLogId(), (short)(fruit_tree.getType().getLogData() + 8));
+        fruit_tree.getTreeWorld().placeTreePart(fruit_tree.getX() + 1, log_y, fruit_tree.getZ(), fruit_tree.getType().getLogId(), (short) (fruit_tree.getType().getLogData() + 4));
+        fruit_tree.getTreeWorld().placeTreePart(fruit_tree.getX() - 1, log_y, fruit_tree.getZ(), fruit_tree.getType().getLogId(), (short) (fruit_tree.getType().getLogData() + 4));
+        fruit_tree.getTreeWorld().placeTreePart(fruit_tree.getX(), log_y, fruit_tree.getZ() + 1, fruit_tree.getType().getLogId(), (short) (fruit_tree.getType().getLogData() + 8));
+        fruit_tree.getTreeWorld().placeTreePart(fruit_tree.getX(), log_y, fruit_tree.getZ() - 1, fruit_tree.getType().getLogId(), (short) (fruit_tree.getType().getLogData() + 8));
     }
 
     private final void leaves_layer1() {
