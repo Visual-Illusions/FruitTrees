@@ -1,18 +1,18 @@
 /*
  * This file is part of FruitTrees.
  *
- * Copyright © 2013 Visual Illusions Entertainment
+ * Copyright © 2013-2014 Visual Illusions Entertainment
  *
  * FruitTrees is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License,
  * or (at your option) any later version.
  *
- * FruitTrees is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
  * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  * See the GNU General Public License for more details.
  *
- * You should have received a copy of the GNU General Public License along with FruitTrees.
+ * You should have received a copy of the GNU General Public License along with this program.
  * If not, see http://www.gnu.org/licenses/gpl.html.
  */
 package net.visualillusionsent.fruittrees.canary;
@@ -20,7 +20,7 @@ package net.visualillusionsent.fruittrees.canary;
 import net.canarymod.Canary;
 import net.canarymod.api.world.World;
 import net.canarymod.commandsys.CommandDependencyException;
-import net.canarymod.logger.CanaryLevel;
+import net.canarymod.logger.Logman;
 import net.visualillusionsent.fruittrees.FruitTrees;
 import net.visualillusionsent.fruittrees.FruitTreesConfigurations;
 import net.visualillusionsent.fruittrees.TreeTracker;
@@ -33,7 +33,7 @@ import net.visualillusionsent.fruittrees.data.XMLTreeStorage;
 import net.visualillusionsent.fruittrees.trees.FruitTree;
 import net.visualillusionsent.minecraft.plugin.canary.VisualIllusionsCanaryPlugin;
 
-import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class CanaryFruitTrees extends VisualIllusionsCanaryPlugin implements FruitTrees {
 
@@ -44,14 +44,14 @@ public class CanaryFruitTrees extends VisualIllusionsCanaryPlugin implements Fru
 
     public CanaryFruitTrees() {
         super();
-        getLogman().setLevel(Level.ALL);
+        //getLogman().setLevel(Level.ALL);
     }
 
     @Override
     public boolean enable() {
+        super.enable();
+
         $ = this;
-        checkStatus();
-        checkVersion();
         ft_cfg = new FruitTreesConfigurations(this);
         SeedGen.genAll();
         if (ft_cfg.isMySQL()) {
@@ -59,7 +59,7 @@ public class CanaryFruitTrees extends VisualIllusionsCanaryPlugin implements Fru
                 storage = new MySQLTreeStorage(this);
             }
             catch (Exception ex) {
-                getLogman().log(Level.SEVERE, "Failed to initialize MySQL Data storage...", ex);
+                getLogman().error("Failed to initialize MySQL Data storage...", ex);
                 disable();
                 return false;
             }
@@ -69,7 +69,7 @@ public class CanaryFruitTrees extends VisualIllusionsCanaryPlugin implements Fru
                 storage = new SQLiteTreeStorage(this);
             }
             catch (Exception ex) {
-                getLogman().log(Level.SEVERE, "Failed to initialize SQLite Data storage...", ex);
+                getLogman().error("Failed to initialize SQLite Data storage...", ex);
                 disable();
                 return false;
             }
@@ -79,7 +79,7 @@ public class CanaryFruitTrees extends VisualIllusionsCanaryPlugin implements Fru
                 storage = new XMLTreeStorage(this);
             }
             catch (Exception ex) {
-                getLogman().log(Level.SEVERE, "Failed to initialize XML Data storage...", ex);
+                getLogman().error("Failed to initialize XML Data storage...", ex);
                 disable();
                 return false;
             }
@@ -93,7 +93,7 @@ public class CanaryFruitTrees extends VisualIllusionsCanaryPlugin implements Fru
             new FruitTreesCommands(this);
         }
         catch (CommandDependencyException e) {
-            getLogman().logWarning("Failed to register FruitTrees information command.");
+            getLogman().warn("Failed to register FruitTrees information command.");
         }
         return true;
     }
@@ -131,7 +131,7 @@ public class CanaryFruitTrees extends VisualIllusionsCanaryPlugin implements Fru
 
     public final void debug(String msg) {
         if (ft_cfg.debug()) {
-            getLogman().log(CanaryLevel.PLUGIN_DEBUG, msg);
+            getLogman().debug(Logman.PLUGINDEBUG, msg);
         }
     }
 
@@ -140,15 +140,15 @@ public class CanaryFruitTrees extends VisualIllusionsCanaryPlugin implements Fru
     }
 
     public final void warning(String msg) {
-        getLogman().warning(msg);
+        getLogman().warn(msg);
     }
 
     public final void severe(String msg) {
-        getLogman().severe(msg);
+        getLogman().error(msg);
     }
 
     public final void severe(String msg, Throwable thrown) {
-        getLogman().log(Level.SEVERE, msg, thrown);
+        getLogman().error(msg, thrown);
     }
 
     public final FruitTreesConfigurations getFruitTreesConfig() {
@@ -161,5 +161,10 @@ public class CanaryFruitTrees extends VisualIllusionsCanaryPlugin implements Fru
 
     public boolean checkEnabled(TreeType type) {
         return ft_cfg.checkEnabled(type);
+    }
+
+    @Override
+    public Logger getPluginLogger() {
+        return logger;
     }
 }
