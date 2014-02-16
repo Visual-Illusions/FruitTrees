@@ -31,8 +31,8 @@ import java.util.Arrays;
 
 final class SeedGen {
 
-    final static Item[] seeds = new Item[25]; //This is set to 25 for quick expansion durring development
-    final static ArrayList<Recipe> recipes = new ArrayList<Recipe>(25);
+    final static Item[] seeds = new Item[50]; //This is set to 50 for quick expansion durring development
+    final static ArrayList<Recipe> recipes = new ArrayList<Recipe>(50);
     private final static String[] dyes = new String[]{ "Black", "Red", "Green", "Brown", "Blue", "Purple", "Cyan", "Light_Gray", "Gray", "Pink", "Lime", "Yellow", "Light_Blue", "Magenta", "Orange", "White" };
 
     private SeedGen() {
