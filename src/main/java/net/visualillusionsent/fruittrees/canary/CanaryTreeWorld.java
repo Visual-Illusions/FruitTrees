@@ -49,7 +49,7 @@ public final class CanaryTreeWorld implements TreeWorld {
     }
 
     public final void scheduleDrop(DropTask task) {
-        new CanaryDropTask(task);
+        CanaryDropTask.scheduleDropTask(task);
     }
 
     public final boolean isTreePart(int x, int y, int z, short part_id, short part_data) {
@@ -69,10 +69,7 @@ public final class CanaryTreeWorld implements TreeWorld {
     }
 
     public final boolean isAreaLoaded(FruitTree fruit_tree) {
-        if (this.isLoaded()) {
-            return world.isChunkLoaded(fruit_tree.getX(), fruit_tree.getY(), fruit_tree.getZ());
-        }
-        return false;
+        return this.isLoaded() && world.isChunkLoaded(fruit_tree.getX(), fruit_tree.getY(), fruit_tree.getZ());
     }
 
     public final String getName() {

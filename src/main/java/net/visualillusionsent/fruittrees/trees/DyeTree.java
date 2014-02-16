@@ -31,7 +31,7 @@ public final class DyeTree extends FruitTree {
         this.dye_color = dye_color;
     }
 
-    private static final TreeType fromDyeColor(int dye_color) {
+    private static TreeType fromDyeColor(int dye_color) {
         switch (dye_color) {
             case 0x0:
                 return TreeType.DYE_BLACK;

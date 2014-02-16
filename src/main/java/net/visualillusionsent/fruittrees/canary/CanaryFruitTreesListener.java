@@ -17,7 +17,6 @@
  */
 package net.visualillusionsent.fruittrees.canary;
 
-import net.canarymod.Canary;
 import net.canarymod.api.GameMode;
 import net.canarymod.api.entity.living.humanoid.Player;
 import net.canarymod.api.inventory.Item;
@@ -39,10 +38,10 @@ import net.visualillusionsent.fruittrees.TreeType;
 import net.visualillusionsent.fruittrees.TreeWorld;
 import net.visualillusionsent.fruittrees.trees.*;
 
-public class CanaryFruitTreesListener implements PluginListener {
+public final class CanaryFruitTreesListener implements PluginListener {
 
     public CanaryFruitTreesListener(CanaryFruitTrees cft) {
-        Canary.hooks().registerListener(this, cft);
+        cft.registerListener(this);
     }
 
     @HookHandler(priority = Priority.LOW)
@@ -376,7 +375,7 @@ public class CanaryFruitTreesListener implements PluginListener {
         }
     }
 
-    private final void decreaseStack(Player player) {
+    private void decreaseStack(Player player) {
         if (player.getMode() != GameMode.CREATIVE) {
             Item held = player.getItemHeld();
             held.setAmount(held.getAmount() - 1);

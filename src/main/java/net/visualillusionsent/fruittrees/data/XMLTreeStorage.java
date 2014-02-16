@@ -51,7 +51,7 @@ public final class XMLTreeStorage extends TreeStorage {
         }
     }
 
-    public boolean storeTree(FruitTree tree) {
+    public final boolean storeTree(FruitTree tree) {
         fruit_trees.info(String.format("Storing Tree: %s", tree));
         String world_file = file.replace("%world_name%", tree.getTreeWorld().getName());
         File worldFile = new File(directory.concat(world_file));
@@ -96,7 +96,7 @@ public final class XMLTreeStorage extends TreeStorage {
         return true;
     }
 
-    public void removeTree(FruitTree tree) {
+    public final void removeTree(FruitTree tree) {
         fruit_trees.info(String.format("Killing Tree: %s", tree));
         String world_file = file.replace("%world_name%", tree.getTreeWorld().getName());
         File worldFile = new File(directory.concat(world_file));
@@ -141,7 +141,7 @@ public final class XMLTreeStorage extends TreeStorage {
         fruit_trees.info("Tree killed successfully");
     }
 
-    public boolean loadTreesForWorld(TreeWorld tree_world) {
+    public final boolean loadTreesForWorld(TreeWorld tree_world) {
         fruit_trees.info(String.format("Loading Trees for TreeWorld: %s", tree_world));
         String world_file = file.replace("%world_name%", tree_world.getName());
         File worldFile = new File(directory.concat(world_file));
@@ -192,7 +192,7 @@ public final class XMLTreeStorage extends TreeStorage {
         return true;
     }
 
-    private final boolean genDefaultWorldFile(File worldFile) {
+    private boolean genDefaultWorldFile(File worldFile) {
         Exception ex = null;
         Element fruittrees = new Element("fruittrees");
         Document root = new Document(fruittrees);

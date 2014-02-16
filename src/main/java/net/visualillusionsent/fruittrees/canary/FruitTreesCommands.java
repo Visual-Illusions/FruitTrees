@@ -34,10 +34,12 @@ public final class FruitTreesCommands extends VisualIllusionsCanaryPluginInforma
         fruit_trees.registerCommands(this, false);
     }
 
-    @Command(aliases = { "fruittrees" },
+    @Command(
+            aliases = { "fruittrees" },
             description = "Displays plugin information",
             permissions = { "" },
-            toolTip = "FruitTrees Information Command")
+            toolTip = "FruitTrees Information Command"
+    )
     public final void infoCommand(MessageReceiver msgrec, String[] args) {
         super.sendInformation(msgrec);
     }

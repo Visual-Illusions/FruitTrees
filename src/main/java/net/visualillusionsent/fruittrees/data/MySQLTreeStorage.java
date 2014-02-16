@@ -38,7 +38,7 @@ public final class MySQLTreeStorage extends TreeStorage {
         checkOrGenTable();
     }
 
-    private final void checkOrGenTable() throws SQLException {
+    private void checkOrGenTable() throws SQLException {
         testConnection();
         conn.prepareStatement("CREATE TABLE IF NOT EXISTS " + tree_table + " (Type VARCHAR(30), X INT, Y INT, Z INT, TreeWorld VARCHAR(64))").execute();
     }
@@ -163,7 +163,7 @@ public final class MySQLTreeStorage extends TreeStorage {
         return true;
     }
 
-    private final void testConnection() throws SQLException {
+    private void testConnection() throws SQLException {
         if (conn == null || conn.isClosed() || !conn.isValid(1)) {
             DriverManager.setLoginTimeout(3);
             conn = DriverManager.getConnection("jdbc:mysql://" + fruit_trees.getFruitTreesConfig().getSQL_URL(), fruit_trees.getFruitTreesConfig().getSQL_User(), fruit_trees.getFruitTreesConfig().getSQL_Password());

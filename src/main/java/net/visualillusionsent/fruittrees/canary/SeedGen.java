@@ -31,14 +31,14 @@ import java.util.Arrays;
 
 final class SeedGen {
 
-    final static Item[] seeds = new Item[127]; //This is set to 127 for quick expansion durring development
-    final static ArrayList<Recipe> recipes = new ArrayList<Recipe>(127);
+    final static Item[] seeds = new Item[25]; //This is set to 25 for quick expansion durring development
+    final static ArrayList<Recipe> recipes = new ArrayList<Recipe>(25);
     private final static String[] dyes = new String[]{ "Black", "Red", "Green", "Brown", "Blue", "Purple", "Cyan", "Light_Gray", "Gray", "Pink", "Lime", "Yellow", "Light_Blue", "Magenta", "Orange", "White" };
 
     private SeedGen() {
     }
 
-    static final void clearSeeds() {
+    static void clearSeeds() {
         Arrays.fill(seeds, null);
         for (Recipe recipe : recipes) {
             if (recipe != null) {
@@ -48,7 +48,7 @@ final class SeedGen {
         recipes.clear();
     }
 
-    static final void genAll() {
+    static void genAll() {
         // Gen Seeds
         genAppleSeeds();
         genGoldAppleSeeds();
@@ -78,31 +78,31 @@ final class SeedGen {
         addCoalSeedsRecipe();
     }
 
-    private static final void genAppleSeeds() {
+    private static void genAppleSeeds() {
         if (CanaryFruitTrees.instance().checkEnabled(TreeType.APPLE)) {
             genSeeds("Apple", ItemType.MelonSeeds, 0, (byte) -1);
         }
     }
 
-    private static final void genGoldAppleSeeds() {
+    private static void genGoldAppleSeeds() {
         if (CanaryFruitTrees.instance().checkEnabled(TreeType.GOLDEN_APPLE)) {
             genSeeds("Golden Apple", ItemType.MelonSeeds, 1, (byte) -1);
         }
     }
 
-    private static final void genSpongeSeeds() {
+    private static void genSpongeSeeds() {
         if (CanaryFruitTrees.instance().checkEnabled(TreeType.SPONGE)) {
             genSeeds("Sponge", ItemType.PumpkinSeeds, 2, (byte) -1);
         }
     }
 
-    private static final void genRecordSeeds() {
+    private static void genRecordSeeds() {
         if (CanaryFruitTrees.instance().checkEnabled(TreeType.RECORD)) {
             genSeeds("Record", ItemType.PumpkinSeeds, 3, (byte) -1);
         }
     }
 
-    private static final void genDyeSeeds() {
+    private static void genDyeSeeds() {
         for (int index = 0; index <= 15; index++) {
             if (CanaryFruitTrees.instance().checkEnabled(TreeType.valueOf("DYE_".concat(dyes[index].toUpperCase())))) {
                 genSeeds(dyes[index].concat(" Dye"), ItemType.Seeds, index + 4, (byte) index);
@@ -110,43 +110,43 @@ final class SeedGen {
         }
     }
 
-    private static final void genRedstoneSeeds() {
+    private static void genRedstoneSeeds() {
         if (CanaryFruitTrees.instance().checkEnabled(TreeType.REDSTONE)) {
             genSeeds("Redstone", ItemType.Seeds, 20, (byte) -1);
         }
     }
 
-    private static final void genIronSeeds() {
+    private static void genIronSeeds() {
         if (CanaryFruitTrees.instance().checkEnabled(TreeType.IRON)) {
             genSeeds("Iron", ItemType.Seeds, 21, (byte) -1);
         }
     }
 
-    private static final void genGoldSeeds() {
+    private static void genGoldSeeds() {
         if (CanaryFruitTrees.instance().checkEnabled(TreeType.GOLD)) {
             genSeeds("Gold", ItemType.Seeds, 22, (byte) -1);
         }
     }
 
-    private static final void genDiamondSeeds() {
+    private static void genDiamondSeeds() {
         if (CanaryFruitTrees.instance().checkEnabled(TreeType.GOLD)) {
             genSeeds("Diamond", ItemType.Seeds, 23, (byte) -1);
         }
     }
 
-    private static final void genEmeraldSeeds() {
+    private static void genEmeraldSeeds() {
         if (CanaryFruitTrees.instance().checkEnabled(TreeType.EMERALD)) {
             genSeeds("Emerald", ItemType.Seeds, 24, (byte) -1);
         }
     }
 
-    private static final void genCoalSeeds() {
+    private static void genCoalSeeds() {
         if (CanaryFruitTrees.instance().checkEnabled(TreeType.COAL)) {
             genSeeds("Coal", ItemType.MelonSeeds, 25, (byte) -1);
         }
     }
 
-    private static final void genSeeds(String name, ItemType type, int seed_index, byte dye) {
+    private static void genSeeds(String name, ItemType type, int seed_index, byte dye) {
         Item fruit_seeds = Canary.factory().getItemFactory().newItem(type, 0, 1);
         fruit_seeds.setDisplayName(String.format("%s Seeds", name));
         fruit_seeds.setLore(String.format("Plant to grow a %s Tree", name));
@@ -159,7 +159,7 @@ final class SeedGen {
         seeds[seed_index] = fruit_seeds;
     }
 
-    private static final void addAppleSeedsRecipe() {
+    private static void addAppleSeedsRecipe() {
         if (CanaryFruitTrees.instance().checkEnabled(TreeType.APPLE)) {
             Item apple = Canary.factory().getItemFactory().newItem(ItemType.Apple, 0, 1);
             Item aplSeeds = seeds[0].clone();
@@ -168,7 +168,7 @@ final class SeedGen {
         }
     }
 
-    private static final void addGoldenAppleSeedsRecipe0() {
+    private static void addGoldenAppleSeedsRecipe0() {
         if (CanaryFruitTrees.instance().checkEnabled(TreeType.GOLDEN_APPLE)) {
             Item golden_apple = Canary.factory().getItemFactory().newItem(ItemType.GoldenApple, 0, 1);
             Item gld_apl_seeds = seeds[1].clone();
@@ -177,7 +177,7 @@ final class SeedGen {
         }
     }
 
-    private static final void addGoldenAppleSeedsRecipe1() {
+    private static void addGoldenAppleSeedsRecipe1() {
         if (CanaryFruitTrees.instance().checkEnabled(TreeType.GOLDEN_APPLE)) {
             Item gld_apl_seeds = seeds[1].clone();
             Item gold_nuggets = Canary.factory().getItemFactory().newItem(ItemType.GoldNugget, 0, 1);
@@ -189,7 +189,7 @@ final class SeedGen {
         }
     }
 
-    private static final void addSpongeSeedRecipe0() {
+    private static void addSpongeSeedRecipe0() {
         if (CanaryFruitTrees.instance().checkEnabled(TreeType.SPONGE)) {
             Item sponge_seeds = seeds[2].clone();
             sponge_seeds.setAmount(2);
@@ -199,7 +199,7 @@ final class SeedGen {
         }
     }
 
-    private static final void addSpongeSeedRecipe1() {
+    private static void addSpongeSeedRecipe1() {
         if (CanaryFruitTrees.instance().checkEnabled(TreeType.SPONGE)) {
             Item sponge_seeds = seeds[2].clone();
             sponge_seeds.setAmount(3);
@@ -208,7 +208,7 @@ final class SeedGen {
         }
     }
 
-    private static final void addRecordSeedRecipe() {
+    private static void addRecordSeedRecipe() {
         if (CanaryFruitTrees.instance().checkEnabled(TreeType.RECORD)) {
             Item record_seeds = seeds[3].clone();
             record_seeds.setAmount(1);
@@ -239,7 +239,7 @@ final class SeedGen {
         }
     }
 
-    private static final void addDyeSeedsRecipe() {
+    private static void addDyeSeedsRecipe() {
         for (int index = 0; index <= 15; index++) {
             if (CanaryFruitTrees.instance().checkEnabled(TreeType.valueOf("DYE_".concat(dyes[index].toUpperCase())))) {
                 Item dye_seeds = seeds[index + 4].clone();
@@ -251,7 +251,7 @@ final class SeedGen {
         }
     }
 
-    private static final void addRedstoneSeedsRecipe() {
+    private static void addRedstoneSeedsRecipe() {
         if (CanaryFruitTrees.instance().checkEnabled(TreeType.REDSTONE)) {
             Item redstone_seeds = seeds[20].clone();
             redstone_seeds.setAmount(2);
@@ -261,7 +261,7 @@ final class SeedGen {
         }
     }
 
-    private static final void addIronSeedsRecipe() {
+    private static void addIronSeedsRecipe() {
         if (CanaryFruitTrees.instance().checkEnabled(TreeType.IRON)) {
             Item iron_seeds = seeds[21].clone();
             Item iron_ingot = Canary.factory().getItemFactory().newItem(ItemType.IronIngot, 0, 1);
@@ -274,7 +274,7 @@ final class SeedGen {
         }
     }
 
-    private static final void addGoldSeedsRecipe() {
+    private static void addGoldSeedsRecipe() {
         if (CanaryFruitTrees.instance().checkEnabled(TreeType.GOLD)) {
             Item gold_seeds = seeds[22].clone();
             Item gold_ingot = Canary.factory().getItemFactory().newItem(ItemType.GoldIngot, 0, 1);
@@ -287,7 +287,7 @@ final class SeedGen {
         }
     }
 
-    private static final void addDiamondSeedsRecipe() {
+    private static void addDiamondSeedsRecipe() {
         if (CanaryFruitTrees.instance().checkEnabled(TreeType.DIAMOND)) {
             Item diamond_seeds = seeds[23].clone();
             Item diamond_gem = Canary.factory().getItemFactory().newItem(ItemType.Diamond, 0, 1);
@@ -300,7 +300,7 @@ final class SeedGen {
         }
     }
 
-    private static final void addEmeraldSeedsRecipe() {
+    private static void addEmeraldSeedsRecipe() {
         if (CanaryFruitTrees.instance().checkEnabled(TreeType.EMERALD)) {
             Item emerald_seeds = seeds[24].clone();
             Item emerald_gem = Canary.factory().getItemFactory().newItem(ItemType.Emerald, 0, 1);
@@ -313,7 +313,7 @@ final class SeedGen {
         }
     }
 
-    private static final void addCoalSeedsRecipe() {
+    private static void addCoalSeedsRecipe() {
         if (CanaryFruitTrees.instance().checkEnabled(TreeType.COAL)) {
             Item coal = Canary.factory().getItemFactory().newItem(ItemType.Coal, 0, 1);
             Item coal_seeds = seeds[25].clone();

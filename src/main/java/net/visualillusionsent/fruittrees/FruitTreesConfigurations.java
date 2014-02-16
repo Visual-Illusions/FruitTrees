@@ -30,7 +30,7 @@ public final class FruitTreesConfigurations {
         checkConfig();
     }
 
-    private final void checkConfig() {
+    private void checkConfig() {
         // Debug Log
         if (!cfg.containsKey("debug.log.enabled")) {
             cfg.setString("debug.log.enabled", "no");

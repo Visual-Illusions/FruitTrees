@@ -27,13 +27,13 @@ import org.jdom2.Element;
 import java.util.Random;
 
 public abstract class FruitTree {
+    protected static final byte[] offset_drop = new byte[]{ -2, -1, 1, 2 };
+    protected static final Random random = new Random();
 
     protected FruitTrees fruit_trees;
     protected TreeType type;
     protected int loc_x, loc_y, loc_z;
     protected TreeWorld world;
-    protected static final byte[] offset_drop = new byte[]{ -2, -1, 1, 2 };
-    protected static final Random random = new Random();
 
     public FruitTree(FruitTrees fruit_trees, TreeType type, int loc_x, int loc_y, int loc_z, TreeWorld world) {
         this.fruit_trees = fruit_trees;
@@ -210,10 +210,7 @@ public abstract class FruitTree {
             return type.getLeavesId() == id && type.getLeavesData() == data;
         }
         else if (y == (loc_y + 3) && inRange(loc_x, x, 0, 2) && inRange(loc_z, z, 0, 2)) {
-            if (Math.abs(loc_x) + 2 == Math.abs(x) && Math.abs(loc_z) + 2 == Math.abs(z)) {
-                return false;
-            }
-            return type.getLeavesId() == id && type.getLeavesData() == data;
+            return !(Math.abs(loc_x) + 2 == Math.abs(x) && Math.abs(loc_z) + 2 == Math.abs(z)) && type.getLeavesId() == id && type.getLeavesData() == data;
         }
         else if (y == (loc_y + 3) && inRange(loc_x, x, 0, 1) && inRange(loc_z, z, 0, 1)) {
             return type.getLeavesId() == id && type.getLeavesData() == data;
@@ -224,12 +221,12 @@ public abstract class FruitTree {
         return false;
     }
 
-    private final boolean inRange(int num_1, int num_2, int min, int max) {
+    private boolean inRange(int num_1, int num_2, int min, int max) {
         int check = Math.abs(num_1 - num_2);
         return check >= min && max >= check;
     }
 
-    public boolean equalsElement(Element tree_element) {
+    public final boolean equalsElement(Element tree_element) {
         if (!this.type.toString().equals(tree_element.getAttributeValue("Type"))) {
             return false;
         }

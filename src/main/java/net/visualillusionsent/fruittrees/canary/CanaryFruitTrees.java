@@ -35,7 +35,7 @@ import net.visualillusionsent.minecraft.plugin.canary.VisualIllusionsCanaryPlugi
 
 import java.util.logging.Logger;
 
-public class CanaryFruitTrees extends VisualIllusionsCanaryPlugin implements FruitTrees {
+public final class CanaryFruitTrees extends VisualIllusionsCanaryPlugin implements FruitTrees {
 
     private final CanaryTreeWorldCache world_cache = new CanaryTreeWorldCache(this);
     private TreeStorage storage;
@@ -125,7 +125,7 @@ public class CanaryFruitTrees extends VisualIllusionsCanaryPlugin implements Fru
         }
     }
 
-    public static final CanaryFruitTrees instance() {
+    public static CanaryFruitTrees instance() {
         return $;
     }
 
