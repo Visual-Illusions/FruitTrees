@@ -24,9 +24,14 @@ public final class TreeGen {
     private final FruitTree fruit_tree;
     private final boolean canGrow;
 
-    public TreeGen(FruitTree fruit_tree) {
+    private TreeGen(FruitTree fruit_tree) {
         this.fruit_tree = fruit_tree;
         this.canGrow = canGrow();
+    }
+
+    public static void growTree(FruitTree fruit_tree) {
+        TreeGen gen = new TreeGen(fruit_tree);
+        gen.grow();
     }
 
     public final boolean getCanGrow() {
@@ -51,7 +56,7 @@ public final class TreeGen {
         return true;
     }
 
-    private final void logTree() {
+    private void logTree() {
         /* Vertically grow tree */
         for (int log_y = fruit_tree.getY(); log_y <= fruit_tree.getY() + 4; log_y++) {
             fruit_tree.getTreeWorld().placeTreePart(fruit_tree.getX(), log_y, fruit_tree.getZ(), fruit_tree.getType().getLogId(), fruit_tree.getType().getLogData());

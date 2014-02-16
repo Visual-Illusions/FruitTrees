@@ -18,7 +18,6 @@
 package net.visualillusionsent.fruittrees.trees;
 
 import net.visualillusionsent.fruittrees.FruitTrees;
-import net.visualillusionsent.fruittrees.TreeGen;
 import net.visualillusionsent.fruittrees.TreeType;
 import net.visualillusionsent.fruittrees.TreeWorld;
 
@@ -35,11 +34,6 @@ public final class EmeraldTree extends FruitTree {
             int drop_z = offset_drop[random.nextInt(3)];
             world.dropFruit(loc_x + drop_x, loc_y + 1, loc_z + drop_z, 1, (short) 388, (short) 0);
         }
-    }
-
-    @Override
-    public final void growTree() {
-        new TreeGen(this).grow();
     }
 
     @Override

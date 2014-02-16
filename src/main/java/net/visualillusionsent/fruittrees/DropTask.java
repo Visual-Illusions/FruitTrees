@@ -36,12 +36,6 @@ public final class DropTask {
     }
 
     public final boolean isValid() {
-        FruitTree test_tree = TreeTracker.getTreeAt(tree.getX(), tree.getY(), tree.getZ(), tree.getTreeWorld());
-        if (test_tree != null) {
-            if (test_tree.isGrown()) {
-                return tree.isStillValid();
-            }
-        }
-        return false;
+        return tree.isGrown() && tree.isStillValid();
     }
 }

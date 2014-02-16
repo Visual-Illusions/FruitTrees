@@ -19,6 +19,7 @@ package net.visualillusionsent.fruittrees.trees;
 
 import net.visualillusionsent.fruittrees.DropTask;
 import net.visualillusionsent.fruittrees.FruitTrees;
+import net.visualillusionsent.fruittrees.TreeGen;
 import net.visualillusionsent.fruittrees.TreeTracker;
 import net.visualillusionsent.fruittrees.TreeType;
 import net.visualillusionsent.fruittrees.TreeWorld;
@@ -42,8 +43,11 @@ public abstract class FruitTree {
         this.loc_y = loc_y;
         this.loc_z = loc_z;
         this.world = world;
+
+        if (isGrown() && isStillValid()) {
+            world.scheduleDrop(new DropTask(this));
+        }
         TreeTracker.trackTree(this);
-        world.scheduleDrop(new DropTask(this));
     }
 
     public int getX() {
@@ -68,7 +72,10 @@ public abstract class FruitTree {
 
     public abstract void dropFruit();
 
-    public abstract void growTree();
+    public final void growTree() {
+        TreeGen.growTree(this);
+        world.scheduleDrop(new DropTask(this));
+    }
 
     public final TreeType getType() {
         return type;

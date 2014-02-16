@@ -26,16 +26,16 @@ public final class TreeTracker {
     private final static TreeTracker $ = new TreeTracker();
     private final ArrayList<FruitTree> fruit_trees = new ArrayList<FruitTree>();
 
-    public static final void trackTree(FruitTree fruit_tree) {
+    public static void trackTree(FruitTree fruit_tree) {
         $.fruit_trees.add(fruit_tree);
 
     }
 
-    public static final void untrackTree(FruitTree fruit_tree) {
+    public static void untrackTree(FruitTree fruit_tree) {
         $.fruit_trees.remove(fruit_tree);
     }
 
-    public final static FruitTree getTreeAt(int x, int y, int z, TreeWorld tree_world) {
+    public static FruitTree getTreeAt(int x, int y, int z, TreeWorld tree_world) {
         for (FruitTree fruit_tree : $.fruit_trees) {
             if (fruit_tree.isBaseAt(x, y, z, tree_world)) {
                 return fruit_tree;
@@ -44,7 +44,7 @@ public final class TreeTracker {
         return null;
     }
 
-    public static final FruitTree isTreeArea(int x, int y, int z, int id, int data, TreeWorld tree_world) {
+    public static FruitTree isTreeArea(int x, int y, int z, int id, int data, TreeWorld tree_world) {
         for (FruitTree fruit_tree : $.fruit_trees) {
             if (fruit_tree.isInArea(x, y, z, id, data, tree_world)) {
                 return fruit_tree;
@@ -53,7 +53,7 @@ public final class TreeTracker {
         return null;
     }
 
-    public static final ArrayList<FruitTree> getTreesInWorld(TreeWorld tree_world) {
+    public static ArrayList<FruitTree> getTreesInWorld(TreeWorld tree_world) {
         ArrayList<FruitTree> trees = new ArrayList<FruitTree>();
         for (FruitTree tree : $.fruit_trees) {
             if (tree.getTreeWorld() == tree_world) {

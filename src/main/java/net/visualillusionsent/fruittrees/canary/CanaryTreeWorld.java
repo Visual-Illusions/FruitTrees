@@ -37,6 +37,7 @@ public final class CanaryTreeWorld implements TreeWorld {
     }
 
     public final void dropFruit(int x, int y, int z, int count, short id, short data) {
+        cft.debug(String.format("Dropping Fruit @ X:%d Y:%d Z:%d in the amount of %d", x, y, z, count));
         world.dropItem(x, y, z, id, count, data);
     }
 
@@ -49,7 +50,7 @@ public final class CanaryTreeWorld implements TreeWorld {
     }
 
     public final void scheduleDrop(DropTask task) {
-        CanaryDropTask.scheduleDropTask(task);
+        cft.debug("Scheduling Task: " + task + " Scheduled?: " + CanaryDropTask.scheduleDropTask(task));
     }
 
     public final boolean isTreePart(int x, int y, int z, short part_id, short part_data) {

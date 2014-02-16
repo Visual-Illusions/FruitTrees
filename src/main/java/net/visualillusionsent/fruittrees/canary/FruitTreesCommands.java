@@ -17,10 +17,16 @@
  */
 package net.visualillusionsent.fruittrees.canary;
 
+import net.canarymod.api.entity.living.humanoid.Player;
+import net.canarymod.api.world.position.Vector3D;
 import net.canarymod.chat.MessageReceiver;
 import net.canarymod.commandsys.Command;
 import net.canarymod.commandsys.CommandDependencyException;
+import net.visualillusionsent.fruittrees.TreeTracker;
+import net.visualillusionsent.fruittrees.trees.FruitTree;
 import net.visualillusionsent.minecraft.plugin.canary.VisualIllusionsCanaryPluginInformationCommand;
+
+import java.util.List;
 
 /**
  * Fruit Trees Commands
@@ -38,9 +44,40 @@ public final class FruitTreesCommands extends VisualIllusionsCanaryPluginInforma
             aliases = { "fruittrees" },
             description = "Displays plugin information",
             permissions = { "" },
-            toolTip = "FruitTrees Information Command"
+            toolTip = "/fruittrees"
     )
     public final void infoCommand(MessageReceiver msgrec, String[] args) {
         super.sendInformation(msgrec);
+    }
+
+    @Command(
+            aliases = { "debug" },
+            description = "Drop Debugger",
+            permissions = { "fruittrees.debug" },
+            toolTip = "/fruittrees debug",
+            parent = "fruittrees"
+    )
+    public final void forceDrop(MessageReceiver msgrec, String[] args) {
+        if (msgrec instanceof Player) {
+            Player player = (Player) msgrec;
+            List<FruitTree> trees = TreeTracker.getTreesInWorld(((CanaryFruitTrees) getPlugin()).getWorldForName(player.getWorld().getFqName()));
+            FruitTree closest = null;
+            double dist = 0;
+            for (FruitTree tree : trees) {
+                if (closest == null) {
+                    closest = tree;
+                    dist = new Vector3D(tree.getX(), tree.getY(), tree.getZ()).getDistance(player.getLocation());
+                }
+                else {
+                    double test = new Vector3D(tree.getX(), tree.getY(), tree.getZ()).getDistance(player.getLocation());
+                    if (test < dist) {
+                        closest = tree;
+                        dist = test;
+                    }
+                }
+            }
+            player.message("Grown?: " + closest.isGrown() + " Valid?: " + closest.isStillValid());
+            closest.dropFruit();
+        }
     }
 }

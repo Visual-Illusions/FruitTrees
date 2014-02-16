@@ -34,6 +34,7 @@ final class CanaryDropTask extends ServerTask {
 
     @Override
     public void run() {
+        CanaryFruitTrees.instance().debug("Running Task..." + this);
         if (task.isValid()) {
             CanaryFruitTrees.instance().debug("Dropping fruit from Tree: " + task.getTree());
             task.drop();
@@ -41,9 +42,13 @@ final class CanaryDropTask extends ServerTask {
         }
     }
 
-    static void scheduleDropTask(DropTask task) {
-        long delay = random.nextInt(540000) + 60000;  //Between 1 minute and 5 minutes
-        Canary.getServer().addSynchronousTask(new CanaryDropTask(task, delay));
-        CanaryFruitTrees.instance().debug("Dropping fruit from Tree: " + task.getTree() + " in " + (delay / 1000) + " seconds");
+    static boolean scheduleDropTask(DropTask task) {
+        if (!task.isValid()) {
+            return false;
+        }
+        long delay = random.nextInt(4800) + 1200;  //Between 1 minute and 5 minutes
+        boolean toRet = Canary.getServer().addSynchronousTask(new CanaryDropTask(task, delay));
+        CanaryFruitTrees.instance().debug("Dropping fruit from Tree: " + task.getTree() + " in " + (delay / 20) + " seconds");
+        return toRet;
     }
 }
