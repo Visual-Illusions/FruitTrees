@@ -7,7 +7,7 @@ Copyright © 2013-2014 Visual Illusions Entertainment
     <modelVersion>4.0.0</modelVersion>
     <name>FruitTrees</name>
     <description>Fruit dropping trees</description>
-    <url>http://wiki.visualillusionsent.net/view/RuleBooks</url>
+    <url>http://wiki.visualillusionsent.net/view/FruitTrees</url>
     <inceptionYear>2013</inceptionYear>
     <groupId>net.visualillusionsent</groupId>
     <artifactId>fruittrees</artifactId>
@@ -43,7 +43,7 @@ Copyright © 2013-2014 Visual Illusions Entertainment
             <name>GNU General Public License v3</name>
             <url>http://www.gnu.org/licenses/gpl.html</url>
             <comments>
-                RuleBooks is free software: you can redistribute it and/or modify
+                FruitTrees is free software: you can redistribute it and/or modify
                 it under the terms of the GNU General Public License as published by
                 the Free Software Foundation, either version 3 of the License, or
                 (at your option) any later version.
@@ -55,23 +55,23 @@ Copyright © 2013-2014 Visual Illusions Entertainment
         </license>
     </licenses>
     <scm>
-        <url>https://github.com/Visual-Illusions/RuleBooks</url>
-        <connection>scm:git:git@github.com:Visual-Illusions/RuleBooks.git</connection>
-        <developerConnection>scm:git:git@github.com:Visual-Illusions/RuleBooks.git</developerConnection>
+        <url>https://github.com/Visual-Illusions/FruitTrees</url>
+        <connection>scm:git:git@github.com:Visual-Illusions/FruitTrees.git</connection>
+        <developerConnection>scm:git:git@github.com:Visual-Illusions/FruitTrees.git</developerConnection>
     </scm>
     <issueManagement>
-        <url>http://github.com/Visual-Illusions/RuleBooks/issues</url>
+        <url>http://github.com/Visual-Illusions/FruitTrees/issues</url>
         <system>GitHub Issues Tracker</system>
     </issueManagement>
     <ciManagement>
-        <url>http://ci.visualillusionsent.net/job/RuleBooks</url>
+        <url>http://ci.visualillusionsent.net/job/FruitTrees</url>
         <system>Jenkins</system>
     </ciManagement>
     <repositories>
         <repository>
             <id>vi-repo2</id>
             <name>Visual Illusions Repository</name>
-            <url>http://repo2.visualillusionsent.net/</url>
+            <url>http://repo2.visualillusionsent.net/repository/public</url>
         </repository>
     </repositories>
     <dependencies>
@@ -259,11 +259,6 @@ Copyright © 2013-2014 Visual Illusions Entertainment
                                 <!-- Relocate base VIMCPlugin stuff to base of plugin -->
                                 <relocation>
                                     <pattern>net.visualillusionsent.minecraft.plugin</pattern>
-                                    <shadedPattern>${project.groupId}.${project.artifactId}</shadedPattern>
-                                </relocation>
-                                <!-- Canary -->
-                                <relocation>
-                                    <pattern>net.visualillusionsent.minecraft.plugin.canary</pattern>
                                     <shadedPattern>${project.groupId}.${project.artifactId}</shadedPattern>
                                 </relocation>
                             </relocations>
