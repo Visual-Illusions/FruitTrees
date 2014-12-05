@@ -1,8 +1,8 @@
-;# {name} - Canary Plugin Configuration File
+;# FruitTrees - Canary Plugin Configuration File
 ;# Copyright © {copyright.years} Visual Illusions Entertainment
-;# Licensed under the {gpl.type}
+;# Licensed under the GNU General Public License Version 3
 
-name={name}
-main-class={canary.main.class}
+name=${name}
+main-class=${canary.main.class}
 author=Visual Illusions Entertainment
-version={plugin.version}
+version=${project.version}

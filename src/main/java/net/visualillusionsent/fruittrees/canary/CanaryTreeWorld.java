@@ -21,6 +21,8 @@ import net.canarymod.Canary;
 import net.canarymod.api.world.World;
 import net.canarymod.api.world.blocks.Block;
 import net.canarymod.api.world.blocks.BlockType;
+import net.canarymod.api.world.blocks.properties.BlockProperty;
+import net.canarymod.api.world.blocks.properties.BlockPropertyEnums;
 import net.visualillusionsent.fruittrees.DropTask;
 import net.visualillusionsent.fruittrees.TreeWorld;
 import net.visualillusionsent.fruittrees.trees.FruitTree;
@@ -46,8 +48,16 @@ public final class CanaryTreeWorld implements TreeWorld {
         return world.getBlockAt(x, y, z).isAir();
     }
 
-    public final void placeTreePart(int x, int y, int z, String blockName) {
-        world.setBlockAt(x, y, z, BlockType.fromString(blockName));
+    public final void placeTreePart(int x, int y, int z, String blockName, byte offset) {
+        Block block = world.getBlockAt(x, y, z);
+        block.setType(BlockType.fromString(blockName));
+        switch (offset) {
+            case 1:
+                block.setPropertyValue(getAxisProperty(block), BlockPropertyEnums.LogAxis.X);
+            case 2:
+                block.setPropertyValue(getAxisProperty(block), BlockPropertyEnums.LogAxis.Z);
+        }
+        block.update();
     }
 
     public final void scheduleDrop(DropTask task) {
@@ -97,5 +107,14 @@ public final class CanaryTreeWorld implements TreeWorld {
 
     public final String toString() {
         return String.format("CanaryTreeWorld[WorldName:%s]", world != null ? world.getFqName() : "null");
+    }
+
+    private BlockProperty getAxisProperty(Block block) {
+        for (BlockProperty property : block.getPropertyKeys()) {
+            if (property.getName().equals("axis")) {
+                return property;
+            }
+        }
+        return null;
     }
 }

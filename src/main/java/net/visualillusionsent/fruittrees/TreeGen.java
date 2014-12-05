@@ -58,15 +58,16 @@ public final class TreeGen {
 
     private void logTree() {
         /* Vertically grow tree */
-        for (int log_y = fruit_tree.getY(); log_y <= fruit_tree.getY() + 4; log_y++) {
-            fruit_tree.getTreeWorld().placeTreePart(fruit_tree.getX(), log_y, fruit_tree.getZ(), fruit_tree.getType().getLogName());
+        int ly = fruit_tree.getY();
+        for (int yTemp = ly; yTemp <= ly + 4; yTemp++) {
+            fruit_tree.getTreeWorld().placeTreePart(fruit_tree.getX(), yTemp, fruit_tree.getZ(), fruit_tree.getType().getLogName(), (byte) 0);
         }
         /* The Sideways logs */
-        int log_y = fruit_tree.getY() + 3;
-        fruit_tree.getTreeWorld().placeTreePart(fruit_tree.getX() + 1, log_y, fruit_tree.getZ(), fruit_tree.getType().getLogId(), (short) (fruit_tree.getType().getLogData() + 4));
-        fruit_tree.getTreeWorld().placeTreePart(fruit_tree.getX() - 1, log_y, fruit_tree.getZ(), fruit_tree.getType().getLogId(), (short) (fruit_tree.getType().getLogData() + 4));
-        fruit_tree.getTreeWorld().placeTreePart(fruit_tree.getX(), log_y, fruit_tree.getZ() + 1, fruit_tree.getType().getLogId(), (short) (fruit_tree.getType().getLogData() + 8));
-        fruit_tree.getTreeWorld().placeTreePart(fruit_tree.getX(), log_y, fruit_tree.getZ() - 1, fruit_tree.getType().getLogId(), (short) (fruit_tree.getType().getLogData() + 8));
+        ly += 3;
+        fruit_tree.getTreeWorld().placeTreePart(fruit_tree.getX() + 1, ly, fruit_tree.getZ(), fruit_tree.getType().getLogName(), (byte) 1);
+        fruit_tree.getTreeWorld().placeTreePart(fruit_tree.getX() - 1, ly, fruit_tree.getZ(), fruit_tree.getType().getLogName(), (byte) 1);
+        fruit_tree.getTreeWorld().placeTreePart(fruit_tree.getX(), ly, fruit_tree.getZ() + 1, fruit_tree.getType().getLogName(), (byte) 2);
+        fruit_tree.getTreeWorld().placeTreePart(fruit_tree.getX(), ly, fruit_tree.getZ() - 1, fruit_tree.getType().getLogName(), (byte) 2);
     }
 
     private final void leaves_layer1() {
@@ -171,6 +172,6 @@ public final class TreeGen {
     }
 
     private final void placeLeavesAt(int x, int y, int z) {
-        fruit_tree.getTreeWorld().placeTreePart(x, y, z, fruit_tree.getType().getLeavesName());
+        fruit_tree.getTreeWorld().placeTreePart(x, y, z, fruit_tree.getType().getLeavesName(), (byte) 0);
     }
 }

@@ -36,18 +36,7 @@ import net.canarymod.plugin.Priority;
 import net.visualillusionsent.fruittrees.TreeTracker;
 import net.visualillusionsent.fruittrees.TreeType;
 import net.visualillusionsent.fruittrees.TreeWorld;
-import net.visualillusionsent.fruittrees.trees.AppleTree;
-import net.visualillusionsent.fruittrees.trees.CoalTree;
-import net.visualillusionsent.fruittrees.trees.DiamondTree;
-import net.visualillusionsent.fruittrees.trees.DyeTree;
-import net.visualillusionsent.fruittrees.trees.EmeraldTree;
-import net.visualillusionsent.fruittrees.trees.FruitTree;
-import net.visualillusionsent.fruittrees.trees.GoldTree;
-import net.visualillusionsent.fruittrees.trees.GoldenAppleTree;
-import net.visualillusionsent.fruittrees.trees.IronTree;
-import net.visualillusionsent.fruittrees.trees.RecordTree;
-import net.visualillusionsent.fruittrees.trees.RedstoneTree;
-import net.visualillusionsent.fruittrees.trees.SpongeTree;
+import net.visualillusionsent.fruittrees.trees.*;
 
 public final class CanaryFruitTreesListener implements PluginListener {
 
@@ -100,7 +89,7 @@ public final class CanaryFruitTreesListener implements PluginListener {
                     else if (type.equals("CoalSeeds")) {
                         if (CanaryFruitTrees.instance().getFruitTreesConfig().checkEnabled(TreeType.COAL)) {
                             block.getWorld().setBlockAt(block.getPosition(), BlockType.Dirt);
-                            block.getWorld().setBlockAt(block.getX(), block.getY() + 1, block.getZ(), (short) 6, TreeType.COAL.getLogData());
+                            block.getWorld().setBlockAt(block.getX(), block.getY() + 1, block.getZ(), BlockType.fromString(TreeType.COAL.getSaplingName()));
                             FruitTree tree = new CoalTree(CanaryFruitTrees.instance(), block.getX(), block.getY() + 1, block.getZ(), CanaryFruitTrees.instance().getWorldForName(block.getWorld().getFqName()));
                             tree.save();
                             decreaseStack(hook.getPlayer());
@@ -111,7 +100,7 @@ public final class CanaryFruitTreesListener implements PluginListener {
                 else if (seeds.getType() == ItemType.PumpkinSeeds) {
                     if (type.equals("RecordSeeds")) {
                         block.getWorld().setBlockAt(block.getPosition(), BlockType.Dirt);
-                        block.getWorld().setBlockAt(block.getX(), block.getY() + 1, block.getZ(), (short) 6, TreeType.RECORD.getLogData());
+                        block.getWorld().setBlockAt(block.getX(), block.getY() + 1, block.getZ(), BlockType.fromString(TreeType.RECORD.getSaplingName()));
                         FruitTree tree = new RecordTree(CanaryFruitTrees.instance(), block.getX(), block.getY() + 1, block.getZ(), CanaryFruitTrees.instance().getWorldForName(block.getWorld().getFqName()));
                         tree.save();
                         decreaseStack(hook.getPlayer());
@@ -119,7 +108,7 @@ public final class CanaryFruitTreesListener implements PluginListener {
                     }
                     else if (type.equals("SpongeSeeds")) {
                         block.getWorld().setBlockAt(block.getPosition(), BlockType.Dirt);
-                        block.getWorld().setBlockAt(block.getX(), block.getY() + 1, block.getZ(), (short) 6, TreeType.SPONGE.getLogData());
+                        block.getWorld().setBlockAt(block.getX(), block.getY() + 1, block.getZ(), BlockType.fromString(TreeType.SPONGE.getSaplingName()));
                         FruitTree tree = new SpongeTree(CanaryFruitTrees.instance(), block.getX(), block.getY() + 1, block.getZ(), CanaryFruitTrees.instance().getWorldForName(block.getWorld().getFqName()));
                         tree.save();
                         decreaseStack(hook.getPlayer());
@@ -129,7 +118,7 @@ public final class CanaryFruitTreesListener implements PluginListener {
                 else if (seeds.getType() == ItemType.Seeds) {
                     if (type.endsWith("DyeSeeds")) {
                         block.getWorld().setBlockAt(block.getPosition(), BlockType.Dirt);
-                        block.getWorld().setBlockAt(block.getX(), block.getY() + 1, block.getZ(), (short) 6, TreeType.DYE_BLACK.getLogData());
+                        block.getWorld().setBlockAt(block.getX(), block.getY() + 1, block.getZ(), BlockType.fromString(TreeType.DYE_BLACK.getSaplingName()));
                         FruitTree tree = new DyeTree(CanaryFruitTrees.instance(), block.getX(), block.getY() + 1, block.getZ(), CanaryFruitTrees.instance().getWorldForName(block.getWorld().getFqName()), seeds.getMetaTag().getCompoundTag("FruitTrees").getByte("DyeColor"));
                         tree.save();
                         decreaseStack(hook.getPlayer());
@@ -137,7 +126,7 @@ public final class CanaryFruitTreesListener implements PluginListener {
                     }
                     else if (type.equals("RedstoneSeeds")) {
                         block.getWorld().setBlockAt(block.getPosition(), BlockType.Dirt);
-                        block.getWorld().setBlockAt(block.getX(), block.getY() + 1, block.getZ(), (short) 6, TreeType.REDSTONE.getLogData());
+                        block.getWorld().setBlockAt(block.getX(), block.getY() + 1, block.getZ(), BlockType.fromString(TreeType.REDSTONE.getSaplingName()));
                         FruitTree tree = new RedstoneTree(CanaryFruitTrees.instance(), block.getX(), block.getY() + 1, block.getZ(), CanaryFruitTrees.instance().getWorldForName(block.getWorld().getFqName()));
                         tree.save();
                         decreaseStack(hook.getPlayer());
@@ -145,7 +134,7 @@ public final class CanaryFruitTreesListener implements PluginListener {
                     }
                     else if (type.equals("IronSeeds")) {
                         block.getWorld().setBlockAt(block.getPosition(), BlockType.Dirt);
-                        block.getWorld().setBlockAt(block.getX(), block.getY() + 1, block.getZ(), (short) 6, TreeType.IRON.getLogData());
+                        block.getWorld().setBlockAt(block.getX(), block.getY() + 1, block.getZ(), BlockType.fromString(TreeType.IRON.getSaplingName()));
                         FruitTree tree = new IronTree(CanaryFruitTrees.instance(), block.getX(), block.getY() + 1, block.getZ(), CanaryFruitTrees.instance().getWorldForName(block.getWorld().getFqName()));
                         tree.save();
                         decreaseStack(hook.getPlayer());
@@ -153,7 +142,7 @@ public final class CanaryFruitTreesListener implements PluginListener {
                     }
                     else if (type.equals("GoldSeeds")) {
                         block.getWorld().setBlockAt(block.getPosition(), BlockType.Dirt);
-                        block.getWorld().setBlockAt(block.getX(), block.getY() + 1, block.getZ(), (short) 6, TreeType.GOLD.getLogData());
+                        block.getWorld().setBlockAt(block.getX(), block.getY() + 1, block.getZ(), BlockType.fromString(TreeType.GOLD.getSaplingName()));
                         FruitTree tree = new GoldTree(CanaryFruitTrees.instance(), block.getX(), block.getY() + 1, block.getZ(), CanaryFruitTrees.instance().getWorldForName(block.getWorld().getFqName()));
                         tree.save();
                         decreaseStack(hook.getPlayer());
@@ -161,7 +150,7 @@ public final class CanaryFruitTreesListener implements PluginListener {
                     }
                     else if (type.equals("DiamondSeeds")) {
                         block.getWorld().setBlockAt(block.getPosition(), BlockType.Dirt);
-                        block.getWorld().setBlockAt(block.getX(), block.getY() + 1, block.getZ(), (short) 6, TreeType.GOLD.getLogData());
+                        block.getWorld().setBlockAt(block.getX(), block.getY() + 1, block.getZ(), BlockType.fromString(TreeType.DIAMOND.getSaplingName()));
                         FruitTree tree = new DiamondTree(CanaryFruitTrees.instance(), block.getX(), block.getY() + 1, block.getZ(), CanaryFruitTrees.instance().getWorldForName(block.getWorld().getFqName()));
                         tree.save();
                         decreaseStack(hook.getPlayer());
@@ -169,16 +158,8 @@ public final class CanaryFruitTreesListener implements PluginListener {
                     }
                     else if (type.equals("EmeraldSeeds")) {
                         block.getWorld().setBlockAt(block.getPosition(), BlockType.Dirt);
-                        block.getWorld().setBlockAt(block.getX(), block.getY() + 1, block.getZ(), (short) 6, TreeType.GOLD.getLogData());
+                        block.getWorld().setBlockAt(block.getX(), block.getY() + 1, block.getZ(), BlockType.fromString(TreeType.EMERALD.getSaplingName()));
                         FruitTree tree = new EmeraldTree(CanaryFruitTrees.instance(), block.getX(), block.getY() + 1, block.getZ(), CanaryFruitTrees.instance().getWorldForName(block.getWorld().getFqName()));
-                        tree.save();
-                        decreaseStack(hook.getPlayer());
-                        hook.setCanceled();
-                    }
-                    else if (type.equals("CoalSeeds")) {
-                        block.getWorld().setBlockAt(block.getPosition(), BlockType.Dirt);
-                        block.getWorld().setBlockAt(block.getX(), block.getY() + 1, block.getZ(), (short) 6, TreeType.GOLD.getLogData());
-                        FruitTree tree = new CoalTree(CanaryFruitTrees.instance(), block.getX(), block.getY() + 1, block.getZ(), CanaryFruitTrees.instance().getWorldForName(block.getWorld().getFqName()));
                         tree.save();
                         decreaseStack(hook.getPlayer());
                         hook.setCanceled();
@@ -289,68 +270,68 @@ public final class CanaryFruitTreesListener implements PluginListener {
     @HookHandler(priority = Priority.LOW)
     public final void killTreeArea(BlockUpdateHook hook) { //BlockUpdate a little more reliable with tracking Tree destruction (Especially if editting out a tree)
         Block block = hook.getBlock();
-        if (block.getTypeId() == BlockType.OakLog.getId()) {
-            FruitTree tree = TreeTracker.isTreeArea(block.getX(), block.getY(), block.getZ(), block.getTypeId(), block.getData(), CanaryFruitTrees.instance().getWorldForName(block.getWorld().getFqName()));
+        if (block.getType().equals(BlockType.OakLog)) {
+            FruitTree tree = TreeTracker.isTreeArea(block.getX(), block.getY(), block.getZ(), block.getType().getMachineName(), CanaryFruitTrees.instance().getWorldForName(block.getWorld().getFqName()));
             if (tree != null) {
                 tree.killTree();
             }
         }
-        else if (block.getTypeId() == BlockType.OakLeaves.getId()) {
-            FruitTree tree = TreeTracker.isTreeArea(block.getX(), block.getY(), block.getZ(), block.getTypeId(), block.getData(), CanaryFruitTrees.instance().getWorldForName(block.getWorld().getFqName()));
+        else if (block.getType().equals(BlockType.OakLeaves)) {
+            FruitTree tree = TreeTracker.isTreeArea(block.getX(), block.getY(), block.getZ(), block.getType().getMachineName(), CanaryFruitTrees.instance().getWorldForName(block.getWorld().getFqName()));
             if (tree != null) {
                 tree.killTree();
             }
         }
-        else if (block.getType() == BlockType.Sponge) {
-            FruitTree tree = TreeTracker.isTreeArea(block.getX(), block.getY(), block.getZ(), block.getTypeId(), block.getData(), CanaryFruitTrees.instance().getWorldForName(block.getWorld().getFqName()));
+        else if (block.getType().equals(BlockType.Sponge)) {
+            FruitTree tree = TreeTracker.isTreeArea(block.getX(), block.getY(), block.getZ(), block.getType().getMachineName(), CanaryFruitTrees.instance().getWorldForName(block.getWorld().getFqName()));
             if (tree != null) {
                 tree.killTree();
             }
         }
         else if (block.getTypeId() == BlockType.WoolWhite.getId()) {
-            FruitTree tree = TreeTracker.isTreeArea(block.getX(), block.getY(), block.getZ(), block.getTypeId(), block.getData(), CanaryFruitTrees.instance().getWorldForName(block.getWorld().getFqName()));
+            FruitTree tree = TreeTracker.isTreeArea(block.getX(), block.getY(), block.getZ(), block.getType().getMachineName(), CanaryFruitTrees.instance().getWorldForName(block.getWorld().getFqName()));
             if (tree != null) {
                 tree.killTree();
             }
         }
-        else if (block.getType() == BlockType.RedstoneBlock) {
-            FruitTree tree = TreeTracker.isTreeArea(block.getX(), block.getY(), block.getZ(), block.getTypeId(), block.getData(), CanaryFruitTrees.instance().getWorldForName(block.getWorld().getFqName()));
+        else if (block.getType().equals(BlockType.RedstoneBlock)) {
+            FruitTree tree = TreeTracker.isTreeArea(block.getX(), block.getY(), block.getZ(), block.getType().getMachineName(), CanaryFruitTrees.instance().getWorldForName(block.getWorld().getFqName()));
             if (tree != null) {
                 tree.killTree();
             }
         }
-        else if (block.getType() == BlockType.NoteBlock) {
-            FruitTree tree = TreeTracker.isTreeArea(block.getX(), block.getY(), block.getZ(), block.getTypeId(), block.getData(), CanaryFruitTrees.instance().getWorldForName(block.getWorld().getFqName()));
+        else if (block.getType().equals(BlockType.NoteBlock)) {
+            FruitTree tree = TreeTracker.isTreeArea(block.getX(), block.getY(), block.getZ(), block.getType().getMachineName(), CanaryFruitTrees.instance().getWorldForName(block.getWorld().getFqName()));
             if (tree != null) {
                 tree.killTree();
             }
         }
-        else if (block.getType() == BlockType.IronBlock) {
-            FruitTree tree = TreeTracker.isTreeArea(block.getX(), block.getY(), block.getZ(), block.getTypeId(), block.getData(), CanaryFruitTrees.instance().getWorldForName(block.getWorld().getFqName()));
+        else if (block.getType().equals(BlockType.IronBlock)) {
+            FruitTree tree = TreeTracker.isTreeArea(block.getX(), block.getY(), block.getZ(), block.getType().getMachineName(), CanaryFruitTrees.instance().getWorldForName(block.getWorld().getFqName()));
             if (tree != null) {
                 tree.killTree();
             }
         }
-        else if (block.getType() == BlockType.GoldBlock) {
-            FruitTree tree = TreeTracker.isTreeArea(block.getX(), block.getY(), block.getZ(), block.getTypeId(), block.getData(), CanaryFruitTrees.instance().getWorldForName(block.getWorld().getFqName()));
+        else if (block.getType().equals(BlockType.GoldBlock)) {
+            FruitTree tree = TreeTracker.isTreeArea(block.getX(), block.getY(), block.getZ(), block.getType().getMachineName(), CanaryFruitTrees.instance().getWorldForName(block.getWorld().getFqName()));
             if (tree != null) {
                 tree.killTree();
             }
         }
-        else if (block.getType() == BlockType.DiamondBlock) {
-            FruitTree tree = TreeTracker.isTreeArea(block.getX(), block.getY(), block.getZ(), block.getTypeId(), block.getData(), CanaryFruitTrees.instance().getWorldForName(block.getWorld().getFqName()));
+        else if (block.getType().equals(BlockType.DiamondBlock)) {
+            FruitTree tree = TreeTracker.isTreeArea(block.getX(), block.getY(), block.getZ(), block.getType().getMachineName(), CanaryFruitTrees.instance().getWorldForName(block.getWorld().getFqName()));
             if (tree != null) {
                 tree.killTree();
             }
         }
-        else if (block.getType() == BlockType.EmeraldBlock) {
-            FruitTree tree = TreeTracker.isTreeArea(block.getX(), block.getY(), block.getZ(), block.getTypeId(), block.getData(), CanaryFruitTrees.instance().getWorldForName(block.getWorld().getFqName()));
+        else if (block.getType().equals(BlockType.EmeraldBlock)) {
+            FruitTree tree = TreeTracker.isTreeArea(block.getX(), block.getY(), block.getZ(), block.getType().getMachineName(), CanaryFruitTrees.instance().getWorldForName(block.getWorld().getFqName()));
             if (tree != null) {
                 tree.killTree();
             }
         }
-        else if (block.getType() == BlockType.CoalBlock) {
-            FruitTree tree = TreeTracker.isTreeArea(block.getX(), block.getY(), block.getZ(), block.getTypeId(), block.getData(), CanaryFruitTrees.instance().getWorldForName(block.getWorld().getFqName()));
+        else if (block.getType().equals(BlockType.CoalBlock)) {
+            FruitTree tree = TreeTracker.isTreeArea(block.getX(), block.getY(), block.getZ(), block.getType().getMachineName(), CanaryFruitTrees.instance().getWorldForName(block.getWorld().getFqName()));
             if (tree != null) {
                 tree.killTree();
             }
