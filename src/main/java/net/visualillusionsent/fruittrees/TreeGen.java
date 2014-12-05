@@ -59,7 +59,7 @@ public final class TreeGen {
     private void logTree() {
         /* Vertically grow tree */
         for (int log_y = fruit_tree.getY(); log_y <= fruit_tree.getY() + 4; log_y++) {
-            fruit_tree.getTreeWorld().placeTreePart(fruit_tree.getX(), log_y, fruit_tree.getZ(), fruit_tree.getType().getLogId(), fruit_tree.getType().getLogData());
+            fruit_tree.getTreeWorld().placeTreePart(fruit_tree.getX(), log_y, fruit_tree.getZ(), fruit_tree.getType().getLogName());
         }
         /* The Sideways logs */
         int log_y = fruit_tree.getY() + 3;
@@ -171,6 +171,6 @@ public final class TreeGen {
     }
 
     private final void placeLeavesAt(int x, int y, int z) {
-        fruit_tree.getTreeWorld().placeTreePart(x, y, z, fruit_tree.getType().getLeavesId(), fruit_tree.getType().getLeavesData());
+        fruit_tree.getTreeWorld().placeTreePart(x, y, z, fruit_tree.getType().getLeavesName());
     }
 }

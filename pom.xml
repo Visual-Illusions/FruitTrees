@@ -15,7 +15,7 @@ Copyright © 2013-2014 Visual Illusions Entertainment
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <canary.main.class>${project.groupId}.${project.artifactId}.canary.CanaryFruitTrees</canary.main.class>
-        <vimcplugin.version>1.1.0-SNAPSHOT</vimcplugin.version>
+        <mcpluginlib.version>1.2.0-SNAPSHOT</mcpluginlib.version>
         <status.url>http://status.visualillusionsent.net/</status.url>
         <devs>darkdiplomat</devs>
         <build.number/>
@@ -82,8 +82,8 @@ Copyright © 2013-2014 Visual Illusions Entertainment
     <dependencies>
         <dependency>
             <groupId>net.visualillusionsent</groupId>
-            <artifactId>vimcplugin</artifactId>
-            <version>${vimcplugin.version}</version>
+            <artifactId>mcpluginlib</artifactId>
+            <version>${mcpluginlib.version}</version>
         </dependency>
     </dependencies>
     <build>
@@ -207,12 +207,12 @@ Copyright © 2013-2014 Visual Illusions Entertainment
                             <artifactSet>
                                 <includes>
                                     <!-- Only need to shade the VIMCPlugin stuff -->
-                                    <include>net.visualillusionsent:vimcplugin</include>
+                                    <include>net.visualillusionsent:mcpluginlib</include>
                                 </includes>
                             </artifactSet>
                             <filters>
                                 <filter>
-                                    <artifact>net.visualillusionsent:vimcplugin</artifact>
+                                    <artifact>net.visualillusionsent:mcpluginlib</artifact>
                                     <includes>
                                         <!-- Always include the license stuff -->
                                         <include>META-INF/license/**</include>
@@ -222,8 +222,8 @@ Copyright © 2013-2014 Visual Illusions Entertainment
                                         <include>net/visualillusionsent/minecraft/plugin/**</include>
                                     </includes>
                                     <excludes>
-                                        <!-- Bukkit is unused at this time -->
-                                        <exclude>net/visualillusionsent/minecraft/plugin/bukkit/**</exclude>
+                                        <!-- Sponge is unused at this time -->
+                                        <exclude>net/visualillusionsent/minecraft/plugin/sponge/**</exclude>
                                     </excludes>
                                 </filter>
                             </filters>
@@ -232,7 +232,7 @@ Copyright © 2013-2014 Visual Illusions Entertainment
                                 <!-- Relocate base VIMCPlugin stuff to base of plugin -->
                                 <relocation>
                                     <pattern>net.visualillusionsent.minecraft.plugin</pattern>
-                                    <shadedPattern>${project.groupId}.${project.artifactId}</shadedPattern>
+                                    <shadedPattern>${project.groupId}.${project.artifactId}.lib</shadedPattern>
                                 </relocation>
                             </relocations>
                         </configuration>

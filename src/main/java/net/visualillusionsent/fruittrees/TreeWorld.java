@@ -25,11 +25,11 @@ public interface TreeWorld {
 
     boolean isClear(int x, int y, int z);
 
-    void placeTreePart(int x, int y, int z, short type, short data);
+    void placeTreePart(int x, int y, int z, String blockName);
 
     void scheduleDrop(DropTask task);
 
-    boolean isTreePart(int x, int y, int z, short part_id, short s);
+    boolean isTreePart(int x, int y, int z, String blockName);
 
     boolean isLoaded();
 

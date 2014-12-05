@@ -44,9 +44,9 @@ public final class TreeTracker {
         return null;
     }
 
-    public static FruitTree isTreeArea(int x, int y, int z, int id, int data, TreeWorld tree_world) {
+    public static FruitTree isTreeArea(int x, int y, int z, String blockName, TreeWorld tree_world) {
         for (FruitTree fruit_tree : $.fruit_trees) {
-            if (fruit_tree.isInArea(x, y, z, id, data, tree_world)) {
+            if (fruit_tree.isInArea(x, y, z, blockName, tree_world)) {
                 return fruit_tree;
             }
         }

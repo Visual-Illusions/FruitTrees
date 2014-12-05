@@ -20,6 +20,7 @@ package net.visualillusionsent.fruittrees.canary;
 import net.canarymod.Canary;
 import net.canarymod.api.world.World;
 import net.canarymod.api.world.blocks.Block;
+import net.canarymod.api.world.blocks.BlockType;
 import net.visualillusionsent.fruittrees.DropTask;
 import net.visualillusionsent.fruittrees.TreeWorld;
 import net.visualillusionsent.fruittrees.trees.FruitTree;
@@ -45,17 +46,17 @@ public final class CanaryTreeWorld implements TreeWorld {
         return world.getBlockAt(x, y, z).isAir();
     }
 
-    public final void placeTreePart(int x, int y, int z, short type, short data) {
-        world.setBlockAt(x, y, z, type, data);
+    public final void placeTreePart(int x, int y, int z, String blockName) {
+        world.setBlockAt(x, y, z, BlockType.fromString(blockName));
     }
 
     public final void scheduleDrop(DropTask task) {
         cft.debug("Scheduling Task: " + task + " Scheduled?: " + CanaryDropTask.scheduleDropTask(task));
     }
 
-    public final boolean isTreePart(int x, int y, int z, short part_id, short part_data) {
+    public final boolean isTreePart(int x, int y, int z, String blockName) {
         Block block = world.getBlockAt(x, y, z);
-        return block.getTypeId() == part_id && block.getData() == part_data;
+        return block.getType().getMachineName().equals(blockName);
     }
 
     public final boolean isLoaded() {
@@ -89,7 +90,7 @@ public final class CanaryTreeWorld implements TreeWorld {
             return ((CanaryTreeWorld) obj).world.equals(world);
         }
         else if (obj instanceof World) {
-            return ((World) obj).equals(world);
+            return obj.equals(world);
         }
         return false;
     }

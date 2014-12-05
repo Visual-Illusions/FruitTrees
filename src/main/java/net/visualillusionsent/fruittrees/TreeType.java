@@ -17,63 +17,93 @@
  */
 package net.visualillusionsent.fruittrees;
 
-import net.visualillusionsent.fruittrees.trees.*;
+import net.visualillusionsent.fruittrees.trees.AppleTree;
+import net.visualillusionsent.fruittrees.trees.CoalTree;
+import net.visualillusionsent.fruittrees.trees.DiamondTree;
+import net.visualillusionsent.fruittrees.trees.DyeTree;
+import net.visualillusionsent.fruittrees.trees.EmeraldTree;
+import net.visualillusionsent.fruittrees.trees.FruitTree;
+import net.visualillusionsent.fruittrees.trees.GoldTree;
+import net.visualillusionsent.fruittrees.trees.GoldenAppleTree;
+import net.visualillusionsent.fruittrees.trees.IronTree;
+import net.visualillusionsent.fruittrees.trees.RecordTree;
+import net.visualillusionsent.fruittrees.trees.RedstoneTree;
+import net.visualillusionsent.fruittrees.trees.SpongeTree;
 
 public enum TreeType {
 
-    APPLE(AppleTree.class, 17, 0, 18, 3), //
-    GOLDEN_APPLE(GoldenAppleTree.class, 17, 1, 18, 3), //
-    SPONGE(SpongeTree.class, 17, 2, 19, 0), //
-    RECORD(RecordTree.class, 17, 1, 25, 0), //
-    DYE_BLACK(DyeTree.class, 17, 2, 35, 15), //
-    DYE_RED(DyeTree.class, 17, 2, 35, 14), //
-    DYE_GREEN(DyeTree.class, 17, 2, 35, 13), //
-    DYE_BROWN(DyeTree.class, 17, 2, 35, 12), //
-    DYE_BLUE(DyeTree.class, 17, 2, 35, 11), //
-    DYE_PURPLE(DyeTree.class, 17, 2, 35, 10), //
-    DYE_CYAN(DyeTree.class, 17, 2, 35, 9), //
-    DYE_LIGHT_GRAY(DyeTree.class, 17, 2, 35, 8), //
-    DYE_GRAY(DyeTree.class, 17, 2, 35, 7), //
-    DYE_PINK(DyeTree.class, 17, 2, 35, 6), //
-    DYE_LIME(DyeTree.class, 17, 2, 35, 5), //
-    DYE_YELLOW(DyeTree.class, 17, 2, 35, 4), //
-    DYE_LIGHT_BLUE(DyeTree.class, 17, 2, 35, 3), //
-    DYE_MAGENTA(DyeTree.class, 17, 2, 35, 2), //
-    DYE_ORANGE(DyeTree.class, 17, 2, 35, 1), //
-    DYE_WHITE(DyeTree.class, 17, 2, 35, 0), //
-    REDSTONE(RedstoneTree.class, 17, 1, 152, 0), //
-    IRON(IronTree.class, 17, 2, 42, 0), //
-    GOLD(GoldTree.class, 17, 1, 41, 0), //
-    DIAMOND(DiamondTree.class, 17, 0, 57, 0), //
-    EMERALD(EmeraldTree.class, 17, 0, 133, 0), //
-    COAL(CoalTree.class, 17, 1, 173, 0), //
+    APPLE(AppleTree.class, "minecraft:log:0", "minecraft:leaves:3", "minecraft:sapling:0"),
+    GOLDEN_APPLE(GoldenAppleTree.class, "minecraft:log:1", "minecraft:leaves:3", "minecraft:sapling:1"),
+    SPONGE(SpongeTree.class, "minecraft:log2:1", "minecraft:sponge:0", "minecraft:sapling:5"),
+    //
+    RECORD(RecordTree.class, "minecraft:log:1", "minecraft:jukebox:0", "minecraft:sapling:1"),
+    //
+    DYE_BLACK(DyeTree.class, "minecraft:log:2", "minecraft:wool:15", "minecraft:sapling:2"),
+    //
+    DYE_RED(DyeTree.class, "minecraft:log:2", "minecraft:wool:14", "minecraft:sapling:2"),
+    //
+    DYE_GREEN(DyeTree.class, "minecraft:log:2", "minecraft:wool:13", "minecraft:sapling:2"),
+    //
+    DYE_BROWN(DyeTree.class, "minecraft:log:2", "minecraft:wool:12", "minecraft:sapling:2"),
+    //
+    DYE_BLUE(DyeTree.class, "minecraft:log:2", "minecraft:wool:11", "minecraft:sapling:2"),
+    //
+    DYE_PURPLE(DyeTree.class, "minecraft:log:2", "minecraft:wool:10", "minecraft:sapling:2"),
+    //
+    DYE_CYAN(DyeTree.class, "minecraft:log:2", "minecraft:wool:9", "minecraft:sapling:2"),
+    //
+    DYE_LIGHT_GRAY(DyeTree.class, "minecraft:log:2", "minecraft:wool:8", "minecraft:sapling:2"),
+    //
+    DYE_GRAY(DyeTree.class, "minecraft:log:2", "minecraft:wool:7", "minecraft:sapling:2"),
+    //
+    DYE_PINK(DyeTree.class, "minecraft:log:2", "minecraft:wool:6", "minecraft:sapling:2"),
+    //
+    DYE_LIME(DyeTree.class, "minecraft:log:2", "minecraft:wool:5", "minecraft:sapling:2"),
+    //
+    DYE_YELLOW(DyeTree.class, "minecraft:log:2", "minecraft:wool:4", "minecraft:sapling:2"),
+    //
+    DYE_LIGHT_BLUE(DyeTree.class, "minecraft:log:2", "minecraft:wool:3", "minecraft:sapling:2"),
+    //
+    DYE_MAGENTA(DyeTree.class, "minecraft:log:2", "minecraft:wool:2", "minecraft:sapling:2"),
+    //
+    DYE_ORANGE(DyeTree.class, "minecraft:log:2", "minecraft:wool:1", "minecraft:sapling:2"),
+    //
+    DYE_WHITE(DyeTree.class, "minecraft:log:2", "minecraft:wool:0", "minecraft:sapling:2"),
+    //
+    REDSTONE(RedstoneTree.class, "minecraft:log2:0", "minecraft:redstone_block:0", "minecraft:sapling:4"),
+    //
+    IRON(IronTree.class, "minecraft:log:2", "minecraft:iron_block:0", "minecraft:sapling:2"),
+    //
+    GOLD(GoldTree.class, "minecraft:log:1", "minecraft:gold_block:0", "minecraft:sapling:1"),
+    //
+    DIAMOND(DiamondTree.class, "minecraft:log:0", "minecraft:diamond_block:0", "minecraft:sapling:0"),
+    //
+    EMERALD(EmeraldTree.class, "minecraft:log:0", "minecraft:emerald_block:0", "minecraft:sapling:0"),
+    //
+    COAL(CoalTree.class, "minecraft:log2:1", "minecraft:coal_block", "minecraft:sapling:5"),
+    //
     ;
 
     private final Class<? extends FruitTree> tree_class;
-    private final short log_id, log_data, leaves_id, leaves_data;
+    private final String logName, leavesName, saplingName;
 
-    private TreeType(Class<? extends FruitTree> tree_class, int log_id, int log_data, int leaves_id, int leaves_data) {
+    private TreeType(Class<? extends FruitTree> tree_class, String logName, String leavesName, String saplingName) {
         this.tree_class = tree_class;
-        this.log_id = (short) log_id;
-        this.log_data = (short) log_data;
-        this.leaves_id = (short) leaves_id;
-        this.leaves_data = (short) leaves_data;
+        this.logName = logName;
+        this.leavesName = leavesName;
+        this.saplingName = saplingName;
     }
 
-    public final short getLogId() {
-        return log_id;
+    public final String getLogName() {
+        return logName;
     }
 
-    public final short getLogData() {
-        return log_data;
+    public final String getLeavesName() {
+        return leavesName;
     }
 
-    public final short getLeavesId() {
-        return leaves_id;
-    }
-
-    public final short getLeavesData() {
-        return leaves_data;
+    public final String getSaplingName() {
+        return saplingName;
     }
 
     public final FruitTree newFruitTree(FruitTrees fruit_trees, int x, int y, int z, TreeWorld tree_world) throws Exception {

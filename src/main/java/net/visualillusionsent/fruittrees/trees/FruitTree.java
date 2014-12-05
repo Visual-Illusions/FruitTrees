@@ -67,7 +67,7 @@ public abstract class FruitTree {
     }
 
     public boolean isGrown() {
-        return !world.isTreePart(loc_x, loc_y, loc_z, (short) 6, this.type.getLogData());
+        return !world.isTreePart(loc_x, loc_y, loc_z, "minecraft:sapling:0");
     }
 
     public abstract void dropFruit();
@@ -93,35 +93,35 @@ public abstract class FruitTree {
         }
         //Trunk
         for (int check_y = loc_y; check_y <= loc_y + 4; check_y++) {
-            if (!world.isTreePart(loc_x, check_y, loc_z, type.getLogId(), type.getLogData())) {
+            if (!world.isTreePart(loc_x, check_y, loc_z, type.getLogName())) {
                 fruit_trees.debug("Log Type Fail at X: " + loc_x + " Y: " + check_y + " Z: " + loc_z);
                 killTree();
                 return false;
             }
         }
         // point logs
-        if (!world.isTreePart(loc_x + 1, loc_y + 3, loc_z, type.getLogId(), (byte) (type.getLogData() + 4))) {
+        if (!world.isTreePart(loc_x + 1, loc_y + 3, loc_z, type.getLogName())) {
             fruit_trees.debug("Log Type Fail at X: " + (loc_x + 1) + " Y: " + (loc_y + 3) + " Z: " + loc_z);
             killTree();
             return false;
         }
-        if (!world.isTreePart(loc_x - 1, loc_y + 3, loc_z, type.getLogId(), (byte) (type.getLogData() + 4))) {
+        if (!world.isTreePart(loc_x - 1, loc_y + 3, loc_z, type.getLogName())) {
             fruit_trees.debug("Log Type Fail at X: " + (loc_x - 1) + " Y: " + (loc_y + 3) + " Z: " + loc_z);
             killTree();
             return false;
         }
-        if (!world.isTreePart(loc_x, loc_y + 3, loc_z + 1, type.getLogId(), (byte) (type.getLogData() + 8))) {
+        if (!world.isTreePart(loc_x, loc_y + 3, loc_z + 1, type.getLogName())) {
             fruit_trees.debug("Log Type Fail at X: " + loc_x + " Y: " + (loc_y + 3) + " Z: " + (loc_z + 1));
             killTree();
             return false;
         }
-        if (!world.isTreePart(loc_x, loc_y + 3, loc_z - 1, type.getLogId(), (byte) (type.getLogData() + 8))) {
+        if (!world.isTreePart(loc_x, loc_y + 3, loc_z - 1, type.getLogName())) {
             fruit_trees.debug("Log Type Fail at X: " + loc_x + " Y: " + (loc_y + 3) + " Z: " + (loc_z - 1));
             killTree();
             return false;
         }
         // Top leaves
-        if (!world.isTreePart(loc_x, loc_y + 5, loc_z, type.getLeavesId(), type.getLeavesData())) {
+        if (!world.isTreePart(loc_x, loc_y + 5, loc_z, type.getLeavesName())) {
             fruit_trees.debug("Leaves Type Fail at X: " + loc_x + " Y: " + (loc_y + 5) + " Z: " + loc_z);
             killTree();
             return false;
@@ -133,7 +133,7 @@ public abstract class FruitTree {
                     // log
                     continue;
                 }
-                else if (!world.isTreePart(check_x, loc_y + 2, check_z, type.getLeavesId(), type.getLeavesData())) {
+                else if (!world.isTreePart(check_x, loc_y + 2, check_z, type.getLeavesName())) {
                     fruit_trees.debug("Leaves Type Fail at X: " + check_x + " Y: " + (loc_y + 2) + " Z: " + check_z);
                     killTree();
                     return false;
@@ -157,7 +157,7 @@ public abstract class FruitTree {
                     // Log points
                     continue;
                 }
-                else if (!world.isTreePart(check_x, loc_y + 3, check_z, type.getLeavesId(), type.getLeavesData())) {
+                else if (!world.isTreePart(check_x, loc_y + 3, check_z, type.getLeavesName())) {
                     fruit_trees.debug("Leaves Type Fail at X: " + check_x + " Y: " + (loc_y + 3) + " Z: " + check_z);
                     killTree();
                     return false;
@@ -171,7 +171,7 @@ public abstract class FruitTree {
                     // Log center
                     continue;
                 }
-                else if (!world.isTreePart(check_x, loc_y + 4, check_z, type.getLeavesId(), type.getLeavesData())) {
+                else if (!world.isTreePart(check_x, loc_y + 4, check_z, type.getLeavesName())) {
                     fruit_trees.debug("Leaves Type Fail at X: " + check_x + " Y: " + (loc_y + 4) + " Z: " + check_z);
                     killTree();
                     return false;
@@ -182,22 +182,10 @@ public abstract class FruitTree {
     }
 
     public final boolean isBaseAt(int x, int y, int z, TreeWorld world) {
-        if (x != loc_x) {
-            return false;
-        }
-        if (y != loc_y) {
-            return false;
-        }
-        if (z != loc_z) {
-            return false;
-        }
-        if (!world.equals(this.world)) {
-            return false;
-        }
-        return true;
+        return x == loc_x && y == loc_y && z == loc_z && world.equals(this.world);
     }
 
-    public final boolean isInArea(int x, int y, int z, int id, int data, TreeWorld world) {
+    public final boolean isInArea(int x, int y, int z, String blockName, TreeWorld world) {
         if (!world.equals(this.world)) {
             return false;
         }
@@ -208,22 +196,22 @@ public abstract class FruitTree {
             return false;
         }
         else if (x == loc_x && z == loc_z && inRange(loc_y, y, 1, 4)) {
-            return type.getLogId() == id && type.getLogData() == data;
+            return type.getLogName().equals(blockName);
         }
         else if (x == loc_x && x == loc_z && y == (loc_y + 5)) {
-            return type.getLeavesId() == id && type.getLeavesData() == data;
+            return type.getLeavesName().equals(blockName);
         }
         else if (y == (loc_y + 2) && inRange(loc_x, x, 0, 2) && inRange(loc_z, z, 0, 2)) {
-            return type.getLeavesId() == id && type.getLeavesData() == data;
+            return type.getLeavesName().equals(blockName);
         }
         else if (y == (loc_y + 3) && inRange(loc_x, x, 0, 2) && inRange(loc_z, z, 0, 2)) {
-            return !(Math.abs(loc_x) + 2 == Math.abs(x) && Math.abs(loc_z) + 2 == Math.abs(z)) && type.getLeavesId() == id && type.getLeavesData() == data;
+            return !(Math.abs(loc_x) + 2 == Math.abs(x) && Math.abs(loc_z) + 2 == Math.abs(z)) && type.getLeavesName().equals(blockName);
         }
         else if (y == (loc_y + 3) && inRange(loc_x, x, 0, 1) && inRange(loc_z, z, 0, 1)) {
-            return type.getLeavesId() == id && type.getLeavesData() == data;
+            return type.getLeavesName().equals(blockName);
         }
         else if (y == (loc_y + 4) && loc_x == x && loc_z == z) {
-            return type.getLeavesId() == id && type.getLeavesData() == data;
+            return type.getLeavesName().equals(blockName);
         }
         return false;
     }
