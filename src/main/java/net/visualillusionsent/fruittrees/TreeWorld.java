@@ -25,6 +25,8 @@ public interface TreeWorld {
 
     boolean isClear(int x, int y, int z);
 
+    void placeTreePart(int x, int y, int z, String blockName);
+
     void placeTreePart(int x, int y, int z, String blockName, byte offset);
 
     void scheduleDrop(DropTask task);

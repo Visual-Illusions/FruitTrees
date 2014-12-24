@@ -21,11 +21,7 @@ import net.canarymod.Canary;
 import net.canarymod.api.world.World;
 import net.canarymod.commandsys.CommandDependencyException;
 import net.canarymod.logger.Logman;
-import net.visualillusionsent.fruittrees.FruitTrees;
-import net.visualillusionsent.fruittrees.FruitTreesConfigurations;
-import net.visualillusionsent.fruittrees.TreeTracker;
-import net.visualillusionsent.fruittrees.TreeType;
-import net.visualillusionsent.fruittrees.TreeWorld;
+import net.visualillusionsent.fruittrees.*;
 import net.visualillusionsent.fruittrees.data.MySQLTreeStorage;
 import net.visualillusionsent.fruittrees.data.SQLiteTreeStorage;
 import net.visualillusionsent.fruittrees.data.TreeStorage;
@@ -44,7 +40,6 @@ public final class CanaryFruitTrees extends VisualIllusionsCanaryPlugin implemen
 
     public CanaryFruitTrees() {
         super();
-        //getLogman().setLevel(Level.ALL);
     }
 
     @Override
@@ -130,7 +125,7 @@ public final class CanaryFruitTrees extends VisualIllusionsCanaryPlugin implemen
     }
 
     public final void debug(String msg) {
-        if (ft_cfg.debug()) {
+        if (ft_cfg.debug() || debug) {
             getLogman().debug(Logman.PLUGINDEBUG, msg);
         }
     }

@@ -48,14 +48,22 @@ public final class CanaryTreeWorld implements TreeWorld {
         return world.getBlockAt(x, y, z).isAir();
     }
 
+    public final void placeTreePart(int x, int y, int z, String blockName) {
+        this.placeTreePart(x, y, z, blockName, (byte) 0);
+    }
+
     public final void placeTreePart(int x, int y, int z, String blockName, byte offset) {
         Block block = world.getBlockAt(x, y, z);
         block.setType(BlockType.fromString(blockName));
         switch (offset) {
             case 1:
-                block.setPropertyValue(getAxisProperty(block), BlockPropertyEnums.LogAxis.X);
+                block.setPropertyValue(getPropertyForName(block, "axis"), BlockPropertyEnums.LogAxis.X);
+                break;
             case 2:
-                block.setPropertyValue(getAxisProperty(block), BlockPropertyEnums.LogAxis.Z);
+                block.setPropertyValue(getPropertyForName(block, "axis"), BlockPropertyEnums.LogAxis.Z);
+                break;
+            default:
+                break;
         }
         block.update();
     }
@@ -66,7 +74,7 @@ public final class CanaryTreeWorld implements TreeWorld {
 
     public final boolean isTreePart(int x, int y, int z, String blockName) {
         Block block = world.getBlockAt(x, y, z);
-        return block.getType().getMachineName().equals(blockName);
+        return block.getType().equals(BlockType.fromString(blockName));
     }
 
     public final boolean isLoaded() {
@@ -109,12 +117,13 @@ public final class CanaryTreeWorld implements TreeWorld {
         return String.format("CanaryTreeWorld[WorldName:%s]", world != null ? world.getFqName() : "null");
     }
 
-    private BlockProperty getAxisProperty(Block block) {
+    private BlockProperty getPropertyForName(Block block, String name) {
         for (BlockProperty property : block.getPropertyKeys()) {
-            if (property.getName().equals("axis")) {
+            if (property.getName().equals(name)) {
                 return property;
             }
         }
+        cft.getPluginLogger().warning("BlockProperty Retreival Failure in CanaryTreeWorld");
         return null;
     }
 }

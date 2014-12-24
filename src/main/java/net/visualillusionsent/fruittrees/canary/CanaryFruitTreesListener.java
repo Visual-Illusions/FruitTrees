@@ -262,7 +262,7 @@ public final class CanaryFruitTreesListener implements PluginListener {
                     block.setTypeId((short) 0);
                     block.getWorld().setBlock(block);
                 }
-                tree.killTree();
+                tree.killTree("Player Destroy");
             }
         }
     }
@@ -273,67 +273,67 @@ public final class CanaryFruitTreesListener implements PluginListener {
         if (block.getType().equals(BlockType.OakLog)) {
             FruitTree tree = TreeTracker.isTreeArea(block.getX(), block.getY(), block.getZ(), block.getType().getMachineName(), CanaryFruitTrees.instance().getWorldForName(block.getWorld().getFqName()));
             if (tree != null) {
-                tree.killTree();
+                tree.killTree("Block Update");
             }
         }
         else if (block.getType().equals(BlockType.OakLeaves)) {
             FruitTree tree = TreeTracker.isTreeArea(block.getX(), block.getY(), block.getZ(), block.getType().getMachineName(), CanaryFruitTrees.instance().getWorldForName(block.getWorld().getFqName()));
             if (tree != null) {
-                tree.killTree();
+                tree.killTree("Block Update");
             }
         }
         else if (block.getType().equals(BlockType.Sponge)) {
             FruitTree tree = TreeTracker.isTreeArea(block.getX(), block.getY(), block.getZ(), block.getType().getMachineName(), CanaryFruitTrees.instance().getWorldForName(block.getWorld().getFqName()));
             if (tree != null) {
-                tree.killTree();
+                tree.killTree("Block Update");
             }
         }
         else if (block.getTypeId() == BlockType.WoolWhite.getId()) {
             FruitTree tree = TreeTracker.isTreeArea(block.getX(), block.getY(), block.getZ(), block.getType().getMachineName(), CanaryFruitTrees.instance().getWorldForName(block.getWorld().getFqName()));
             if (tree != null) {
-                tree.killTree();
+                tree.killTree("Block Update");
             }
         }
         else if (block.getType().equals(BlockType.RedstoneBlock)) {
             FruitTree tree = TreeTracker.isTreeArea(block.getX(), block.getY(), block.getZ(), block.getType().getMachineName(), CanaryFruitTrees.instance().getWorldForName(block.getWorld().getFqName()));
             if (tree != null) {
-                tree.killTree();
+                tree.killTree("Block Update");
             }
         }
         else if (block.getType().equals(BlockType.NoteBlock)) {
             FruitTree tree = TreeTracker.isTreeArea(block.getX(), block.getY(), block.getZ(), block.getType().getMachineName(), CanaryFruitTrees.instance().getWorldForName(block.getWorld().getFqName()));
             if (tree != null) {
-                tree.killTree();
+                tree.killTree("Block Update");
             }
         }
         else if (block.getType().equals(BlockType.IronBlock)) {
             FruitTree tree = TreeTracker.isTreeArea(block.getX(), block.getY(), block.getZ(), block.getType().getMachineName(), CanaryFruitTrees.instance().getWorldForName(block.getWorld().getFqName()));
             if (tree != null) {
-                tree.killTree();
+                tree.killTree("Block Update");
             }
         }
         else if (block.getType().equals(BlockType.GoldBlock)) {
             FruitTree tree = TreeTracker.isTreeArea(block.getX(), block.getY(), block.getZ(), block.getType().getMachineName(), CanaryFruitTrees.instance().getWorldForName(block.getWorld().getFqName()));
             if (tree != null) {
-                tree.killTree();
+                tree.killTree("Block Update");
             }
         }
         else if (block.getType().equals(BlockType.DiamondBlock)) {
             FruitTree tree = TreeTracker.isTreeArea(block.getX(), block.getY(), block.getZ(), block.getType().getMachineName(), CanaryFruitTrees.instance().getWorldForName(block.getWorld().getFqName()));
             if (tree != null) {
-                tree.killTree();
+                tree.killTree("Block Update");
             }
         }
         else if (block.getType().equals(BlockType.EmeraldBlock)) {
             FruitTree tree = TreeTracker.isTreeArea(block.getX(), block.getY(), block.getZ(), block.getType().getMachineName(), CanaryFruitTrees.instance().getWorldForName(block.getWorld().getFqName()));
             if (tree != null) {
-                tree.killTree();
+                tree.killTree("Block Update");
             }
         }
         else if (block.getType().equals(BlockType.CoalBlock)) {
             FruitTree tree = TreeTracker.isTreeArea(block.getX(), block.getY(), block.getZ(), block.getType().getMachineName(), CanaryFruitTrees.instance().getWorldForName(block.getWorld().getFqName()));
             if (tree != null) {
-                tree.killTree();
+                tree.killTree("Block Update");
             }
         }
     }
