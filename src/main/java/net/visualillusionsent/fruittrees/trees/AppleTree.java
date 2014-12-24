@@ -23,8 +23,8 @@ import net.visualillusionsent.fruittrees.TreeWorld;
 
 public final class AppleTree extends FruitTree {
 
-    public AppleTree(FruitTrees fruit_trees, int loc_x, int loc_y, int loc_z, TreeWorld world) {
-        super(fruit_trees, TreeType.APPLE, loc_x, loc_y, loc_z, world);
+    public AppleTree(FruitTrees fruit_trees, int loc_x, int loc_y, int loc_z, TreeWorld world, boolean isPlanting) {
+        super(fruit_trees, TreeType.APPLE, loc_x, loc_y, loc_z, world, isPlanting);
     }
 
     @Override

@@ -30,8 +30,10 @@ public abstract class FruitTree {
     protected TreeType type;
     protected int loc_x, loc_y, loc_z;
     protected TreeWorld world;
+    private DropTask task;
+    private boolean dead = false;
 
-    public FruitTree(FruitTrees fruit_trees, TreeType type, int loc_x, int loc_y, int loc_z, TreeWorld world) {
+    public FruitTree(FruitTrees fruit_trees, TreeType type, int loc_x, int loc_y, int loc_z, TreeWorld world, boolean planting) {
         this.fruit_trees = fruit_trees;
         this.type = type;
         this.loc_x = loc_x;
@@ -39,7 +41,7 @@ public abstract class FruitTree {
         this.loc_z = loc_z;
         this.world = world;
 
-        if (isGrown() && isStillValid()) {
+        if (!planting && isGrown() && isStillValid()) {
             world.scheduleDrop(new DropTask(this));
         }
         TreeTracker.trackTree(this);
@@ -65,11 +67,15 @@ public abstract class FruitTree {
         return !world.isTreePart(loc_x, loc_y, loc_z, this.getType().getSaplingName());
     }
 
+    public boolean isDead() {
+        return dead;
+    }
+
     public abstract void dropFruit();
 
     public final void growTree() {
         TreeGen.growTree(this);
-        world.scheduleDrop(new DropTask(this));
+        world.scheduleDrop(task = new DropTask(this));
     }
 
     public final TreeType getType() {
@@ -77,12 +83,18 @@ public abstract class FruitTree {
     }
 
     public final void killTree(String reason) {
-        fruit_trees.debug("Proceeding to kill tree due to '" + reason + "'");
-        TreeTracker.untrackTree(this);
-        fruit_trees.getStorage().removeTree(this);
+        if (!dead) {
+            fruit_trees.debug("Proceeding to kill tree due to '" + reason + "'");
+            dead = true;
+            TreeTracker.untrackTree(this);
+            fruit_trees.getStorage().removeTree(this);
+        }
     }
 
     public final boolean isStillValid() {
+        if (dead) {
+            return false;
+        }
         if (!fruit_trees.getFruitTreesConfig().checkEnabled(this.type)) {
             fruit_trees.debug("Tree Type Fail at X: " + loc_x + " Y: " + loc_y + " Z: " + loc_z);
             return false;

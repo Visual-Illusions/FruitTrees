@@ -25,8 +25,8 @@ public final class DyeTree extends FruitTree {
 
     private final byte dye_color;
 
-    public DyeTree(FruitTrees fruit_trees, int loc_x, int loc_y, int loc_z, TreeWorld world, byte dye_color) {
-        super(fruit_trees, fromDyeColor(dye_color), loc_x, loc_y, loc_z, world);
+    public DyeTree(FruitTrees fruit_trees, int loc_x, int loc_y, int loc_z, TreeWorld world, byte dye_color, boolean isPlanting) {
+        super(fruit_trees, fromDyeColor(dye_color), loc_x, loc_y, loc_z, world, isPlanting);
         this.dye_color = dye_color;
     }
 

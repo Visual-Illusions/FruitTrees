@@ -23,8 +23,8 @@ import net.visualillusionsent.fruittrees.TreeWorld;
 
 public final class SpongeTree extends FruitTree {
 
-    public SpongeTree(FruitTrees fruit_trees, int loc_x, int loc_y, int loc_z, TreeWorld world) {
-        super(fruit_trees, TreeType.SPONGE, loc_x, loc_y, loc_z, world);
+    public SpongeTree(FruitTrees fruit_trees, int loc_x, int loc_y, int loc_z, TreeWorld world, boolean isPlanting) {
+        super(fruit_trees, TreeType.SPONGE, loc_x, loc_y, loc_z, world, isPlanting);
     }
 
     @Override

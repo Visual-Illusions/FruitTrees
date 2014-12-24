@@ -25,8 +25,8 @@ public final class RecordTree extends FruitTree {
 
     private static final short[] records = new short[]{ 2256, 2257, 2258, 2259, 2260, 2261, 2262, 2263, 2264, 2265, 2266, 2267 };
 
-    public RecordTree(FruitTrees fruit_trees, int loc_x, int loc_y, int loc_z, TreeWorld world) {
-        super(fruit_trees, TreeType.RECORD, loc_x, loc_y, loc_z, world);
+    public RecordTree(FruitTrees fruit_trees, int loc_x, int loc_y, int loc_z, TreeWorld world, boolean isPlanting) {
+        super(fruit_trees, TreeType.RECORD, loc_x, loc_y, loc_z, world, isPlanting);
     }
 
     @Override

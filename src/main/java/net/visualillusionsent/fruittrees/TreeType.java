@@ -73,11 +73,11 @@ public enum TreeType {
     }
 
     public final FruitTree newFruitTree(FruitTrees fruit_trees, int x, int y, int z, TreeWorld tree_world) throws Exception {
-        if (this.tree_class == DyeTree.class) {
-            return tree_class.getConstructor(FruitTrees.class, Integer.TYPE, Integer.TYPE, Integer.TYPE, TreeWorld.class, Byte.TYPE).newInstance(fruit_trees, x, y, z, tree_world, (byte) (this.ordinal() - 4));
+        if (this.tree_class.equals(DyeTree.class)) {
+            return tree_class.getConstructor(FruitTrees.class, Integer.TYPE, Integer.TYPE, Integer.TYPE, TreeWorld.class, Byte.TYPE, Boolean.TYPE).newInstance(fruit_trees, x, y, z, tree_world, (byte) (this.ordinal() - 4), false);
         }
         else {
-            return tree_class.getConstructor(FruitTrees.class, Integer.TYPE, Integer.TYPE, Integer.TYPE, TreeWorld.class).newInstance(fruit_trees, x, y, z, tree_world);
+            return tree_class.getConstructor(FruitTrees.class, Integer.TYPE, Integer.TYPE, Integer.TYPE, TreeWorld.class, Boolean.TYPE).newInstance(fruit_trees, x, y, z, tree_world, false);
         }
     }
 }
