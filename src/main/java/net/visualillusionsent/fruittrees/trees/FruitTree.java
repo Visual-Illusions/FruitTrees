@@ -30,8 +30,8 @@ public abstract class FruitTree {
     protected TreeType type;
     protected int loc_x, loc_y, loc_z;
     protected TreeWorld world;
-    private DropTask task;
     private boolean dead = false;
+    private boolean isGrowing = false;
 
     public FruitTree(FruitTrees fruit_trees, TreeType type, int loc_x, int loc_y, int loc_z, TreeWorld world, boolean planting) {
         this.fruit_trees = fruit_trees;
@@ -67,6 +67,10 @@ public abstract class FruitTree {
         return !world.isTreePart(loc_x, loc_y, loc_z, this.getType().getSaplingName());
     }
 
+    public boolean isGrowing() {
+        return isGrowing;
+    }
+
     public boolean isDead() {
         return dead;
     }
@@ -74,20 +78,25 @@ public abstract class FruitTree {
     public abstract boolean dropFruit();
 
     public final void growTree() {
-        TreeGen.growTree(this);
-        world.scheduleDrop(task = new DropTask(this));
+        isGrowing = true;
+        if (TreeGen.growTree(this)) {
+            isGrowing = false;
+            world.scheduleDrop(new DropTask(this));
+        }
+        else {
+            killTree(TreeDeathReason.SAPLING_MISMATCH);
+        }
     }
 
     public final TreeType getType() {
         return type;
     }
 
-    public final void killTree(String reason) {
+    public final void killTree(TreeDeathReason reason) {
         if (!dead) {
-            fruit_trees.debug("Proceeding to kill tree due to '" + reason + "'");
             dead = true;
             TreeTracker.untrackTree(this);
-            fruit_trees.getStorage().removeTree(this);
+            fruit_trees.getStorage().removeTree(this, reason);
         }
     }
 
@@ -103,35 +112,35 @@ public abstract class FruitTree {
         for (int check_y = loc_y; check_y <= loc_y + 4; check_y++) {
             if (!world.isTreePart(loc_x, check_y, loc_z, type.getLogName())) {
                 fruit_trees.debug("Log Type Fail at X: " + loc_x + " Y: " + check_y + " Z: " + loc_z);
-                killTree("Log Type");
+                killTree(TreeDeathReason.LOG_MISMATCH);
                 return false;
             }
         }
         // point logs
         if (!world.isTreePart(loc_x + 1, loc_y + 3, loc_z, type.getLogName())) {
             fruit_trees.debug("Log Type Fail at X: " + (loc_x + 1) + " Y: " + (loc_y + 3) + " Z: " + loc_z);
-            killTree("Log Type");
+            killTree(TreeDeathReason.LOG_MISMATCH);
             return false;
         }
         if (!world.isTreePart(loc_x - 1, loc_y + 3, loc_z, type.getLogName())) {
             fruit_trees.debug("Log Type Fail at X: " + (loc_x - 1) + " Y: " + (loc_y + 3) + " Z: " + loc_z);
-            killTree("Log Type");
+            killTree(TreeDeathReason.LOG_MISMATCH);
             return false;
         }
         if (!world.isTreePart(loc_x, loc_y + 3, loc_z + 1, type.getLogName())) {
             fruit_trees.debug("Log Type Fail at X: " + loc_x + " Y: " + (loc_y + 3) + " Z: " + (loc_z + 1));
-            killTree("Log Type");
+            killTree(TreeDeathReason.LOG_MISMATCH);
             return false;
         }
         if (!world.isTreePart(loc_x, loc_y + 3, loc_z - 1, type.getLogName())) {
             fruit_trees.debug("Log Type Fail at X: " + loc_x + " Y: " + (loc_y + 3) + " Z: " + (loc_z - 1));
-            killTree("Log Type");
+            killTree(TreeDeathReason.LOG_MISMATCH);
             return false;
         }
         // Top leaves
         if (!world.isTreePart(loc_x, loc_y + 5, loc_z, type.getLeavesName())) {
             fruit_trees.debug("Leaves Type Fail at X: " + loc_x + " Y: " + (loc_y + 5) + " Z: " + loc_z);
-            killTree("Log Type");
+            killTree(TreeDeathReason.LOG_MISMATCH);
             return false;
         }
         // Leaves layer 1
@@ -143,7 +152,7 @@ public abstract class FruitTree {
                 }
                 else if (!world.isTreePart(check_x, loc_y + 2, check_z, type.getLeavesName())) {
                     fruit_trees.debug("Leaves Type Fail at X: " + check_x + " Y: " + (loc_y + 2) + " Z: " + check_z);
-                    killTree("Leaves Type");
+                    killTree(TreeDeathReason.LEAVES_MISMATCH);
                     return false;
                 }
             }
@@ -167,7 +176,7 @@ public abstract class FruitTree {
                 }
                 else if (!world.isTreePart(check_x, loc_y + 3, check_z, type.getLeavesName())) {
                     fruit_trees.debug("Leaves Type Fail at X: " + check_x + " Y: " + (loc_y + 3) + " Z: " + check_z);
-                    killTree("Leaves Type");
+                    killTree(TreeDeathReason.LEAVES_MISMATCH);
                     return false;
                 }
             }
@@ -181,7 +190,7 @@ public abstract class FruitTree {
                 }
                 else if (!world.isTreePart(check_x, loc_y + 4, check_z, type.getLeavesName())) {
                     fruit_trees.debug("Leaves Type Fail at X: " + check_x + " Y: " + (loc_y + 4) + " Z: " + check_z);
-                    killTree("Leaves Type");
+                    killTree(TreeDeathReason.LEAVES_MISMATCH);
                     return false;
                 }
             }

@@ -18,15 +18,12 @@
 package net.visualillusionsent.fruittrees.data;
 
 import net.visualillusionsent.fruittrees.FruitTrees;
+import net.visualillusionsent.fruittrees.TreeDeathReason;
 import net.visualillusionsent.fruittrees.TreeType;
 import net.visualillusionsent.fruittrees.TreeWorld;
 import net.visualillusionsent.fruittrees.trees.FruitTree;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 
 public final class MySQLTreeStorage extends TreeStorage {
 
@@ -79,8 +76,8 @@ public final class MySQLTreeStorage extends TreeStorage {
     }
 
     @Override
-    public final void removeTree(FruitTree tree) {
-        fruit_trees.info(String.format("Killing Tree: %s", tree));
+    public final void removeTree(FruitTree tree, TreeDeathReason reason) {
+        fruit_trees.info(String.format("Killing Tree: %s (Reason: %s)", tree, reason));
         SQLException sqlex = null;
         PreparedStatement ps = null;
         try {

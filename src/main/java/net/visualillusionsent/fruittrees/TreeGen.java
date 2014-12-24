@@ -27,9 +27,8 @@ public final class TreeGen {
         this.fruit_tree = fruit_tree;
     }
 
-    public static void growTree(FruitTree fruit_tree) {
-        TreeGen gen = new TreeGen(fruit_tree);
-        gen.grow();
+    public static boolean growTree(FruitTree fruit_tree) {
+        return new TreeGen(fruit_tree).grow();
     }
 
     public final boolean grow() {

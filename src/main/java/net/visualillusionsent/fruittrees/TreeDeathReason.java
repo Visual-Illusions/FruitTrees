@@ -15,25 +15,15 @@
  * You should have received a copy of the GNU General Public License along with this program.
  * If not, see http://www.gnu.org/licenses/gpl.html.
  */
-package net.visualillusionsent.fruittrees.data;
+package net.visualillusionsent.fruittrees;
 
-import net.visualillusionsent.fruittrees.FruitTrees;
-import net.visualillusionsent.fruittrees.TreeDeathReason;
-import net.visualillusionsent.fruittrees.TreeWorld;
-import net.visualillusionsent.fruittrees.trees.FruitTree;
-
-public abstract class TreeStorage {
-
-    protected final FruitTrees fruit_trees;
-
-    public TreeStorage(FruitTrees fruit_trees) {
-        this.fruit_trees = fruit_trees;
-    }
-
-    public abstract boolean storeTree(FruitTree tree);
-
-    public abstract void removeTree(FruitTree tree, TreeDeathReason reason);
-
-    public abstract boolean loadTreesForWorld(TreeWorld tree_world);
-
+/**
+ * Created by darkdiplomat on 12/24/14.
+ */
+public enum TreeDeathReason {
+    LOG_MISMATCH,
+    LEAVES_MISMATCH,
+    SAPLING_MISMATCH,
+    PLAYER_DESTROY,
+    WORLD_DESTROY
 }

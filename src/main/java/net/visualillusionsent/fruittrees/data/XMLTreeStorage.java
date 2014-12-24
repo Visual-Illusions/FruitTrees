@@ -18,6 +18,7 @@
 package net.visualillusionsent.fruittrees.data;
 
 import net.visualillusionsent.fruittrees.FruitTrees;
+import net.visualillusionsent.fruittrees.TreeDeathReason;
 import net.visualillusionsent.fruittrees.TreeType;
 import net.visualillusionsent.fruittrees.TreeWorld;
 import net.visualillusionsent.fruittrees.trees.FruitTree;
@@ -96,8 +97,8 @@ public final class XMLTreeStorage extends TreeStorage {
         return true;
     }
 
-    public final void removeTree(FruitTree tree) {
-        fruit_trees.info(String.format("Killing Tree: %s", tree));
+    public final void removeTree(FruitTree tree, TreeDeathReason reason) {
+        fruit_trees.info(String.format("Killing Tree: %s (Reason: %s)", tree, reason));
         String world_file = file.replace("%world_name%", tree.getTreeWorld().getName());
         File worldFile = new File(directory.concat(world_file));
         Exception ex = null;

@@ -15,25 +15,26 @@
  * You should have received a copy of the GNU General Public License along with this program.
  * If not, see http://www.gnu.org/licenses/gpl.html.
  */
-package net.visualillusionsent.fruittrees.data;
+package net.visualillusionsent.fruittrees.canary;
 
-import net.visualillusionsent.fruittrees.FruitTrees;
-import net.visualillusionsent.fruittrees.TreeDeathReason;
-import net.visualillusionsent.fruittrees.TreeWorld;
+import net.canarymod.Canary;
+import net.canarymod.tasks.ServerTask;
 import net.visualillusionsent.fruittrees.trees.FruitTree;
 
-public abstract class TreeStorage {
+public class DelayedTreeGrowth extends ServerTask {
+    private final FruitTree tree;
 
-    protected final FruitTrees fruit_trees;
-
-    public TreeStorage(FruitTrees fruit_trees) {
-        this.fruit_trees = fruit_trees;
+    private DelayedTreeGrowth(FruitTree tree) {
+        super(CanaryFruitTrees.instance(), 2, false);
+        this.tree = tree;
     }
 
-    public abstract boolean storeTree(FruitTree tree);
+    public final void run() {
+        tree.growTree();
+    }
 
-    public abstract void removeTree(FruitTree tree, TreeDeathReason reason);
-
-    public abstract boolean loadTreesForWorld(TreeWorld tree_world);
+    static void schedule(FruitTree tree) {
+        Canary.getServer().addSynchronousTask(new DelayedTreeGrowth(tree));
+    }
 
 }
