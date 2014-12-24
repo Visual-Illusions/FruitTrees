@@ -18,6 +18,9 @@ Copyright © 2013-2014 Visual Illusions Entertainment
         <mcpluginlib.version>1.2.0-SNAPSHOT</mcpluginlib.version>
         <status.url>http://status.visualillusionsent.net/</status.url>
         <devs>darkdiplomat</devs>
+        <license.type>GNU General Public License v3</license.type>
+        <license.url>http://www.gnu.org/licenses/gpl.html</license.url>
+        <copyright.years>${project.inceptionYear}-${current.year}</copyright.years>
         <build.number/>
         <build.number.display/>
         <!-- Jar Signing -->
@@ -153,7 +156,7 @@ Copyright © 2013-2014 Visual Illusions Entertainment
                             <Status-URL>${status.url}</Status-URL>
                             <Wiki-URL>${project.url}</Wiki-URL>
                             <Developers>${devs}</Developers>
-                            <Copyright>${project.inceptionYear}-${current.year}</Copyright>
+                            <Copyright>${copyright.years}</Copyright>
                         </manifestEntries>
                     </archive>
                 </configuration>
@@ -184,8 +187,8 @@ Copyright © 2013-2014 Visual Illusions Entertainment
                     </mapping>
                     <properties>
                         <name>${project.name}</name>
-                        <years>${project.inceptionYear}-${current.year}</years>
-                        <gpl.type>GNU General Public License</gpl.type>
+                        <years>${copyright.years}</years>
+                        <license.type>GNU General Public License</license.type>
                         <license.url>http://www.gnu.org/licenses/gpl.html</license.url>
                     </properties>
                     <includes>
