@@ -71,7 +71,7 @@ public abstract class FruitTree {
         return dead;
     }
 
-    public abstract void dropFruit();
+    public abstract boolean dropFruit();
 
     public final void growTree() {
         TreeGen.growTree(this);

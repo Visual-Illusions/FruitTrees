@@ -27,8 +27,8 @@ public final class DropTask {
         this.tree = tree;
     }
 
-    public final void drop() {
-        tree.dropFruit();
+    public final boolean drop() {
+        return tree.dropFruit();
     }
 
     public final FruitTree getTree() {

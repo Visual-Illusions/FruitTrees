@@ -28,12 +28,14 @@ public final class SpongeTree extends FruitTree {
     }
 
     @Override
-    public final void dropFruit() {
-        if (isGrown() && world.isAreaLoaded(this) && fruit_trees.getFruitTreesConfig().checkEnabled(this.type)) {
+    public final boolean dropFruit() {
+        if (world.isAreaLoaded(this) && fruit_trees.getFruitTreesConfig().checkEnabled(this.type)) {
             int drop_x = offset_drop[random.nextInt(3)];
             int drop_z = offset_drop[random.nextInt(3)];
             world.dropFruit(loc_x + drop_x, loc_y + 1, loc_z + drop_z, 1, (short) 19, (byte) 0);
+            return true;
         }
+        return false;
     }
 
     @Override

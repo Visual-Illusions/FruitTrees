@@ -36,8 +36,9 @@ final class CanaryDropTask extends ServerTask {
     public void run() {
         CanaryFruitTrees.instance().debug("Running Task..." + this);
         if (task.isValid()) {
-            CanaryFruitTrees.instance().debug("Dropping fruit from Tree: " + task.getTree());
-            task.drop();
+            if (task.drop()) {
+                CanaryFruitTrees.instance().debug("Dropping fruit from Tree: " + task.getTree());
+            }
             scheduleDropTask(task);
         }
     }
