@@ -36,6 +36,6 @@ public final class DropTask {
     }
 
     public final boolean isValid() {
-        return tree.isGrown() && tree.isStillValid();
+        return tree.isGrowing() || (tree.isGrown() && tree.isStillValid());
     }
 }

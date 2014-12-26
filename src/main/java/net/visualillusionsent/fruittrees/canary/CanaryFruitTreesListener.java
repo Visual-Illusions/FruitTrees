@@ -61,7 +61,15 @@ public final class CanaryFruitTreesListener implements PluginListener {
 
     @HookHandler(priority = Priority.LOW)
     public final void plantSeeds(BlockRightClickHook hook) {
-        if (hook.getBlockClicked().getType().equals(BlockType.Soil)) {
+        if (hook.getBlockClicked().getTypeId() == BlockType.OakSapling.getId()) {
+            Item held = hook.getPlayer().getItemHeld();
+            if (held != null && held.getType().equals(ItemType.Charcoal)) {
+                Block block = hook.getBlockClicked();
+                FruitTree tree = TreeTracker.getTreeAt(block.getX(), block.getY(), block.getZ(), CanaryFruitTrees.instance().getWorldForName(block.getWorld().getFqName()));
+                hook.getPlayer().notice(tree != null ? "FruitTree sapling of type:" + tree.getType() : "Not a FruitTree sapling...");
+            }
+        }
+        else if (hook.getBlockClicked().getType().equals(BlockType.Soil)) {
             Item seeds = hook.getPlayer().getItemHeld();
             Block block = hook.getBlockClicked();
             TreeWorld treeWorld = CanaryFruitTrees.instance().getWorldForName(block.getWorld().getFqName());

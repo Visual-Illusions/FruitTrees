@@ -80,8 +80,8 @@ public abstract class FruitTree {
     public final void growTree() {
         isGrowing = true;
         if (TreeGen.growTree(this)) {
-            isGrowing = false;
             world.scheduleDrop(new DropTask(this));
+            isGrowing = false;
         }
         else {
             killTree(TreeDeathReason.SAPLING_MISMATCH);
@@ -101,13 +101,17 @@ public abstract class FruitTree {
     }
 
     public final boolean isStillValid() {
-        if (dead) {
-            return false;
-        }
         if (!fruit_trees.getFruitTreesConfig().checkEnabled(this.type)) {
             fruit_trees.debug("Tree Type Fail at X: " + loc_x + " Y: " + loc_y + " Z: " + loc_z);
             return false;
         }
+        else if (dead) {
+            return false;
+        }
+        else if (isGrowing) {
+            return true;
+        }
+
         //Trunk
         for (int check_y = loc_y; check_y <= loc_y + 4; check_y++) {
             if (!world.isTreePart(loc_x, check_y, loc_z, type.getLogName())) {
