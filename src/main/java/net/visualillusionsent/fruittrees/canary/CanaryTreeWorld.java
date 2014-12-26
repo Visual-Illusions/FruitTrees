@@ -74,6 +74,7 @@ public final class CanaryTreeWorld implements TreeWorld {
 
     public final boolean isTreePart(int x, int y, int z, String blockName) {
         Block block = world.getBlockAt(x, y, z);
+        CanaryFruitTrees.instance().debug("Block Type Name+Id " + block.getType().getMachineName() + ":" + block.getType().getData() + " Checking: " + blockName);
         return block.getType().equals(BlockType.fromString(blockName));
     }
 

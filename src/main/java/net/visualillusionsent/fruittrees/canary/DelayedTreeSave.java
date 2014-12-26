@@ -28,7 +28,7 @@ public class DelayedTreeSave extends ServerTask {
     private final FruitTree tree;
 
     private DelayedTreeSave(Block target, FruitTree tree) {
-        super(CanaryFruitTrees.instance(), 2, false);
+        super(CanaryFruitTrees.instance(), 1, false);
         this.tree = tree;
         this.target = target;
     }

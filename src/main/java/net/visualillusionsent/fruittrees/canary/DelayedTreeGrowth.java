@@ -25,7 +25,7 @@ public class DelayedTreeGrowth extends ServerTask {
     private final FruitTree tree;
 
     private DelayedTreeGrowth(FruitTree tree) {
-        super(CanaryFruitTrees.instance(), 2, false);
+        super(CanaryFruitTrees.instance(), 1, false);
         this.tree = tree;
     }
 

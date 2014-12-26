@@ -162,88 +162,7 @@ public final class CanaryFruitTreesListener implements PluginListener {
             if (tree != null) {
                 if (hook.getPlayer().getMode() != GameMode.CREATIVE) { //If creative, no need to drop stuff
                     hook.setCanceled();
-                    switch (tree.getType()) {
-                        case APPLE:
-                            block.getWorld().dropItem(block.getPosition(), SeedGen.seeds[0].clone());
-                            break;
-                        case GOLDEN_APPLE:
-                            block.getWorld().dropItem(block.getPosition(), SeedGen.seeds[1].clone());
-                            break;
-                        case SPONGE:
-                            block.getWorld().dropItem(block.getPosition(), SeedGen.seeds[2].clone());
-                            break;
-                        case RECORD:
-                            block.getWorld().dropItem(block.getPosition(), SeedGen.seeds[3].clone());
-                            break;
-                        case DYE_BLACK:
-                            block.getWorld().dropItem(block.getPosition(), SeedGen.seeds[4].clone());
-                            break;
-                        case DYE_RED:
-                            block.getWorld().dropItem(block.getPosition(), SeedGen.seeds[5].clone());
-                            break;
-                        case DYE_GREEN:
-                            block.getWorld().dropItem(block.getPosition(), SeedGen.seeds[6].clone());
-                            break;
-                        case DYE_BROWN:
-                            block.getWorld().dropItem(block.getPosition(), SeedGen.seeds[7].clone());
-                            break;
-                        case DYE_BLUE:
-                            block.getWorld().dropItem(block.getPosition(), SeedGen.seeds[8].clone());
-                            break;
-                        case DYE_PURPLE:
-                            block.getWorld().dropItem(block.getPosition(), SeedGen.seeds[9].clone());
-                            break;
-                        case DYE_CYAN:
-                            block.getWorld().dropItem(block.getPosition(), SeedGen.seeds[10].clone());
-                            break;
-                        case DYE_LIGHT_GRAY:
-                            block.getWorld().dropItem(block.getPosition(), SeedGen.seeds[11].clone());
-                            break;
-                        case DYE_GRAY:
-                            block.getWorld().dropItem(block.getPosition(), SeedGen.seeds[12].clone());
-                            break;
-                        case DYE_PINK:
-                            block.getWorld().dropItem(block.getPosition(), SeedGen.seeds[13].clone());
-                            break;
-                        case DYE_LIME:
-                            block.getWorld().dropItem(block.getPosition(), SeedGen.seeds[14].clone());
-                            break;
-                        case DYE_YELLOW:
-                            block.getWorld().dropItem(block.getPosition(), SeedGen.seeds[15].clone());
-                            break;
-                        case DYE_LIGHT_BLUE:
-                            block.getWorld().dropItem(block.getPosition(), SeedGen.seeds[16].clone());
-                            break;
-                        case DYE_MAGENTA:
-                            block.getWorld().dropItem(block.getPosition(), SeedGen.seeds[17].clone());
-                            break;
-                        case DYE_ORANGE:
-                            block.getWorld().dropItem(block.getPosition(), SeedGen.seeds[18].clone());
-                            break;
-                        case DYE_WHITE:
-                            block.getWorld().dropItem(block.getPosition(), SeedGen.seeds[19].clone());
-                            break;
-                        case REDSTONE:
-                            block.getWorld().dropItem(block.getPosition(), SeedGen.seeds[20].clone());
-                            break;
-                        case IRON:
-                            block.getWorld().dropItem(block.getPosition(), SeedGen.seeds[21].clone());
-                            break;
-                        case GOLD:
-                            block.getWorld().dropItem(block.getPosition(), SeedGen.seeds[22].clone());
-                            break;
-                        case DIAMOND:
-                            block.getWorld().dropItem(block.getPosition(), SeedGen.seeds[23].clone());
-                            break;
-                        case EMERALD:
-                            block.getWorld().dropItem(block.getPosition(), SeedGen.seeds[24].clone());
-                            break;
-                        case COAL:
-                            block.getWorld().dropItem(block.getPosition(), SeedGen.seeds[25].clone());
-                            break;
-                        default:
-                            break;
-                    }
+                    block.getWorld().dropItem(block.getPosition(), SeedGen.seeds[tree.getType().ordinal()].clone());
                     block.setType(BlockType.Air);
                     block.update();
                 }
@@ -256,71 +175,24 @@ public final class CanaryFruitTreesListener implements PluginListener {
     public final void killTreeArea(BlockUpdateHook hook) { //BlockUpdate a little more reliable with tracking Tree destruction (Especially if editting out a tree)
         Block block = hook.getBlock();
         TreeWorld treeWorld = CanaryFruitTrees.instance().getWorldForName(block.getWorld().getFqName());
-        if (block.getType().equals(BlockType.OakLog)) {
-            FruitTree tree = TreeTracker.isTreeArea(block.getX(), block.getY(), block.getZ(), blockFqName(block), treeWorld);
-            if (tree != null && tree.isGrown() && !tree.isGrowing()) {
-                tree.killTree(TreeDeathReason.WORLD_DESTROY);
-            }
+        FruitTree tree = null;
+        if (block.getType().equals(BlockType.OakLog) ||
+                block.getType().equals(BlockType.OakLeaves) ||
+                block.getType().equals(BlockType.Sponge) ||
+                block.getTypeId() == BlockType.WoolWhite.getId() ||
+                block.getType().equals(BlockType.RedstoneBlock) ||
+                block.getType().equals(BlockType.NoteBlock) ||
+                block.getType().equals(BlockType.IronBlock) ||
+                block.getType().equals(BlockType.GoldBlock) ||
+                block.getType().equals(BlockType.DiamondBlock) ||
+                block.getType().equals(BlockType.EmeraldBlock) ||
+                block.getType().equals(BlockType.CoalBlock)
+                ) {
+            tree = TreeTracker.isTreeArea(block.getX(), block.getY(), block.getZ(), blockFqName(block), treeWorld);
         }
-        else if (block.getType().equals(BlockType.OakLeaves)) {
-            FruitTree tree = TreeTracker.isTreeArea(block.getX(), block.getY(), block.getZ(), blockFqName(block), treeWorld);
-            if (tree != null && tree.isGrown() && !tree.isGrowing()) {
-                tree.killTree(TreeDeathReason.WORLD_DESTROY);
-            }
-        }
-        else if (block.getType().equals(BlockType.Sponge)) {
-            FruitTree tree = TreeTracker.isTreeArea(block.getX(), block.getY(), block.getZ(), blockFqName(block), treeWorld);
-            if (tree != null && tree.isGrown() && !tree.isGrowing()) {
-                tree.killTree(TreeDeathReason.WORLD_DESTROY);
-            }
-        }
-        else if (block.getTypeId() == BlockType.WoolWhite.getId()) {
-            FruitTree tree = TreeTracker.isTreeArea(block.getX(), block.getY(), block.getZ(), blockFqName(block), treeWorld);
-            if (tree != null && tree.isGrown() && !tree.isGrowing()) {
-                tree.killTree(TreeDeathReason.WORLD_DESTROY);
-            }
-        }
-        else if (block.getType().equals(BlockType.RedstoneBlock)) {
-            FruitTree tree = TreeTracker.isTreeArea(block.getX(), block.getY(), block.getZ(), blockFqName(block), treeWorld);
-            if (tree != null && tree.isGrown() && !tree.isGrowing()) {
-                tree.killTree(TreeDeathReason.WORLD_DESTROY);
-            }
-        }
-        else if (block.getType().equals(BlockType.NoteBlock)) {
-            FruitTree tree = TreeTracker.isTreeArea(block.getX(), block.getY(), block.getZ(), blockFqName(block), treeWorld);
-            if (tree != null && tree.isGrown() && !tree.isGrowing()) {
-                tree.killTree(TreeDeathReason.WORLD_DESTROY);
-            }
-        }
-        else if (block.getType().equals(BlockType.IronBlock)) {
-            FruitTree tree = TreeTracker.isTreeArea(block.getX(), block.getY(), block.getZ(), blockFqName(block), treeWorld);
-            if (tree != null && tree.isGrown() && !tree.isGrowing()) {
-                tree.killTree(TreeDeathReason.WORLD_DESTROY);
-            }
-        }
-        else if (block.getType().equals(BlockType.GoldBlock)) {
-            FruitTree tree = TreeTracker.isTreeArea(block.getX(), block.getY(), block.getZ(), blockFqName(block), treeWorld);
-            if (tree != null && tree.isGrown() && !tree.isGrowing()) {
-                tree.killTree(TreeDeathReason.WORLD_DESTROY);
-            }
-        }
-        else if (block.getType().equals(BlockType.DiamondBlock)) {
-            FruitTree tree = TreeTracker.isTreeArea(block.getX(), block.getY(), block.getZ(), blockFqName(block), treeWorld);
-            if (tree != null && tree.isGrown() && !tree.isGrowing()) {
-                tree.killTree(TreeDeathReason.WORLD_DESTROY);
-            }
-        }
-        else if (block.getType().equals(BlockType.EmeraldBlock)) {
-            FruitTree tree = TreeTracker.isTreeArea(block.getX(), block.getY(), block.getZ(), blockFqName(block), treeWorld);
-            if (tree != null && tree.isGrown() && !tree.isGrowing()) {
-                tree.killTree(TreeDeathReason.WORLD_DESTROY);
-            }
-        }
-        else if (block.getType().equals(BlockType.CoalBlock)) {
-            FruitTree tree = TreeTracker.isTreeArea(block.getX(), block.getY(), block.getZ(), blockFqName(block), treeWorld);
-            if (tree != null && tree.isGrown() && !tree.isGrowing()) {
-                tree.killTree(TreeDeathReason.WORLD_DESTROY);
-            }
+
+        if (tree != null && tree.isGrown() && !tree.isGrowing()) {
+            tree.killTree(TreeDeathReason.WORLD_DESTROY);
         }
     }
 
@@ -329,8 +201,8 @@ public final class CanaryFruitTreesListener implements PluginListener {
         Block sapling = hook.getSapling();
         FruitTree tree = TreeTracker.getTreeAt(sapling.getX(), sapling.getY(), sapling.getZ(), CanaryFruitTrees.instance().getWorldForName(sapling.getWorld().getFqName()));
         if (tree != null) {
-            DelayedTreeGrowth.schedule(tree);
             hook.setCanceled();
+            DelayedTreeGrowth.schedule(tree);
         }
     }
 

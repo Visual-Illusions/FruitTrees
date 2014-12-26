@@ -32,7 +32,7 @@ public final class CanaryTreeWorldCache extends TreeWorldCache {
     }
 
     public final TreeWorld getTreeWorld(String world_name) {
-        if (tree_worlds.contains(world_name)) {
+        if (tree_worlds.containsKey(world_name)) {
             return tree_worlds.get(world_name);
         }
         else if (Canary.getServer().getWorldManager().worldIsLoaded(world_name)) {
